@@ -3,37 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz da Turma</title>
+  <title>Atividade em Sala — Quiz Educativo</title>
   <style>
     :root {
-      --green-950: #022c22;
-      --green-900: #064e3b;
+      --bg-page: #eef3f0;
+      --white: #ffffff;
+      --border: #d8e2dc;
+      --border-strong: #b7cbc0;
+      --text: #1e293b;
+      --text-muted: #64748b;
+
+      --green-950: #052e16;
+      --green-900: #14532d;
       --green-800: #166534;
       --green-700: #15803d;
       --green-600: #16a34a;
-      --green-500: #22c55e;
-      --green-200: #bbf7d0;
       --green-100: #dcfce7;
       --green-50: #f0fdf4;
 
-      --white: #ffffff;
-      --surface-bg: #f4faf6;
-      --border: #d1e7d9;
-      --text-main: #0f291e;
-      --text-soft: #4b6859;
-
       --amber-100: #fef3c7;
-      --amber-500: #f59e0b;
+      --amber-600: #d97706;
       --amber-800: #92400e;
 
       --red-100: #fee2e2;
-      --red-500: #ef4444;
       --red-600: #dc2626;
       --red-800: #991b1b;
 
-      --shadow-sm: 0 2px 8px rgba(6, 78, 59, 0.06);
-      --shadow-md: 0 10px 28px rgba(6, 78, 59, 0.1);
-      --shadow-lg: 0 22px 50px rgba(2, 44, 34, 0.28);
+      --font-active: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
     }
 
     * {
@@ -44,14 +40,14 @@
 
     html, body {
       min-height: 100%;
-      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-      background: var(--surface-bg);
-      color: var(--text-main);
-      line-height: 1.5;
+      font-family: var(--font-active);
+      background: var(--bg-page);
+      color: var(--text);
+      line-height: 1.45;
       -webkit-font-smoothing: antialiased;
     }
 
-    button, input, textarea, select {
+    button, input, select, textarea {
       font-family: inherit;
     }
 
@@ -59,32 +55,110 @@
       display: none !important;
     }
 
-    svg.icon {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
+    /* =====================================================
+       BARRA SUPERIOR E CABEÇALHO DA ATIVIDADE (ESTILO LIMPO)
+       ===================================================== */
+    .app-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 20px 18px 50px;
     }
 
-    /* =====================================================
-       BOTÕES E BADGES GERAIS
-       ===================================================== */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 270px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .activity-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .activity-header {
+      padding: 18px 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .activity-title-area h1 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .activity-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .tag-chip {
+      background: #e9efec;
+      color: #334155;
+      border: 1px solid #d5dfd9;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+
+    .tag-chip.green {
+      background: var(--green-100);
+      color: var(--green-800);
+      border-color: #bbf7d0;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Botões Limpos */
     .btn {
-      border: 1.5px solid transparent;
-      border-radius: 10px;
-      padding: 10px 16px;
-      font-size: 0.94rem;
-      font-weight: 700;
+      border: 1px solid var(--border-strong);
+      background: var(--white);
+      color: var(--text);
+      border-radius: 5px;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: background-color 0.18s, border-color 0.18s, transform 0.1s, box-shadow 0.18s;
-      text-decoration: none;
+      gap: 6px;
+      transition: background-color 0.15s, border-color 0.15s, color 0.15s;
     }
 
-    .btn:active:not(:disabled) {
-      transform: translateY(1px);
+    .btn:hover:not(:disabled) {
+      background: #f8faf9;
+      border-color: var(--green-700);
     }
 
     .btn:disabled {
@@ -92,1225 +166,1037 @@
       cursor: not-allowed;
     }
 
-    .btn-primary {
+    .btn-green {
       background: var(--green-700);
+      border-color: var(--green-700);
       color: var(--white);
-      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.22);
     }
 
-    .btn-primary:hover:not(:disabled) {
+    .btn-green:hover:not(:disabled) {
       background: var(--green-800);
-    }
-
-    .btn-outline {
-      background: var(--white);
-      color: var(--green-800);
-      border-color: var(--border);
-    }
-
-    .btn-outline:hover:not(:disabled) {
-      background: var(--green-50);
-      border-color: var(--green-600);
-    }
-
-    .btn-danger-ghost {
-      background: transparent;
-      color: var(--red-600);
-      border-color: transparent;
-      padding: 6px 10px;
-    }
-
-    .btn-danger-ghost:hover:not(:disabled) {
-      background: var(--red-100);
+      border-color: var(--green-800);
     }
 
     .btn-sm {
-      padding: 7px 12px;
-      font-size: 0.85rem;
-      border-radius: 8px;
+      padding: 6px 11px;
+      font-size: 0.82rem;
     }
 
     .btn-lg {
-      padding: 14px 26px;
-      font-size: 1.05rem;
-      border-radius: 12px;
+      padding: 12px 22px;
+      font-size: 1rem;
     }
 
-    .diff-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border: 1.5px solid transparent;
-    }
-
-    .diff-facil {
-      background: var(--green-100);
-      color: var(--green-800);
-      border-color: #86efac;
-    }
-
-    .diff-media {
-      background: var(--amber-100);
-      color: var(--amber-800);
-      border-color: #fcd34d;
-    }
-
-    .diff-dificil {
-      background: var(--red-100);
-      color: var(--red-800);
-      border-color: #fca5a5;
-    }
-
-    /* =====================================================
-       TELA DO PROFESSOR (VERDE E BRANCO LIMPO)
-       ===================================================== */
-    .teacher-nav {
-      background: var(--green-800);
-      color: var(--white);
-      padding: 16px 24px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .teacher-nav-inner {
-      max-width: 1140px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .nav-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--white);
-      color: var(--green-800);
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      font-size: 1.25rem;
-    }
-
-    .nav-brand h1 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-    }
-
-    .nav-brand span {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--green-200);
-      font-weight: 500;
-    }
-
-    .nav-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .btn-nav-white {
-      background: var(--white);
-      color: var(--green-800);
-      border: none;
-    }
-
-    .btn-nav-white:hover:not(:disabled) {
-      background: var(--green-50);
-    }
-
-    .btn-nav-ghost {
-      background: rgba(255, 255, 255, 0.12);
-      color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    .btn-nav-ghost:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.22);
-    }
-
-    .teacher-container {
-      max-width: 1140px;
-      margin: 26px auto 60px;
-      padding: 0 20px;
-    }
-
-    .setup-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 22px;
-      align-items: start;
-    }
-
-    @media (max-width: 900px) {
-      .setup-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #ebf5ef;
-    }
-
-    .card-header h2 {
-      font-size: 1.08rem;
-      font-weight: 800;
-      color: var(--green-900);
-    }
-
-    .count-tag {
-      background: var(--green-100);
-      color: var(--green-800);
-      font-size: 0.8rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 6px;
-      background: var(--surface-bg);
-      border: 1px solid var(--border);
-      padding: 4px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-    }
-
-    .tab-btn {
-      flex: 1;
+    .btn-link-danger {
       border: none;
       background: transparent;
-      color: var(--text-soft);
-      font-weight: 700;
-      font-size: 0.88rem;
-      padding: 9px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.15s;
+      color: var(--red-600);
+      padding: 5px 8px;
     }
 
-    .tab-btn.active {
-      background: var(--green-700);
-      color: var(--white);
-      box-shadow: 0 2px 6px rgba(21, 128, 61, 0.22);
+    .btn-link-danger:hover:not(:disabled) {
+      background: var(--red-100);
+      border-color: transparent;
     }
 
-    .field {
-      margin-bottom: 14px;
+    /* Abas horizontais estilo Wordwall */
+    .tabs-bar {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      padding: 0 22px;
+      gap: 22px;
+      overflow-x: auto;
     }
 
-    .field label {
-      display: block;
-      font-size: 0.86rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 6px;
-    }
-
-    .field-hint {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-top: 5px;
-    }
-
-    input[type="text"], textarea, select {
-      width: 100%;
-      background: var(--white);
-      color: var(--text-main);
-      border: 1.5px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 10px 12px;
+    .tab-link {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 13px 2px 11px;
       font-size: 0.94rem;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
     }
 
-    input[type="text"]:focus, textarea:focus, select:focus {
-      outline: none;
-      border-color: var(--green-600);
-      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.14);
+    .tab-link:hover {
+      color: var(--text);
     }
 
-    .alt-row {
-      display: grid;
-      grid-template-columns: 36px 1fr auto;
-      gap: 8px;
-      align-items: center;
+    .tab-link.active {
+      color: var(--green-700);
+      border-bottom-color: var(--green-700);
+    }
+
+    .tab-body {
+      padding: 22px;
+    }
+
+    /* Seletores de Matéria e Ano (Botões Clicáveis) */
+    .section-block {
+      margin-bottom: 20px;
+    }
+
+    .block-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1e293b;
       margin-bottom: 8px;
     }
 
-    .alt-letter-box {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--green-50);
-      border: 1.5px solid var(--border);
-      color: var(--green-800);
-      font-weight: 800;
-      display: grid;
-      place-items: center;
-      font-size: 0.9rem;
-    }
-
-    .radio-correct {
+    .pill-picker {
       display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-soft);
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .pick-btn {
+      border: 1px solid #cbd5e1;
+      background: var(--white);
+      color: #334155;
+      border-radius: 5px;
+      padding: 7px 13px;
+      font-size: 0.86rem;
+      font-weight: 600;
       cursor: pointer;
-      white-space: nowrap;
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: 1px solid transparent;
+      transition: all 0.14s;
     }
 
-    .radio-correct:has(input:checked) {
-      background: var(--green-100);
-      color: var(--green-800);
-      border-color: #86efac;
+    .pick-btn:hover {
+      border-color: var(--green-600);
+      background: var(--green-50);
     }
 
-    .radio-correct input {
-      accent-color: var(--green-700);
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
+    .pick-btn.selected {
+      background: var(--green-700);
+      border-color: var(--green-700);
+      color: var(--white);
     }
 
-    .row-2 {
+    .form-grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 14px;
     }
 
-    @media (max-width: 560px) {
-      .row-2 {
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 720px) {
+      .form-grid-2, .form-grid-3 {
         grid-template-columns: 1fr;
       }
     }
 
-    .alert-box {
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      padding: 9px 11px;
+      font-size: 0.92rem;
+      color: #0f172a;
+      background: var(--white);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--green-700);
+      box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.15);
+    }
+
+    .status-msg {
       margin-top: 12px;
-      padding: 10px 14px;
-      border-radius: 10px;
+      padding: 10px 13px;
+      border-radius: 5px;
       font-size: 0.88rem;
       font-weight: 600;
     }
 
-    .alert-ok {
+    .status-msg.ok {
       background: var(--green-100);
       color: var(--green-800);
-      border: 1px solid #86efac;
+      border: 1px solid #bbf7d0;
     }
 
-    .alert-err {
+    .status-msg.info {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .status-msg.err {
       background: var(--red-100);
       color: var(--red-800);
-      border: 1px solid #fca5a5;
+      border: 1px solid #fecaca;
     }
 
-    /* Lista de Perguntas Cadastradas */
-    .q-list {
-      display: grid;
-      gap: 12px;
-      max-height: 540px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .q-item {
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      background: #fcfefd;
-      transition: border-color 0.15s;
-    }
-
-    .q-item:hover {
-      border-color: var(--green-500);
-    }
-
-    .q-item-top {
+    /* Lista / Tabela de Perguntas */
+    .filter-bar {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 8px;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
-    .q-item-num {
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--text-soft);
+    .q-table-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .q-row-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 13px 15px;
+      background: #fbfdfc;
+    }
+
+    .q-row-top {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       align-items: center;
       gap: 8px;
+      margin-bottom: 6px;
     }
 
-    .q-item-actions {
-      display: flex;
-      gap: 4px;
+    .diff-tag {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 9px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
     }
 
-    .q-item-title {
+    .diff-facil { background: var(--green-100); color: var(--green-800); }
+    .diff-media { background: var(--amber-100); color: var(--amber-800); }
+    .diff-dificil { background: var(--red-100); color: var(--red-800); }
+
+    .q-row-enunciado {
       font-weight: 700;
-      font-size: 0.96rem;
-      color: var(--text-main);
+      font-size: 0.95rem;
       margin-bottom: 8px;
+      color: #0f172a;
     }
 
-    .q-item-alts {
+    .q-row-alts {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6px;
       font-size: 0.83rem;
     }
 
-    @media (max-width: 560px) {
-      .q-item-alts {
+    @media (max-width: 600px) {
+      .q-row-alts {
         grid-template-columns: 1fr;
       }
     }
 
-    .q-alt-mini {
+    .q-alt-box {
       padding: 5px 8px;
-      border-radius: 6px;
-      background: var(--surface-bg);
-      color: var(--text-soft);
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: #475569;
     }
 
-    .q-alt-mini.is-right {
+    .q-alt-box.right {
       background: var(--green-100);
       color: var(--green-800);
       font-weight: 700;
     }
 
-    .empty-state {
-      text-align: center;
-      padding: 36px 20px;
-      color: var(--text-soft);
-      border: 2px dashed var(--border);
-      border-radius: 12px;
+    /* Tabela Ranking Limpa (igual à referência da imagem!) */
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 0.9rem;
     }
 
-    .start-footer {
-      margin-top: 22px;
+    .ranking-table thead th {
+      background: var(--green-700);
+      color: var(--white);
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 700;
+    }
+
+    .ranking-table tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #1e293b;
+    }
+
+    .ranking-table tbody tr:nth-child(even) {
+      background: #f4f7f5;
+    }
+
+    /* Sidebar Direita (Estilo visual e Fontes) */
+    .sidebar-card {
       background: var(--white);
-      border: 2px solid var(--green-600);
-      border-radius: 16px;
-      padding: 18px 24px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .sidebar-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .theme-option {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      box-shadow: var(--shadow-md);
+      gap: 10px;
+      width: 100%;
+      padding: 8px;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .theme-option:hover {
+      background: #f8faf9;
+    }
+
+    .theme-option.active {
+      background: var(--green-700);
+      color: var(--white);
+    }
+
+    .theme-thumb {
+      width: 48px;
+      height: 32px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.14);
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+
+    .thumb-classic { background: linear-gradient(135deg, #15803d 55%, #ffffff 55%); color: #052e16; }
+    .thumb-classroom { background: #f8faf9; border-top: 8px solid #16a34a; color: #166534; }
+    .thumb-forest { background: #052e16; color: #ffffff; }
+
+    /* Modal simples de adicionar/editar pergunta */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.48);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .modal-box {
+      background: var(--white);
+      border-radius: 8px;
+      max-width: 580px;
+      width: 100%;
+      padding: 22px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+      max-height: 92vh;
+      overflow-y: auto;
     }
 
     /* =====================================================
-       TELA DO JOGO (PROJEÇÃO PARA SALA - VERDE E BRANCO)
+       TELA DO JOGO (PROJEÇÃO PARA A SALA)
        ===================================================== */
     .game-screen {
       min-height: 100vh;
-      background: linear-gradient(165deg, var(--green-800) 0%, var(--green-900) 55%, var(--green-950) 100%);
-      color: var(--white);
       display: flex;
       flex-direction: column;
-      padding: clamp(14px, 2.2vw, 28px);
+      padding: clamp(14px, 2vw, 24px);
+      transition: background 0.25s;
     }
 
-    .game-header {
-      max-width: 1140px;
+    .game-screen.style-classic {
+      background: linear-gradient(165deg, #166534 0%, #14532d 100%);
+      color: var(--white);
+    }
+
+    .game-screen.style-classroom {
+      background: #eef4f0;
+      color: #0f172a;
+    }
+
+    .game-screen.style-forest {
+      background: #052e16;
+      color: var(--white);
+    }
+
+    .game-topbar {
+      max-width: 1120px;
       width: 100%;
       margin: 0 auto 18px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 14px;
-      padding: 12px 20px;
+      background: var(--white);
+      color: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 18px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     }
 
-    .game-quiz-title {
-      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-      font-weight: 800;
-      color: var(--white);
-    }
-
-    .game-meta {
+    .game-title-left {
       display: flex;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .meta-pill {
-      background: var(--white);
-      color: var(--green-900);
-      font-weight: 800;
-      font-size: 0.92rem;
-      padding: 6px 14px;
-      border-radius: 999px;
+    .game-title-left strong {
+      font-size: 1.05rem;
+      color: var(--green-800);
     }
 
-    .meta-pill.score {
-      background: var(--green-100);
-      color: var(--green-900);
+    .game-meta-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .game-main {
-      max-width: 1140px;
+    .game-stage {
+      max-width: 1120px;
       width: 100%;
       margin: 0 auto;
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 18px;
+      gap: 16px;
     }
 
-    /* ETAPA 0: ANÚNCIO DA DIFICULDADE ANTES DA PERGUNTA */
-    .difficulty-intro-card {
+    /* INTERVALO ENTRE PERGUNTAS: ESCOLHA DA DIFICULDADE */
+    .diff-choice-card {
       background: var(--white);
-      color: var(--text-main);
-      border-radius: 24px;
-      padding: clamp(32px, 5vw, 60px) 28px;
+      color: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: clamp(24px, 4vw, 44px);
       text-align: center;
-      box-shadow: var(--shadow-lg);
-      max-width: 720px;
-      width: 100%;
-      margin: 0 auto;
-      animation: popIn 0.22s ease-out;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
     }
 
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.97); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .intro-step-label {
-      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    .diff-choice-card h2 {
+      font-size: clamp(1.4rem, 2.8vw, 2.1rem);
       font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-soft);
-      margin-bottom: 18px;
+      margin-bottom: 8px;
+      color: #0f172a;
     }
 
-    .intro-diff-pill {
-      display: inline-block;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      padding: 16px 42px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      border: 3px solid transparent;
+    .diff-choice-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 26px;
     }
 
-    .intro-diff-pill.diff-facil {
-      background: var(--green-100);
-      color: var(--green-800);
-      border-color: var(--green-500);
+    .diff-buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 820px;
+      margin: 0 auto;
     }
 
-    .intro-diff-pill.diff-media {
-      background: var(--amber-100);
-      color: var(--amber-800);
-      border-color: var(--amber-500);
+    @media (max-width: 680px) {
+      .diff-buttons-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .intro-diff-pill.diff-dificil {
-      background: var(--red-100);
-      color: var(--red-800);
-      border-color: var(--red-500);
-    }
-
-    .intro-sub {
-      font-size: clamp(1rem, 1.6vw, 1.2rem);
-      color: var(--text-soft);
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
-
-    /* BARRA DO CRONÔMETRO */
-    .timer-panel {
+    .diff-pick-card {
+      border: 2px solid #cbd5e1;
       background: var(--white);
-      color: var(--text-main);
-      border-radius: 16px;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .timer-clock {
-      min-width: 92px;
-      text-align: center;
-      font-size: clamp(1.7rem, 3vw, 2.3rem);
-      font-weight: 900;
-      font-variant-numeric: tabular-nums;
-      padding: 6px 12px;
-      border-radius: 12px;
-      background: var(--green-50);
-      color: var(--green-800);
-      border: 2px solid var(--green-500);
-      transition: all 0.2s;
-    }
-
-    .timer-clock.paused {
-      background: #f1f5f9;
-      color: #475569;
-      border-color: #cbd5e1;
-    }
-
-    .timer-clock.warn {
-      background: var(--amber-100);
-      color: var(--amber-800);
-      border-color: var(--amber-500);
-    }
-
-    .timer-clock.danger {
-      background: var(--red-100);
-      color: var(--red-800);
-      border-color: var(--red-500);
-      animation: pulseTime 0.85s ease-in-out infinite;
-    }
-
-    @keyframes pulseTime {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    .timer-bar-col {
-      flex: 1;
+      border-radius: 10px;
+      padding: 24px 16px;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 8px;
+      transition: transform 0.12s, border-color 0.15s, box-shadow 0.15s;
     }
 
-    .timer-status-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .diff-pick-card:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .diff-pick-card:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+    }
+
+    .diff-pick-card.facil { border-color: #86efac; background: #f0fdf4; }
+    .diff-pick-card.facil:hover:not(:disabled) { border-color: var(--green-700); }
+
+    .diff-pick-card.media { border-color: #fcd34d; background: #fffbeb; }
+    .diff-pick-card.media:hover:not(:disabled) { border-color: var(--amber-600); }
+
+    .diff-pick-card.dificil { border-color: #fca5a5; background: #fef2f2; }
+    .diff-pick-card.dificil:hover:not(:disabled) { border-color: var(--red-600); }
+
+    .diff-pick-name {
+      font-size: 1.55rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .diff-pick-card.facil .diff-pick-name { color: var(--green-800); }
+    .diff-pick-card.media .diff-pick-name { color: var(--amber-800); }
+    .diff-pick-card.dificil .diff-pick-name { color: var(--red-800); }
+
+    .diff-pick-pts {
       font-size: 0.92rem;
       font-weight: 700;
-      color: var(--text-soft);
+      color: #475569;
     }
 
-    .timer-track {
+    .diff-pick-left {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* CRONÔMETRO + PERGUNTA + OPÇÕES */
+    .timer-bar-card {
+      background: var(--white);
+      color: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .clock-pill {
+      min-width: 84px;
+      text-align: center;
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: var(--green-50);
+      color: var(--green-800);
+      border: 2px solid var(--green-600);
+    }
+
+    .clock-pill.paused { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+    .clock-pill.warn { background: var(--amber-100); color: var(--amber-800); border-color: var(--amber-600); }
+    .clock-pill.danger { background: var(--red-100); color: var(--red-800); border-color: var(--red-600); }
+
+    .progress-track {
       width: 100%;
-      height: 16px;
+      height: 14px;
       background: #e2e8f0;
       border-radius: 999px;
       overflow: hidden;
+      margin-top: 6px;
     }
 
-    .timer-fill {
+    .progress-fill {
       height: 100%;
       width: 100%;
       background: var(--green-600);
-      border-radius: 999px;
-      transition: width 0.25s linear, background-color 0.25s ease;
+      transition: width 0.2s linear, background-color 0.25s;
     }
 
-    .timer-fill.paused { background: #94a3b8; }
-    .timer-fill.warn { background: var(--amber-500); }
-    .timer-fill.danger { background: var(--red-500); }
+    .progress-fill.paused { background: #94a3b8; }
+    .progress-fill.warn { background: var(--amber-600); }
+    .progress-fill.danger { background: var(--red-600); }
 
-    /* CARTÃO DA PERGUNTA */
-    .question-box {
+    .question-stage-card {
       background: var(--white);
-      color: var(--text-main);
-      border-radius: 22px;
-      padding: clamp(24px, 3.6vw, 42px);
-      box-shadow: var(--shadow-lg);
+      color: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: clamp(22px, 3.5vw, 38px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
     }
 
-    .question-top-tags {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .stage-label {
-      font-size: 0.84rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--green-800);
-      background: var(--green-50);
-      border: 1px solid var(--green-200);
-      padding: 5px 12px;
-      border-radius: 999px;
-    }
-
-    .question-enunciado {
-      font-size: clamp(1.45rem, 3vw, 2.3rem);
+    .question-stage-text {
+      font-size: clamp(1.4rem, 2.9vw, 2.2rem);
       font-weight: 800;
       line-height: 1.32;
-      color: #0b1f16;
-      letter-spacing: -0.015em;
+      color: #0f172a;
+      margin-top: 12px;
     }
 
-    .reading-footer {
-      margin-top: 26px;
-      padding-top: 22px;
-      border-top: 2px dashed var(--border);
+    .reading-cta {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px dashed #cbd5e1;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .reading-footer p {
-      color: var(--text-soft);
-      font-weight: 600;
-      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    }
-
-    .btn-reveal-options {
-      background: var(--green-700);
-      color: var(--white);
-      border: none;
-      border-radius: 14px;
-      padding: clamp(15px, 2vw, 20px) clamp(26px, 4vw, 44px);
-      font-size: clamp(1.05rem, 2vw, 1.38rem);
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(21, 128, 61, 0.35);
-      transition: background-color 0.15s, transform 0.12s;
-    }
-
-    .btn-reveal-options:hover {
-      background: var(--green-800);
-      transform: translateY(-1px);
-    }
-
-    /* ALTERNATIVAS A, B, C, D */
     .options-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 740px) {
       .options-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .opt-card {
+    .option-card-btn {
       background: var(--white);
-      color: var(--text-main);
-      border: 3px solid transparent;
-      border-radius: 18px;
-      padding: clamp(16px, 2vw, 22px);
+      color: #0f172a;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      padding: clamp(14px, 2vw, 20px);
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       text-align: left;
       cursor: pointer;
-      box-shadow: var(--shadow-md);
-      transition: transform 0.12s, border-color 0.15s, background-color 0.15s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: border-color 0.15s, background-color 0.15s, transform 0.1s;
     }
 
-    .opt-card:hover:not(:disabled) {
-      transform: translateY(-2px);
-      border-color: var(--green-500);
+    .option-card-btn:hover:not(:disabled) {
+      border-color: var(--green-700);
       background: var(--green-50);
+      transform: translateY(-1px);
     }
 
-    .opt-card:disabled {
+    .option-card-btn:disabled {
       cursor: default;
     }
 
-    .opt-badge {
-      width: clamp(42px, 4.5vw, 52px);
-      height: clamp(42px, 4.5vw, 52px);
-      border-radius: 12px;
-      background: var(--green-800);
+    .opt-letter-square {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: var(--green-700);
       color: var(--white);
-      font-size: clamp(1.1rem, 1.9vw, 1.4rem);
-      font-weight: 900;
+      font-size: 1.25rem;
+      font-weight: 800;
       display: grid;
       place-items: center;
       flex-shrink: 0;
     }
 
-    .opt-text {
-      font-size: clamp(1.08rem, 1.9vw, 1.38rem);
+    .opt-content-text {
+      font-size: clamp(1.05rem, 1.8vw, 1.32rem);
       font-weight: 700;
-      line-height: 1.3;
     }
 
-    .opt-card.correct {
+    .option-card-btn.is-correct {
       background: var(--green-100);
       border-color: var(--green-600);
     }
 
-    .opt-card.correct .opt-badge {
-      background: var(--green-700);
-    }
-
-    .opt-card.wrong {
+    .option-card-btn.is-wrong {
       background: var(--red-100);
-      border-color: var(--red-500);
+      border-color: var(--red-600);
     }
 
-    .opt-card.wrong .opt-badge {
+    .option-card-btn.is-wrong .opt-letter-square {
       background: var(--red-600);
     }
 
-    .opt-card.dim {
+    .option-card-btn.is-dim {
       opacity: 0.55;
     }
 
-    /* FEEDBACK PÓS-RESPOSTA */
-    .feedback-panel {
+    .feedback-bar {
       background: var(--white);
-      color: var(--text-main);
-      border-radius: 18px;
-      padding: clamp(18px, 2.4vw, 26px);
+      color: #0f172a;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      border-left: 7px solid var(--green-600);
+      padding: 18px 22px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      box-shadow: var(--shadow-lg);
-      border-left: 8px solid var(--green-600);
-      animation: popIn 0.2s ease-out;
+      gap: 14px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
     }
 
-    .feedback-panel.is-wrong {
+    .feedback-bar.wrong {
       border-left-color: var(--red-600);
     }
 
-    .feedback-heading {
-      font-size: clamp(1.15rem, 2vw, 1.45rem);
-      font-weight: 900;
-      margin-bottom: 4px;
+    .spinner {
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
     }
 
-    .feedback-heading.ok { color: var(--green-800); }
-    .feedback-heading.err { color: var(--red-800); }
-
-    .feedback-exp {
-      font-size: clamp(0.98rem, 1.5vw, 1.15rem);
-      color: var(--text-soft);
-      font-weight: 600;
-    }
-
-    /* =====================================================
-       TELA FINAL (PLACAR DA TURMA)
-       ===================================================== */
-    .final-screen {
-      min-height: 100vh;
-      background: var(--surface-bg);
-      padding: 36px 20px 60px;
-    }
-
-    .final-container {
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
-    .final-banner {
-      background: linear-gradient(135deg, var(--green-800), var(--green-700));
-      color: var(--white);
-      border-radius: 22px;
-      padding: clamp(26px, 4vw, 42px);
-      text-align: center;
-      box-shadow: var(--shadow-md);
-      margin-bottom: 22px;
-    }
-
-    .final-banner h1 {
-      font-size: clamp(1.7rem, 3.4vw, 2.5rem);
-      font-weight: 900;
-      margin-bottom: 6px;
-    }
-
-    .final-stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    @media (max-width: 600px) {
-      .final-stats-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .final-stat {
-      background: var(--white);
-      color: var(--text-main);
-      border-radius: 14px;
-      padding: 16px;
-    }
-
-    .final-stat-val {
-      font-size: clamp(1.7rem, 3vw, 2.3rem);
-      font-weight: 900;
-      color: var(--green-800);
-    }
-
-    .final-stat-lbl {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-soft);
-    }
-
-    .summary-card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .summary-card h2 {
-      font-size: 1.12rem;
-      font-weight: 800;
-      color: var(--green-900);
-      margin-bottom: 14px;
-    }
-
-    .summary-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .summary-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: var(--surface-bg);
-      border: 1px solid var(--border);
-    }
-
-    .summary-row-left {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .summary-status {
-      font-weight: 800;
-      font-size: 0.88rem;
-      padding: 4px 12px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-
-    .summary-status.hit {
-      background: var(--green-100);
-      color: var(--green-800);
-    }
-
-    .summary-status.miss {
-      background: var(--red-100);
-      color: var(--red-800);
-    }
-
-    .final-actions {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
 
   <!-- =========================================================
-       1. TELA DE MONTAGEM DO QUIZ (PROFESSOR)
+       1. TELA PRINCIPAL / CONFIGURAÇÃO DA ATIVIDADE
        ========================================================= -->
-  <div id="teacherScreen">
-    <nav class="teacher-nav">
-      <div class="teacher-nav-inner">
-        <div class="nav-brand">
-          <div class="nav-logo">Q</div>
-          <div>
-            <h1>Quiz da Turma</h1>
-            <span>Monte suas perguntas rapidamente — sem conta, sem API e direto no navegador</span>
-          </div>
-        </div>
-        <div class="nav-actions">
-          <button type="button" id="btnLoadDemo" class="btn btn-nav-ghost btn-sm">Carregar Quiz de Exemplo</button>
-          <button type="button" id="btnSoundTeacher" class="btn btn-nav-ghost btn-sm">Som: Ligado</button>
-        </div>
-      </div>
-    </nav>
-
-    <main class="teacher-container">
-      <!-- Título do Quiz -->
-      <div class="card" style="margin-bottom: 20px;">
-        <div class="row-2" style="align-items: end;">
-          <div class="field" style="margin-bottom: 0;">
-            <label for="quizTitleInput">Título da Apresentação (aparece na tela para a sala)</label>
-            <input type="text" id="quizTitleInput" value="Desafio da Aula de Hoje" placeholder="Ex: Revisão de Ciências — 7º Ano" />
-          </div>
-          <div class="field" style="margin-bottom: 0;">
-            <label for="orderSelect">Ordem das Perguntas no Jogo</label>
-            <select id="orderSelect">
-              <option value="ordered">Na ordem da lista (ex: Fácil → Média → Difícil)</option>
-              <option value="shuffled">Sortear ordem das perguntas</option>
-            </select>
-          </div>
+  <div id="setupView" class="app-wrap">
+    <!-- Cabeçalho da atividade estilo Wordwall -->
+    <header class="activity-card activity-header">
+      <div class="activity-title-area">
+        <h1 id="displayActivityTitle">ATIVIDADE EDUCATIVA</h1>
+        <div class="activity-subtitle">Quiz interativo para projeção em sala de aula</div>
+        <div class="tags-row">
+          <span id="tagGrade" class="tag-chip">5º Ano</span>
+          <span id="tagSubject" class="tag-chip">Matemática</span>
+          <span id="tagTopic" class="tag-chip green">Tema: Geral</span>
+          <span id="tagTime" class="tag-chip">Tempo: 30s</span>
+          <span id="tagRounds" class="tag-chip">10 Rodadas</span>
         </div>
       </div>
 
-      <div class="setup-grid">
-        <!-- Coluna Esquerda: Criar / Colar Perguntas -->
-        <section class="card">
-          <div class="card-header">
-            <h2 id="formHeading">Adicionar Pergunta</h2>
-            <button type="button" id="btnCancelEdit" class="btn btn-outline btn-sm hidden">Cancelar Edição</button>
-          </div>
-
-          <div class="tabs">
-            <button type="button" class="tab-btn active" data-tab="form">Criar Uma a Uma</button>
-            <button type="button" class="tab-btn" data-tab="bulk">Colar Várias de Uma Vez</button>
-          </div>
-
-          <!-- Aba 1: Formulário Direto -->
-          <div id="tabForm">
-            <div class="row-2">
-              <div class="field">
-                <label for="qDifficulty">Dificuldade (exibida antes da pergunta)</label>
-                <select id="qDifficulty">
-                  <option value="facil">Fácil</option>
-                  <option value="media">Média</option>
-                  <option value="dificil">Difícil</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="qTimeHint">Tempo da rodada</label>
-                <input type="text" id="qTimeHint" value="30 segundos (após leitura livre)" disabled style="background: #f8fafc; color: #64748b;" />
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="qEnunciado">Enunciado da Pergunta</label>
-              <textarea id="qEnunciado" rows="3" placeholder="Digite a pergunta que vai aparecer no projetor..."></textarea>
-            </div>
-
-            <div class="field">
-              <label>Alternativas (marque qual é a correta)</label>
-
-              <div class="alt-row">
-                <div class="alt-letter-box">A</div>
-                <input type="text" id="alt0" placeholder="Alternativa A" />
-                <label class="radio-correct"><input type="radio" name="correctOpt" value="0" checked /> Correta</label>
-              </div>
-
-              <div class="alt-row">
-                <div class="alt-letter-box">B</div>
-                <input type="text" id="alt1" placeholder="Alternativa B" />
-                <label class="radio-correct"><input type="radio" name="correctOpt" value="1" /> Correta</label>
-              </div>
-
-              <div class="alt-row">
-                <div class="alt-letter-box">C</div>
-                <input type="text" id="alt2" placeholder="Alternativa C" />
-                <label class="radio-correct"><input type="radio" name="correctOpt" value="2" /> Correta</label>
-              </div>
-
-              <div class="alt-row">
-                <div class="alt-letter-box">D</div>
-                <input type="text" id="alt3" placeholder="Alternativa D" />
-                <label class="radio-correct"><input type="radio" name="correctOpt" value="3" /> Correta</label>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="qExplicacao">Explicação curta (aparece após responder)</label>
-              <input type="text" id="qExplicacao" placeholder="Ex: A clorofila é o pigmento responsável por absorver a luz solar." />
-            </div>
-
-            <button type="button" id="btnSaveQuestion" class="btn btn-primary" style="width: 100%;">
-              + Adicionar Pergunta ao Quiz
-            </button>
-          </div>
-
-          <!-- Aba 2: Colar em Bloco -->
-          <div id="tabBulk" class="hidden">
-            <div class="field">
-              <label for="bulkTextInput">Cole suas perguntas no formato simples abaixo:</label>
-              <textarea id="bulkTextInput" rows="12" placeholder="Dificuldade: Fácil
-Qual a capital do Brasil?
-A) São Paulo
-B) Brasília *
-C) Rio de Janeiro
-D) Salvador
-Explicação: Brasília é a capital federal desde 1960.
-
-Dificuldade: Média
-Quanto é 7 x 8?
-A) 54
-B) 56 *
-C) 64
-D) 48
-Explicação: Na tabuada, 7 vezes 8 é igual a 56."></textarea>
-              <p class="field-hint">
-                Coloque um asterisco <strong>*</strong> na frente da alternativa correta e separe uma pergunta da outra com uma linha em branco.
-              </p>
-            </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-              <button type="button" id="btnFillBulkExample" class="btn btn-outline btn-sm">Preencher Modelo</button>
-              <button type="button" id="btnImportBulk" class="btn btn-primary" style="flex: 1;">Importar Perguntas</button>
-            </div>
-          </div>
-
-          <div id="formAlert" class="alert-box hidden"></div>
-        </section>
-
-        <!-- Coluna Direita: Lista de Perguntas Prontas -->
-        <section class="card">
-          <div class="card-header">
-            <h2>Perguntas do Quiz</h2>
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span id="qCountBadge" class="count-tag">0 perguntas</span>
-              <button type="button" id="btnClearAll" class="btn btn-danger-ghost btn-sm hidden">Limpar Tudo</button>
-            </div>
-          </div>
-
-          <div id="questionsListContainer" class="q-list"></div>
-        </section>
-      </div>
-
-      <!-- Barra de Início -->
-      <footer class="start-footer">
-        <div>
-          <strong style="font-size: 1.05rem; color: var(--green-900);">Tudo pronto para apresentar?</strong>
-          <p id="startStatusText" style="font-size: 0.9rem; color: var(--text-soft);">
-            Adicione pelo menos 1 pergunta acima para iniciar a apresentação.
-          </p>
-        </div>
-        <button type="button" id="btnStartPresentation" class="btn btn-primary btn-lg" disabled>
-          Iniciar Apresentação
-        </button>
-      </footer>
-    </main>
-  </div>
-
-  <!-- =========================================================
-       2. TELA DO JOGO (PROJEÇÃO PARA A SALA)
-       ===================================================== -->
-  <section id="gameScreen" class="game-screen hidden">
-    <header class="game-header">
-      <div id="gameQuizTitle" class="game-quiz-title">Desafio da Aula</div>
-      <div class="game-meta">
-        <span id="gameProgressPill" class="meta-pill">Pergunta 1 de 1</span>
-        <span id="gameScorePill" class="meta-pill score">Acertos: 0</span>
-        <button type="button" id="btnSoundGame" class="btn btn-nav-ghost btn-sm">Som: On</button>
-        <button type="button" id="btnFullscreen" class="btn btn-nav-ghost btn-sm">Tela Cheia</button>
-        <button type="button" id="btnExitGame" class="btn btn-nav-ghost btn-sm">Sair</button>
+      <div class="header-actions">
+        <button type="button" id="btnSoundSetup" class="btn btn-sm">Som: Ligado</button>
+        <button type="button" id="btnHeaderEditQuestions" class="btn btn-sm">Editar perguntas</button>
+        <button type="button" id="btnStartGameTop" class="btn btn-green btn-lg">Iniciar Jogo</button>
       </div>
     </header>
 
-    <main class="game-main">
-      <!-- ETAPA 0: MOSTRA A DIFICULDADE ANTES DA PERGUNTA -->
-      <div id="difficultyIntroCard" class="difficulty-intro-card hidden">
-        <div id="introQuestionLabel" class="intro-step-label">Pergunta 1 de 5</div>
-        <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-soft); margin-bottom: 12px;">
-          Nível de Dificuldade:
+    <div class="main-layout">
+      <!-- Coluna Principal com Abas -->
+      <section class="activity-card">
+        <nav class="tabs-bar">
+          <button type="button" class="tab-link active" data-tab="config">Configurações de atividade</button>
+          <button type="button" class="tab-link" data-tab="questions">Perguntas (<span id="tabQCount">0</span>)</button>
+          <button type="button" class="tab-link" data-tab="ranking">Ranking e Resultado</button>
+        </nav>
+
+        <!-- ABA 1: CONFIGURAÇÕES E GERAÇÃO AUTOMÁTICA -->
+        <div id="tabConfig" class="tab-body">
+          <div class="section-block">
+            <span class="block-label">1. Escolha o Ano Escolar:</span>
+            <div id="gradePicker" class="pill-picker"></div>
+          </div>
+
+          <div class="section-block">
+            <span class="block-label">2. Escolha a Matéria:</span>
+            <div id="subjectPicker" class="pill-picker"></div>
+          </div>
+
+          <div class="form-grid-3 section-block">
+            <div>
+              <label class="block-label" for="topicInput">3. Tema da Aula (para gerar as perguntas):</label>
+              <input type="text" id="topicInput" value="Operações e Frações" placeholder="Ex: Frações, Verbos, Sistema Solar, Independência..." />
+            </div>
+            <div>
+              <label class="block-label" for="timeSelect">4. Tempo por Pergunta:</label>
+              <select id="timeSelect">
+                <option value="15">15 segundos</option>
+                <option value="20">20 segundos</option>
+                <option value="30" selected>30 segundos</option>
+                <option value="45">45 segundos</option>
+                <option value="60">60 segundos</option>
+                <option value="90">90 segundos</option>
+                <option value="custom">Outro tempo...</option>
+              </select>
+              <input type="number" id="customTimeInput" class="hidden" min="5" max="300" value="40" placeholder="Segundos" style="margin-top: 6px;" />
+            </div>
+            <div>
+              <label class="block-label" for="roundsSelect">5. Quantidade de Rodadas:</label>
+              <select id="roundsSelect">
+                <option value="5">5 perguntas</option>
+                <option value="8">8 perguntas</option>
+                <option value="10" selected>10 perguntas</option>
+                <option value="12">12 perguntas</option>
+                <option value="15">15 perguntas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="section-block">
+            <label class="block-label" for="contextInput">Texto ou tópicos extras da aula (opcional):</label>
+            <textarea id="contextInput" rows="3" placeholder="Se quiser, cole um resumo ou palavras-chave aqui para direcionar ainda mais as perguntas..."></textarea>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+            <button type="button" id="btnAutoGenerate" class="btn btn-green btn-lg">
+              Gerar Perguntas Automaticamente
+            </button>
+            <button type="button" id="btnOpenAddModal" class="btn">
+              + Adicionar Pergunta Manual
+            </button>
+          </div>
+
+          <div id="genStatus" class="status-msg info" style="margin-top: 14px;">
+            O sistema gera perguntas nos 3 níveis (Fácil, Média e Difícil) para que a turma escolha a dificuldade no intervalo de cada rodada.
+          </div>
         </div>
-        <div id="introDiffBadge" class="intro-diff-pill diff-facil">Fácil</div>
-        <p id="introDiffDesc" class="intro-sub">Preparem-se! Quando todos estiverem prontos, revele a pergunta.</p>
-        <button type="button" id="btnShowQuestion" class="btn btn-primary btn-lg" style="font-size: 1.18rem; padding: 16px 36px;">
-          Mostrar Pergunta
+
+        <!-- ABA 2: LISTA DE PERGUNTAS GERADAS / EDITÁVEIS -->
+        <div id="tabQuestions" class="tab-body hidden">
+          <div class="filter-bar">
+            <div class="pill-picker" id="diffFilterBar">
+              <button type="button" class="pick-btn selected" data-filter="all">Todas</button>
+              <button type="button" class="pick-btn" data-filter="facil">Fáceis</button>
+              <button type="button" class="pick-btn" data-filter="media">Médias</button>
+              <button type="button" class="pick-btn" data-filter="dificil">Difíceis</button>
+            </div>
+            <button type="button" id="btnAddInsideTab" class="btn btn-green btn-sm">+ Nova Pergunta</button>
+          </div>
+
+          <div id="questionsList" class="q-table-list"></div>
+        </div>
+
+        <!-- ABA 3: RANKING / RESULTADO (ESTILO TABELA DA IMAGEM) -->
+        <div id="tabRanking" class="tab-body hidden">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h2 style="font-size: 1.05rem; font-weight: 700;">Ranking da Última Partida</h2>
+            <span id="rankingSummaryBadge" class="tag-chip green">Nenhuma partida finalizada ainda</span>
+          </div>
+
+          <table class="ranking-table">
+            <thead>
+              <tr>
+                <th>Rodada</th>
+                <th>Dificuldade</th>
+                <th>Resultado</th>
+                <th>Tempo</th>
+                <th>Pontuação</th>
+              </tr>
+            </thead>
+            <tbody id="rankingBody">
+              <tr>
+                <td colspan="5" style="text-align: center; color: #64748b; padding: 22px;">
+                  Inicie o jogo para registrar os resultados da turma aqui.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Barra Lateral Direita: Estilo Visual e Fontes (como no Wordwall) -->
+      <aside class="sidebar-card">
+        <div class="sidebar-title">Estilo visual</div>
+        <button type="button" class="theme-option active" data-style="classic">
+          <span class="theme-thumb thumb-classic">Aa</span>
+          <span>Verde Clássico</span>
         </button>
+        <button type="button" class="theme-option" data-style="classroom">
+          <span class="theme-thumb thumb-classroom">Aa</span>
+          <span>Sala de aula</span>
+        </button>
+        <button type="button" class="theme-option" data-style="forest">
+          <span class="theme-thumb thumb-forest">Aa</span>
+          <span>Verde Escuro</span>
+        </button>
+
+        <div class="sidebar-title" style="margin-top: 18px;">FONTES</div>
+        <select id="fontSelect">
+          <option value="default">Padrão (Limpa)</option>
+          <option value="comic">Escolar / Arredondada</option>
+          <option value="didactic">Didática (Alta leitura)</option>
+        </select>
+
+        <div style="margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--border);">
+          <label class="block-label" for="titleEditInput" style="font-size: 0.82rem;">Nome da atividade:</label>
+          <input type="text" id="titleEditInput" value="ATIVIDADE EDUCATIVA" />
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       2. MODAL ADICIONAR / EDITAR PERGUNTA
+       ========================================================= -->
+  <div id="questionModal" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 id="modalTitle" style="font-size: 1.1rem; font-weight: 800;">Nova Pergunta</h3>
+        <button type="button" id="btnCloseModal" class="btn btn-sm">Fechar</button>
       </div>
 
-      <!-- ETAPAS 1 E 2: CRONÔMETRO + PERGUNTA + OPÇÕES -->
-      <div id="activeQuestionWrapper" class="hidden" style="display: flex; flex-direction: column; gap: 18px;">
-        <div class="timer-panel">
-          <div id="timerClock" class="timer-clock paused">30s</div>
-          <div class="timer-bar-col">
-            <div class="timer-status-row">
-              <span id="timerStateLabel">Leitura livre — tempo parado</span>
-              <span>30 segundos</span>
+      <div class="section-block" style="margin-bottom: 12px;">
+        <label class="block-label" for="mDiff">Dificuldade</label>
+        <select id="mDiff">
+          <option value="facil">Fácil</option>
+          <option value="media">Média</option>
+          <option value="dificil">Difícil</option>
+        </select>
+      </div>
+
+      <div class="section-block" style="margin-bottom: 12px;">
+        <label class="block-label" for="mEnunciado">Enunciado</label>
+        <textarea id="mEnunciado" rows="2" placeholder="Digite a pergunta..."></textarea>
+      </div>
+
+      <div class="form-grid-2" style="margin-bottom: 12px;">
+        <div>
+          <label class="block-label" for="mAlt0">Alternativa A</label>
+          <input type="text" id="mAlt0" />
+        </div>
+        <div>
+          <label class="block-label" for="mAlt1">Alternativa B</label>
+          <input type="text" id="mAlt1" />
+        </div>
+        <div>
+          <label class="block-label" for="mAlt2">Alternativa C</label>
+          <input type="text" id="mAlt2" />
+        </div>
+        <div>
+          <label class="block-label" for="mAlt3">Alternativa D</label>
+          <input type="text" id="mAlt3" />
+        </div>
+      </div>
+
+      <div class="form-grid-2" style="margin-bottom: 14px;">
+        <div>
+          <label class="block-label" for="mCorreta">Resposta Correta</label>
+          <select id="mCorreta">
+            <option value="0">Letra A</option>
+            <option value="1">Letra B</option>
+            <option value="2">Letra C</option>
+            <option value="3">Letra D</option>
+          </select>
+        </div>
+        <div>
+          <label class="block-label" for="mExp">Explicação curta</label>
+          <input type="text" id="mExp" placeholder="Por que esta é a certa?" />
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <button type="button" id="btnModalCancel" class="btn">Cancelar</button>
+        <button type="button" id="btnModalSave" class="btn btn-green">Salvar Pergunta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       3. TELA DO JOGO (PROJEÇÃO PARA OS ALUNOS)
+       ===================================================== -->
+  <section id="gameView" class="game-screen style-classic hidden">
+    <header class="game-topbar">
+      <div class="game-title-left">
+        <strong id="gameTitleDisplay">ATIVIDADE EDUCATIVA</strong>
+        <span id="gameMetaTags" class="tag-chip">5º Ano • Matemática</span>
+      </div>
+      <div class="game-meta-right">
+        <span id="gameRoundPill" class="tag-chip green">Pergunta 1 de 10</span>
+        <span id="gamePointsPill" class="tag-chip">Pontos: 0</span>
+        <button type="button" id="btnSoundGame" class="btn btn-sm">Som: On</button>
+        <button type="button" id="btnFullscreen" class="btn btn-sm">Tela cheia</button>
+        <button type="button" id="btnExitGame" class="btn btn-sm">Sair</button>
+      </div>
+    </header>
+
+    <main class="game-stage">
+      <!-- INTERVALO ANTES DE CADA PERGUNTA: ESCOLHER A DIFICULDADE -->
+      <div id="intervalCard" class="diff-choice-card">
+        <div id="intervalRoundLabel" style="font-size: 0.92rem; font-weight: 800; color: var(--green-700); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">
+          Rodada 1 de 10
+        </div>
+        <h2>Escolha a Dificuldade da Pergunta</h2>
+        <p class="diff-choice-sub">A turma escolhe o nível agora, antes de a pergunta começar.</p>
+
+        <div class="diff-buttons-grid">
+          <button type="button" id="pickFacil" class="diff-pick-card facil">
+            <span class="diff-pick-name">Fácil</span>
+            <span class="diff-pick-pts">100 pontos</span>
+            <span id="leftFacil" class="diff-pick-left">Disponíveis: 5</span>
+          </button>
+
+          <button type="button" id="pickMedia" class="diff-pick-card media">
+            <span class="diff-pick-name">Média</span>
+            <span class="diff-pick-pts">200 pontos</span>
+            <span id="leftMedia" class="diff-pick-left">Disponíveis: 5</span>
+          </button>
+
+          <button type="button" id="pickDificil" class="diff-pick-card dificil">
+            <span class="diff-pick-name">Difícil</span>
+            <span class="diff-pick-pts">300 pontos</span>
+            <span id="leftDificil" class="diff-pick-left">Disponíveis: 5</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- RODADA ATIVA: LEITURA LIVRE -> 4 OPÇÕES + CRONÔMETRO -->
+      <div id="roundWrapper" class="hidden" style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="timer-bar-card">
+          <div id="clockDisplay" class="clock-pill paused">30s</div>
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: #475569;">
+              <span id="timerStatusText">Leitura livre — tempo parado</span>
+              <span id="timerConfiguredLabel">30 segundos</span>
             </div>
-            <div class="timer-track">
-              <div id="timerFill" class="timer-fill paused" style="width: 100%;"></div>
+            <div class="progress-track">
+              <div id="timerProgressBar" class="progress-fill paused"></div>
             </div>
           </div>
         </div>
 
-        <article class="question-box">
-          <div class="question-top-tags">
-            <span id="stageLabel" class="stage-label">Etapa 1 — Leitura Livre</span>
-            <span id="questionDiffBadge" class="diff-badge diff-facil">Dificuldade: Fácil</span>
+        <article class="question-stage-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <span id="roundStageTag" class="tag-chip green">Etapa 1 — Leitura Livre</span>
+            <span id="roundDiffTag" class="diff-tag diff-facil">Fácil</span>
           </div>
 
-          <h2 id="questionText" class="question-enunciado"></h2>
+          <h2 id="roundQuestionText" class="question-stage-text"></h2>
 
-          <div id="readingFooter" class="reading-footer">
-            <p>Leia o enunciado com a turma. As alternativas estão ocultas e o tempo só começa ao clicar abaixo.</p>
-            <button type="button" id="btnStartTimerOptions" class="btn-reveal-options">
-              Iniciar Tempo (30s) e Mostrar Opções
+          <div id="readingArea" class="reading-cta">
+            <p style="color: #475569; font-weight: 600;">
+              Leiam a pergunta com atenção. As alternativas estão ocultas e o tempo só começa ao clicar abaixo.
+            </p>
+            <button type="button" id="btnRevealOptions" class="btn btn-green btn-lg" style="font-size: 1.15rem; padding: 14px 32px;">
+              Iniciar Tempo (<span id="btnTimeVal">30</span>s) e Mostrar Opções
             </button>
           </div>
         </article>
 
-        <div id="optionsGrid" class="options-grid hidden"></div>
+        <div id="optionsContainer" class="options-grid hidden"></div>
 
-        <div id="feedbackPanel" class="feedback-panel hidden">
+        <div id="feedbackBar" class="feedback-bar hidden">
           <div style="flex: 1; min-width: 240px;">
-            <div id="feedbackHeading" class="feedback-heading"></div>
-            <p id="feedbackExp" class="feedback-exp"></p>
+            <div id="feedbackTitle" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 4px;"></div>
+            <div id="feedbackExplain" style="font-size: 1rem; color: #475569; font-weight: 600;"></div>
           </div>
-          <button type="button" id="btnNextQuestion" class="btn btn-primary btn-lg">
+          <button type="button" id="btnNextRound" class="btn btn-green btn-lg">
             Próxima Pergunta
           </button>
         </div>
@@ -1318,168 +1204,718 @@ Explicação: Na tabuada, 7 vezes 8 é igual a 56."></textarea>
     </main>
   </section>
 
-  <!-- =========================================================
-       3. TELA FINAL (PLACAR DA TURMA)
-       ========================================================= -->
-  <section id="finalScreen" class="final-screen hidden">
-    <div class="final-container">
-      <div class="final-banner">
-        <h1>Resultado Final</h1>
-        <p id="finalQuizTitle" style="color: var(--green-100); font-size: 1.08rem;">Desafio concluído!</p>
-
-        <div class="final-stats-row">
-          <div class="final-stat">
-            <div id="finalHits" class="final-stat-val">0 / 0</div>
-            <div class="final-stat-lbl">Acertos da Turma</div>
-          </div>
-          <div class="final-stat">
-            <div id="finalPercent" class="final-stat-val">0%</div>
-            <div class="final-stat-lbl">Aproveitamento</div>
-          </div>
-          <div class="final-stat">
-            <div id="finalPoints" class="final-stat-val">0</div>
-            <div class="final-stat-lbl">Pontuação Geral</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="summary-card">
-        <h2>Resumo por Pergunta</h2>
-        <div id="finalSummaryList" class="summary-list"></div>
-      </div>
-
-      <div class="final-actions">
-        <button type="button" id="btnReplay" class="btn btn-primary btn-lg">Jogar Novamente</button>
-        <button type="button" id="btnBackToSetup" class="btn btn-outline btn-lg">Voltar e Editar Perguntas</button>
-      </div>
-    </div>
-  </section>
-
   <script>
     (() => {
       "use strict";
 
-      const STORAGE_KEY = "quiz_turma_verde_branco_v1";
-      const TOTAL_SECONDS = 30;
+      const GRADES = [
+        "1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano",
+        "6º Ano", "7º Ano", "8º Ano", "9º Ano", "Ensino Médio"
+      ];
+
+      const SUBJECTS = [
+        "Matemática", "Português", "Ciências", "História", "Geografia", "Inglês", "Conhecimentos Gerais"
+      ];
+
       const LETTERS = ["A", "B", "C", "D"];
 
-      const DIFF_INFO = {
-        facil: {
-          label: "Fácil",
-          cls: "diff-facil",
-          points: 100,
-          desc: "Questão inicial para aquecer a turma. Vamos lá!"
-        },
-        media: {
-          label: "Média",
-          cls: "diff-media",
-          points: 200,
-          desc: "Atenção aos detalhes do conteúdo! Vale 200 pontos."
-        },
-        dificil: {
-          label: "Difícil",
-          cls: "diff-dificil",
-          points: 300,
-          desc: "Desafio máximo! Concentração total antes de revelar."
-        }
+      const DIFF_META = {
+        facil: { label: "Fácil", points: 100, cls: "diff-facil" },
+        media: { label: "Média", points: 200, cls: "diff-media" },
+        dificil: { label: "Difícil", points: 300, cls: "diff-dificil" }
       };
 
       const state = {
-        quizTitle: "Desafio da Aula de Hoje",
-        questions: [], // [{ id, difficulty, enunciado, alternativas[4], correta, explicacao }]
-        editingIndex: null,
+        title: "ATIVIDADE EDUCATIVA",
+        grade: "5º Ano",
+        subject: "Matemática",
+        topic: "Operações e Frações",
+        timeSeconds: 30,
+        totalRounds: 10,
+        visualStyle: "classic",
+        fontChoice: "default",
         soundEnabled: true,
 
-        // Estado do jogo
-        deck: [],
-        currentIndex: 0,
-        stage: "idle", // "diff" | "reading" | "answering" | "feedback" | "idle"
-        timeLeft: TOTAL_SECONDS,
+        questions: [], // [{ id, difficulty, enunciado, alternativas[4], correta, explicacao }]
+        filterDiff: "all",
+        editingIndex: null,
+
+        // Jogo em andamento
+        usedIds: new Set(),
+        currentRound: 0,
+        currentQuestion: null,
+        stage: "idle", // "interval" | "reading" | "answering" | "feedback" | "idle"
+        timeLeft: 30,
         timerId: null,
         deadlineMs: 0,
-        results: [] // [{ difficulty, enunciado, isCorrect, timedOut, timeSpent, points }]
+        history: [] // [{ round, difficulty, isCorrect, timedOut, timeSpent, points }]
       };
 
-      const el = {
-        teacherScreen: document.getElementById("teacherScreen"),
-        gameScreen: document.getElementById("gameScreen"),
-        finalScreen: document.getElementById("finalScreen"),
-
-        quizTitleInput: document.getElementById("quizTitleInput"),
-        orderSelect: document.getElementById("orderSelect"),
-        btnLoadDemo: document.getElementById("btnLoadDemo"),
-        btnSoundTeacher: document.getElementById("btnSoundTeacher"),
-
-        formHeading: document.getElementById("formHeading"),
-        btnCancelEdit: document.getElementById("btnCancelEdit"),
-        tabButtons: document.querySelectorAll(".tab-btn"),
-        tabForm: document.getElementById("tabForm"),
-        tabBulk: document.getElementById("tabBulk"),
-
-        qDifficulty: document.getElementById("qDifficulty"),
-        qEnunciado: document.getElementById("qEnunciado"),
-        altInputs: [
-          document.getElementById("alt0"),
-          document.getElementById("alt1"),
-          document.getElementById("alt2"),
-          document.getElementById("alt3")
+      /* =====================================================
+         BANCO CURRICULAR BRASILEIRO INTEGRADO (SEM API KEY)
+         ===================================================== */
+      const CURATED_BANK = {
+        "Português": [
+          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["ortografia","silaba","vogais","alfabeto"], q: "Qual das palavras abaixo está escrita corretamente?", a: ["Cachorro","Caxorro","Cachoro","Cachôrro"], c: 0, e: "Escreve-se 'cachorro' com CH e RR." },
+          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["substantivo","classes","palavras"], q: "Na frase 'O menino joga bola no parque', qual palavra é um substantivo comum?", a: ["Joga","Menino","No","O"], c: 1, e: "'Menino' nomeia um ser e é um substantivo comum." },
+          { d: "facil", g: ["4º Ano","5º Ano","6º Ano","7º Ano"], tags: ["verbo","acao"], q: "Qual palavra indica uma ação (verbo) na frase 'Mariana leu o livro inteiro'?", a: ["Mariana","Livro","Leu","Inteiro"], c: 2, e: "'Leu' é a forma conjugada do verbo ler." },
+          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["sinonimo","antonimo","vocabulario"], q: "Qual é o antônimo (sentido contrário) da palavra 'alegre'?", a: ["Feliz","Triste","Rápido","Grande"], c: 1, e: "'Triste' expressa o oposto de 'alegre'." },
+          { d: "media", g: ["4º Ano","5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["acentuacao","oxitona","paroxitona"], q: "Por que a palavra 'café' recebe acento agudo?", a: ["Por ser uma oxítona terminada em E","Por ser uma proparoxítona","Por ter mais de quatro letras","Por começar com a letra C"], c: 0, e: "Oxítonas terminadas em A, E, O (seguidas ou não de S) são acentuadas." },
+          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["sujeito","predicado","sintaxe","frase"], q: "Na oração 'Os estudantes resolveram o desafio', quem é o sujeito?", a: ["Resolveram","O desafio","Os estudantes","Desafio"], c: 2, e: "'Os estudantes' é quem pratica a ação de resolver." },
+          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["adjetivo","caracteristica"], q: "Na expressão 'dia ensolarado', a palavra 'ensolarado' tem função de:", a: ["Verbo","Adjetivo","Preposição","Advérbio"], c: 1, e: "Adjetivos caracterizam ou qualificam um substantivo ('dia')." },
+          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["pontuacao","virgula","crase"], q: "Qual sinal de pontuação é usado antes de enumerar itens ou introduzir uma fala?", a: ["Ponto final","Dois-pontos","Ponto de interrogação","Reticências"], c: 1, e: "Os dois-pontos anunciam explicações, falas ou enumerações." },
+          { d: "dificil", g: ["6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["figuras","metafora","linguagem"], q: "Na frase 'Aquele aluno é uma enciclopédia ambulante', qual figura de linguagem foi usada?", a: ["Hipérbole","Metáfora","Onomatopeia","Aliteração"], c: 1, e: "A metáfora faz uma comparação implícita sem usar 'como'." },
+          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["concordancia","regencia","crase","gramatica"], q: "Em qual alternativa o uso de 'mas' ou 'mais' está empregado corretamente?", a: ["Quero estudar mas português hoje.","Ele estudou muito, mas não foi bem.","Ela gosta mais de ler, mas não tem tempo nenhum e mais nada.","Choveu mas forte ontem à noite."], c: 1, e: "'Mas' indica oposição/ideia contrária (equivalente a 'porém')." },
+          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["interpretacao","coesao","conjuncoes"], q: "Na frase 'Estudou bastante, portanto conseguiu ótima nota', a palavra 'portanto' expressa ideia de:", a: ["Oposição","Tempo","Conclusão","Condição"], c: 2, e: "'Portanto' é uma conjunção coordenativa conclusiva." }
         ],
-        qExplicacao: document.getElementById("qExplicacao"),
-        btnSaveQuestion: document.getElementById("btnSaveQuestion"),
+        "Ciências": [
+          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["plantas","fotossintese","natureza"], q: "Do que as plantas precisam para fazer fotossíntese e produzir seu alimento?", a: ["Luz solar, água e gás carbônico","Apenas vento e areia","Somente escuridão total","Óleo e sal"], c: 0, e: "A fotossíntese usa luz do sol, água e gás carbônico." },
+          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["sistema solar","planetas","espaco"], q: "Qual é a estrela localizada no centro do nosso Sistema Solar?", a: ["Lua","Terra","Sol","Marte"], c: 2, e: "O Sol é a estrela central ao redor da qual os planetas orbitam." },
+          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["agua","estados fisicos","ciclo da agua"], q: "Quando a água líquida esquenta e vira vapor, como se chama essa mudança de estado?", a: ["Solidificação","Evaporação","Condensação","Fusão"], c: 1, e: "A passagem do estado líquido para o gasoso por aquecimento lento é a evaporação." },
+          { d: "facil", g: ["4º Ano","5º Ano","6º Ano","7º Ano"], tags: ["corpo humano","orgaos","sangue"], q: "Qual órgão é responsável por bombear o sangue para todo o corpo humano?", a: ["Estômago","Pulmão","Coração","Rim"], c: 2, e: "O coração impulsiona o sangue pelos vasos sanguíneos." },
+          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["ecologia","cadeia alimentar","seres vivos"], q: "Em uma cadeia alimentar, qual grupo representa os seres produtores?", a: ["Animais carnívoros","Plantas e algas","Fungos decompositores","Animais herbívoros"], c: 1, e: "Produtores fabricam o próprio alimento pela fotossíntese." },
+          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["celula","biologia","organelas"], q: "Qual parte da célula contém o material genético (DNA) nas células eucariontes?", a: ["Membrana plasmática","Núcleo","Parede celular","Vacúolo"], c: 1, e: "O núcleo celular protege e organiza o DNA nas células eucariontes." },
+          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["respiracao","sistema respiratorio","oxigenio"], q: "Qual gás é absorvido pelos pulmões durante a inspiração e levado às células?", a: ["Gás carbônico","Gás oxigênio","Gás hélio","Monóxido de carbono"], c: 1, e: "O oxigênio (O2) é essencial para a respiração celular." },
+          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["energia","fisica","eletricidade"], q: "Segundo o princípio da conservação de energia, a energia no universo:", a: ["Pode ser criada do nada em usinas","Desaparece quando o aparelho desliga","Não é criada nem destruída, apenas transformada","Existe apenas em forma de calor"], c: 2, e: "A energia muda de uma forma para outra (ex: elétrica para luminosa), conservando o total." },
+          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["quimica","atomos","tabela"], q: "Na molécula da água (H2O), quantos átomos de hidrogênio estão ligados a um átomo de oxigênio?", a: ["1 átomo","2 átomos","3 átomos","4 átomos"], c: 1, e: "A fórmula H2O indica 2 átomos de hidrogênio e 1 de oxigênio." },
+          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["genetica","evolucao","biologia"], q: "Como se chama o processo proposto por Charles Darwin em que seres mais bem adaptados sobrevivem e se reproduzem mais?", a: ["Geração espontânea","Seleção natural","Metamorfose completa","Clonagem celular"], c: 1, e: "A seleção natural favorece características vantajosas em determinado ambiente." }
+        ],
+        "História": [
+          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["brasil","independencia","historia do brasil"], q: "Em que data é comemorada a Independência do Brasil?", a: ["15 de novembro","7 de setembro","21 de abril","12 de outubro"], c: 1, e: "A Independência do Brasil foi proclamada em 7 de setembro de 1822." },
+          { d: "facil", g: ["4º Ano","5º Ano","6º Ano"], tags: ["descobrimento","colonizacao","portugueses"], q: "Qual navegador português comandou a frota que chegou ao território brasileiro em 1500?", a: ["Cristóvão Colombo","Pedro Álvares Cabral","Vasco da Gama","Fernão de Magalhães"], c: 1, e: "Pedro Álvares Cabral liderou a expedição portuguesa que chegou em abril de 1500." },
+          { d: "facil", g: ["4º Ano","5º Ano","6º Ano","7º Ano"], tags: ["egito","antiguidade","piramides"], q: "Qual grande rio foi fundamental para o desenvolvimento da civilização do Egito Antigo?", a: ["Rio Amazonas","Rio Nilo","Rio Danúbio","Rio Tejo"], c: 1, e: "As cheias do Rio Nilo fertilizavam o solo para a agricultura egípcia." },
+          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["republica","brasil","imperio"], q: "Em 15 de novembro de 1889 ocorreu qual acontecimento histórico importante no Brasil?", a: ["Proclamação da República","Abolição da escravatura","Chegada da Família Real","Revolução de 1930"], c: 0, e: "Em 1889 o Brasil deixou de ser uma monarquia e tornou-se uma República." },
+          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["idade media","feudalismo","europa"], q: "Qual era a principal base econômica da sociedade feudal na Europa medieval?", a: ["Indústria automobilística","Agricultura e posse de terras","Comércio eletrônico","Mineração de petróleo"], c: 1, e: "O feudalismo girava em torno da terra (feudos) e da produção agrícola." },
+          { d: "media", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["revolucao industrial","maquinas","inglesa"], q: "Em qual país começou a Primeira Revolução Industrial no século XVIII?", a: ["França","Inglaterra","Brasil","Itália"], c: 1, e: "A Inglaterra reuniu capitais, carvão mineral e mão de obra para iniciar a industrialização." },
+          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["revolucao francesa","iluminismo"], q: "Qual lema ficou famoso por sintetizar os ideais da Revolução Francesa de 1789?", a: ["Ordem e Progresso","Liberdade, Igualdade e Fraternidade","Paz, Terra e Pão","Independência ou Morte"], c: 1, e: "O lema 'Liberdade, Igualdade, Fraternidade' expressava o fim dos privilégios absolutistas." },
+          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["guerra fria","seculo xx","guerras"], q: "O que caracterizou a chamada Guerra Fria entre Estados Unidos e União Soviética?", a: ["Combates diretos com bombas nucleares entre os dois países","Disputa ideológica, política e tecnológica sem confronto militar direto entre as potências","Uma guerra ocorrida apenas na Antártida","A união dos dois países em um único governo"], c: 1, e: "Foi um conflito indireto entre o bloco capitalista (EUA) e o socialista (URSS)." }
+        ],
+        "Geografia": [
+          { d: "facil", g: ["2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["pontos cardeais","bussola","orientacao"], q: "Em qual ponto cardeal o Sol aparenta nascer pela manhã?", a: ["Oeste","Norte","Leste","Sul"], c: 2, e: "O Sol nasce na direção Leste e se põe a Oeste." },
+          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["brasil","regioes","estados"], q: "Quantas grandes regiões geográficas compõem oficialmente o Brasil segundo o IBGE?", a: ["3 regiões","5 regiões","7 regiões","10 regiões"], c: 1, e: "São 5 regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul." },
+          { d: "facil", g: ["4º Ano","5º Ano","6º Ano","7º Ano"], tags: ["continentes","planeta","mapas"], q: "Em qual continente o Brasil está localizado?", a: ["Europa","África","América do Sul","Ásia"], c: 2, e: "O Brasil fica na porção centro-oriental da América do Sul." },
+          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["biomas","amazonia","cerrado","caatinga"], q: "Qual bioma brasileiro é típico do semiárido nordestino, com vegetação adaptada à seca?", a: ["Pampa","Caatinga","Pantanal","Mata de Araucárias"], c: 1, e: "A Caatinga é um bioma exclusivo do Brasil adaptado ao clima semiárido." },
+          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["clima","tempo","camadas","atmosfera"], q: "Qual é a principal diferença entre 'tempo atmosférico' e 'clima'?", a: ["Não há nenhuma diferença","Tempo é momentâneo; clima é o padrão observado por décadas","Clima muda toda hora; tempo dura 100 anos","Tempo só existe no verão"], c: 1, e: "O tempo varia ao longo do dia; o clima é a média histórica de uma região." },
+          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["urbanizacao","populacao","campo"], q: "Como se chama o deslocamento em massa de pessoas do campo para viver nas cidades?", a: ["Êxodo rural","Imigração marítima","Turismo sazonal","Rotação agrícola"], c: 0, e: "Êxodo rural é a saída de moradores da zona rural para a zona urbana." },
+          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["relevo","placas tectonicas","terremotos"], q: "Qual fenômeno geológico explica a formação de grandes cadeias de montanhas como os Andes e o Himalaia?", a: ["Erosão apenas pelo vento","Choque entre placas tectônicas","Maré alta dos oceanos","Resfriamento das nuvens"], c: 1, e: "O movimento convergente das placas tectônicas dobra e eleva a crosta terrestre." },
+          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["globalizacao","economia","blocos"], q: "Qual bloco econômico reúne Brasil, Argentina, Paraguai e Uruguai como membros fundadores?", a: ["União Europeia","Mercosul","NAFTA","OTAN"], c: 1, e: "O Mercosul foi criado em 1991 para integração econômica na América do Sul." }
+        ],
+        "Inglês": [
+          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["cores","vocabulario","basico"], q: "Como se diz a cor 'Verde' em inglês?", a: ["Blue","Yellow","Green","White"], c: 2, e: "'Green' significa verde em inglês." },
+          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["cumprimentos","saudacoes"], q: "Qual expressão em inglês significa 'Bom dia'?", a: ["Good night","Good morning","See you later","Thank you"], c: 1, e: "'Good morning' é usado para cumprimentar pela manhã." },
+          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["verbo to be","gramatica"], q: "Complete corretamente: 'She ___ my best friend.'", a: ["are","am","is","be"], c: 2, e: "Para 'he', 'she' e 'it', o verbo 'to be' no presente é 'is'." },
+          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["simple present","rotina"], q: "Qual frase está correta no Simple Present?", a: ["He play soccer every day.","He plays soccer every day.","He playing soccer every day.","He to play soccer every day."], c: 1, e: "Na 3ª pessoa do singular (he/she/it), acrescentamos -s ao verbo no presente." },
+          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["past","passado","verbos irregulares"], q: "Qual é a forma correta no passado simples (Simple Past) do verbo 'go' (ir)?", a: ["Goed","Going","Went","Gone"], c: 2, e: "'Go' é um verbo irregular; seu passado simples é 'went'." }
+        ],
+        "Conhecimentos Gerais": [
+          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano","6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["geral","brasil"], q: "Qual é a capital do Brasil?", a: ["São Paulo","Rio de Janeiro","Brasília","Belo Horizonte"], c: 2, e: "Brasília é a capital federal do Brasil desde 1960." },
+          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["geral","planeta","oceanos"], q: "Qual é o maior oceano da Terra?", a: ["Oceano Atlântico","Oceano Índico","Oceano Pacífico","Oceano Ártico"], c: 2, e: "O Oceano Pacífico cobre cerca de um terço da superfície terrestre." },
+          { d: "dificil", g: ["6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["geral","ciencia","historia"], q: "Qual cientista formulou a Teoria da Relatividade?", a: ["Isaac Newton","Albert Einstein","Galileu Galilei","Louis Pasteur"], c: 1, e: "Albert Einstein publicou a Teoria da Relatividade no início do século XX." }
+        ]
+      };
 
-        bulkTextInput: document.getElementById("bulkTextInput"),
-        btnFillBulkExample: document.getElementById("btnFillBulkExample"),
-        btnImportBulk: document.getElementById("btnImportBulk"),
-        formAlert: document.getElementById("formAlert"),
+      /* =====================================================
+         MOTOR PROCEDURAL DE MATEMÁTICA (EXATO POR ANO E TEMA)
+         ===================================================== */
+      function randInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
 
-        qCountBadge: document.getElementById("qCountBadge"),
-        btnClearAll: document.getElementById("btnClearAll"),
-        questionsListContainer: document.getElementById("questionsListContainer"),
-        startStatusText: document.getElementById("startStatusText"),
-        btnStartPresentation: document.getElementById("btnStartPresentation"),
+      function buildMathOptions(correctVal, candidateWrongValues, suffix = "") {
+        const set = new Set([String(correctVal)]);
+        const wrongs = [];
+        for (const w of candidateWrongValues) {
+          const s = String(w);
+          if (!set.has(s) && Number(w) >= 0) {
+            set.add(s);
+            wrongs.push(s);
+          }
+          if (wrongs.length === 3) break;
+        }
+        let guard = 0;
+        while (wrongs.length < 3 && guard < 40) {
+          guard++;
+          const offset = randInt(1, 9) * (Math.random() > 0.5 ? 1 : -1);
+          const num = Number(correctVal) + offset;
+          const s = String(num >= 0 ? num : Math.abs(num) + 2);
+          if (!set.has(s)) {
+            set.add(s);
+            wrongs.push(s);
+          }
+        }
+        const all = [
+          { txt: `${correctVal}${suffix}`, ok: true },
+          ...wrongs.map(w => ({ txt: `${w}${suffix}`, ok: false }))
+        ];
+        // Embaralha alternativas
+        for (let i = all.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [all[i], all[j]] = [all[j], all[i]];
+        }
+        return {
+          alternativas: all.map(o => o.txt),
+          correta: all.findIndex(o => o.ok)
+        };
+      }
+
+      function generateMathQuestion(grade, topic, difficulty) {
+        const gradeNum = grade === "Ensino Médio" ? 10 : parseInt(grade, 10) || 5;
+        const t = topic.toLowerCase();
+
+        // Detecta subtema
+        const isFraction = /fra[cç]|meio|ter[cç]|quarto/.test(t);
+        const isPercent = /porcent|%/.test(t);
+        const isGeometry = /geometr|[áa]rea|per[íi]metro|tri[âa]ngulo|quadrado|ret[âa]ngulo/.test(t);
+        const isEquation = /equa[cç]|inc[óo]gnita|alg[eé]b/.test(t);
+        const isMultDiv = /multiplica|divis|tabuada/.test(t);
+
+        const modes = [];
+        if (isFraction) modes.push("fraction");
+        if (isPercent) modes.push("percent");
+        if (isGeometry) modes.push("geometry");
+        if (isEquation) modes.push("equation");
+        if (isMultDiv) modes.push("multdiv");
+
+        if (modes.length === 0) {
+          if (gradeNum <= 3) modes.push("addsub", "multdiv");
+          else if (gradeNum <= 5) modes.push("addsub", "multdiv", "fraction", "geometry");
+          else if (gradeNum <= 7) modes.push("multdiv", "fraction", "percent", "geometry", "equation");
+          else modes.push("percent", "geometry", "equation", "power");
+        }
+
+        const mode = modes[randInt(0, modes.length - 1)];
+
+        if (mode === "fraction") {
+          if (difficulty === "facil") {
+            const den = [2, 3, 4, 5, 6, 8][randInt(0, 5)];
+            const num = randInt(1, den - 1);
+            const total = den * randInt(2, 6);
+            const ans = (total / den) * num;
+            const opts = buildMathOptions(ans, [ans + 2, ans - 1, total / 2, num + den]);
+            return {
+              difficulty,
+              enunciado: `Quanto vale ${num}/${den} de ${total}?`,
+              ...opts,
+              explicacao: `Dividimos ${total} por ${den} (dá ${total / den}) e multiplicamos por ${num}, resultando em ${ans}.`
+            };
+          }
+          if (difficulty === "media") {
+            const den = [4, 5, 6, 8, 10][randInt(0, 4)];
+            const a = randInt(1, Math.floor(den / 2));
+            const b = randInt(1, den - a);
+            const sum = a + b;
+            const correctTxt = `${sum}/${den}`;
+            const wrongSet = [`${sum}/${den * 2}`, `${Math.abs(a - b) + 1}/${den}`, `${sum + 1}/${den}`, `${a * b}/${den}`];
+            const alts = [correctTxt, ...wrongSet.filter(w => w !== correctTxt).slice(0, 3)];
+            const shuffled = alts.map((txt, idx) => ({ txt, ok: idx === 0 })).sort(() => Math.random() - 0.5);
+            return {
+              difficulty,
+              enunciado: `Qual é o resultado da soma ${a}/${den} + ${b}/${den}?`,
+              alternativas: shuffled.map(x => x.txt),
+              correta: shuffled.findIndex(x => x.ok),
+              explicacao: `Com denominadores iguais, somamos os numeradores (${a} + ${b} = ${sum}) e mantemos o ${den}.`
+            };
+          }
+          // difícil
+          const den1 = [2, 3, 4][randInt(0, 2)];
+          const den2 = den1 === 2 ? 4 : den1 === 3 ? 6 : 8;
+          const n1 = randInt(1, den1 - 1);
+          const n2 = 1;
+          const mult = den2 / den1;
+          const finalNum = n1 * mult + n2;
+          const correctTxt = `${finalNum}/${den2}`;
+          const candidates = [`${n1 + n2}/${den1 + den2}`, `${finalNum + 1}/${den2}`, `${n1 + n2}/${den2}`, `${finalNum}/${den1}`];
+          const uniques = [...new Set(candidates.filter(x => x !== correctTxt))].slice(0, 3);
+          while (uniques.length < 3) uniques.push(`${finalNum + uniques.length + 2}/${den2}`);
+          const shuffled = [correctTxt, ...uniques].map((txt, idx) => ({ txt, ok: idx === 0 })).sort(() => Math.random() - 0.5);
+          return {
+            difficulty,
+            enunciado: `Calcule a soma das frações com denominadores diferentes: ${n1}/${den1} + ${n2}/${den2}`,
+            alternativas: shuffled.map(x => x.txt),
+            correta: shuffled.findIndex(x => x.ok),
+            explicacao: `Transformando ${n1}/${den1} em ${n1 * mult}/${den2} e somando ${n2}/${den2}, obtemos ${correctTxt}.`
+          };
+        }
+
+        if (mode === "percent") {
+          const pct = difficulty === "facil" ? [10, 25, 50][randInt(0, 2)]
+                    : difficulty === "media" ? [15, 20, 30, 40][randInt(0, 3)]
+                    : [12, 18, 35, 75][randInt(0, 3)];
+          const base = difficulty === "facil" ? randInt(2, 10) * 20
+                     : difficulty === "media" ? randInt(3, 12) * 50
+                     : randInt(2, 9) * 100;
+          const ans = Math.round((pct / 100) * base);
+          const opts = buildMathOptions(ans, [ans + 10, Math.max(1, ans - 10), Math.round(ans / 2), base - ans]);
+          return {
+            difficulty,
+            enunciado: `Quanto é ${pct}% de ${base}?`,
+            ...opts,
+            explicacao: `Calculamos (${pct} × ${base}) ÷ 100, que é igual a ${ans}.`
+          };
+        }
+
+        if (mode === "geometry") {
+          const w = difficulty === "facil" ? randInt(3, 9) : difficulty === "media" ? randInt(6, 15) : randInt(12, 24);
+          const h = difficulty === "facil" ? randInt(2, 7) : difficulty === "media" ? randInt(4, 12) : randInt(7, 16);
+          if (difficulty === "facil") {
+            const per = 2 * (w + h);
+            const opts = buildMathOptions(per, [w * h, w + h, per + 4, per - 2], " cm");
+            return {
+              difficulty,
+              enunciado: `Um retângulo mede ${w} cm de largura e ${h} cm de altura. Qual é o seu perímetro?`,
+              ...opts,
+              explicacao: `O perímetro é a soma dos 4 lados: ${w} + ${w} + ${h} + ${h} = ${per} cm.`
+            };
+          }
+          if (difficulty === "media") {
+            const area = w * h;
+            const opts = buildMathOptions(area, [2 * (w + h), area + w, area - h, w + h], " cm²");
+            return {
+              difficulty,
+              enunciado: `Qual é a área de um retângulo com ${w} cm de base e ${h} cm de altura?`,
+              ...opts,
+              explicacao: `A área do retângulo é base × altura: ${w} × ${h} = ${area} cm².`
+            };
+          }
+          const triBase = w % 2 === 0 ? w : w + 1;
+          const areaTri = (triBase * h) / 2;
+          const opts = buildMathOptions(areaTri, [triBase * h, triBase + h, areaTri + 6, areaTri * 2 + 2], " cm²");
+          return {
+            difficulty,
+            enunciado: `Um triângulo tem base de ${triBase} cm e altura de ${h} cm. Qual é a sua área?`,
+            ...opts,
+            explicacao: `A área do triângulo é (base × altura) ÷ 2 = (${triBase} × ${h}) ÷ 2 = ${areaTri} cm².`
+          };
+        }
+
+        if (mode === "equation") {
+          const x = difficulty === "facil" ? randInt(2, 12) : difficulty === "media" ? randInt(3, 15) : randInt(4, 18);
+          const a = difficulty === "facil" ? 1 : randInt(2, 5);
+          const b = randInt(2, 14);
+          const rhs = a * x + b;
+          const opts = buildMathOptions(x, [x + 1, Math.max(1, x - 2), rhs - b, x + 3]);
+          const eqStr = a === 1 ? `x + ${b} = ${rhs}` : `${a}x + ${b} = ${rhs}`;
+          return {
+            difficulty,
+            enunciado: `Qual é o valor de x na equação ${eqStr}?`,
+            ...opts,
+            explicacao: `Subtraindo ${b} de ${rhs} obtemos ${rhs - b}${a > 1 ? ` e dividindo por ${a}` : ""}, encontramos x = ${x}.`
+          };
+        }
+
+        if (mode === "power") {
+          const base = difficulty === "facil" ? randInt(2, 6) : difficulty === "media" ? randInt(3, 9) : randInt(2, 5);
+          const exp = difficulty === "dificil" ? randInt(3, 4) : 2;
+          const ans = Math.pow(base, exp);
+          const opts = buildMathOptions(ans, [base * exp, ans + base, Math.max(1, ans - base), Math.pow(base, exp - 1) + 2]);
+          return {
+            difficulty,
+            enunciado: `Qual é o valor da potência ${base}^${exp} (${base} elevado a ${exp})?`,
+            ...opts,
+            explicacao: `Multiplicando ${base} por ele mesmo ${exp} vezes, o resultado é ${ans}.`
+          };
+        }
+
+        if (mode === "multdiv") {
+          const a = difficulty === "facil" ? randInt(2, 9) : difficulty === "media" ? randInt(6, 14) : randInt(12, 25);
+          const b = difficulty === "facil" ? randInt(2, 9) : difficulty === "media" ? randInt(4, 12) : randInt(6, 15);
+          const prod = a * b;
+          if (Math.random() > 0.4) {
+            const opts = buildMathOptions(prod, [prod + a, Math.max(1, prod - b), a + b, prod + 10]);
+            return {
+              difficulty,
+              enunciado: `Qual é o resultado da multiplicação ${a} × ${b}?`,
+              ...opts,
+              explicacao: `${a} vezes ${b} é igual a ${prod}.`
+            };
+          } else {
+            const opts = buildMathOptions(b, [b + 1, Math.max(1, b - 1), b + 2, a]);
+            return {
+              difficulty,
+              enunciado: `Qual é o resultado da divisão ${prod} ÷ ${a}?`,
+              ...opts,
+              explicacao: `Dividindo ${prod} por ${a}, obtemos exatamente ${b}.`
+            };
+          }
+        }
+
+        // addsub
+        const maxN = difficulty === "facil" ? 30 : difficulty === "media" ? 150 : 600;
+        const x = randInt(10, maxN);
+        const y = randInt(5, maxN);
+        if (Math.random() > 0.45) {
+          const ans = x + y;
+          const opts = buildMathOptions(ans, [ans + 10, Math.max(1, ans - 10), ans + 2, Math.abs(x - y)]);
+          return {
+            difficulty,
+            enunciado: `Qual é o resultado de ${x} + ${y}?`,
+            ...opts,
+            explicacao: `Somando ${x} com ${y}, chegamos a ${ans}.`
+          };
+        } else {
+          const big = Math.max(x, y) + 5;
+          const small = Math.min(x, y);
+          const ans = big - small;
+          const opts = buildMathOptions(ans, [ans + 10, Math.max(1, ans - 2), big + small, ans + 4]);
+          return {
+            difficulty,
+            enunciado: `Qual é o resultado de ${big} − ${small}?`,
+            ...opts,
+            explicacao: `Subtraindo ${small} de ${big}, resta ${ans}.`
+          };
+        }
+      }
+
+      /* =====================================================
+         EXTRATOR LOCAL DE TEXTO (SE O PROFESSOR COLAR RESUMO)
+         ===================================================== */
+      function buildQuestionsFromContext(contextText, neededPerDiff) {
+        if (!contextText || contextText.trim().length < 40) return [];
+        const sentences = contextText
+          .replace(/\s+/g, " ")
+          .split(/(?<=[.!?])\s+/)
+          .map(s => s.trim())
+          .filter(s => s.length >= 45 && s.length <= 190);
+
+        const created = [];
+        const nounsPool = [];
+
+        sentences.forEach(s => {
+          const words = s.match(/[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]{3,}|[a-záéíóúâêôãõç]{6,}/g) || [];
+          words.forEach(w => {
+            if (!nounsPool.includes(w)) nounsPool.push(w);
+          });
+        });
+
+        const diffs = ["facil", "media", "dificil"];
+        sentences.forEach((sentence, idx) => {
+          const match = sentence.match(/\b(é|são|significa|consiste em|chama-se|responsável por|produz)\s+([a-záéíóúâêôãõçA-ZÁÉÍÓÚÂÊÔÃÕÇ\s,]{6,50}?)(?:[.,;]|$)/i);
+          if (!match) return;
+
+          const targetPhrase = match[2].trim();
+          const blanked = sentence.replace(targetPhrase, "__________");
+          if (blanked === sentence) return;
+
+          const distractors = nounsPool
+            .filter(w => w.toLowerCase() !== targetPhrase.toLowerCase() && !targetPhrase.toLowerCase().includes(w.toLowerCase()))
+            .slice(0, 6);
+
+          const fallbacks = ["nenhuma das anteriores", "um processo secundário", "apenas energia térmica", "um fenômeno aleatório"];
+          while (distractors.length < 3) {
+            distractors.push(fallbacks[distractors.length]);
+          }
+
+          const all = [
+            { txt: targetPhrase, ok: true },
+            ...distractors.slice(0, 3).map(d => ({ txt: d, ok: false }))
+          ].sort(() => Math.random() - 0.5);
+
+          created.push({
+            id: Date.now() + Math.random() + idx,
+            difficulty: diffs[idx % 3],
+            enunciado: `Complete corretamente com base no texto da aula: "${blanked}"`,
+            alternativas: all.map(o => o.txt),
+            correta: all.findIndex(o => o.ok),
+            explicacao: `De acordo com o conteúdo estudado: ${sentence}`
+          });
+        });
+
+        return created.slice(0, neededPerDiff * 3);
+      }
+
+      /* =====================================================
+         MOTOR DE GERAÇÃO AUTOMÁTICA (IA SEM CHAVE + FALLBACK LOCAL)
+         ===================================================== */
+      async function tryKeylessAI(subject, grade, topic, contextText, perDiff) {
+        const totalNeeded = perDiff * 3;
+        const prompt = `Crie exatamente ${totalNeeded} perguntas de múltipla escolha em Português do Brasil para sala de aula.
+Matéria: ${subject}
+Ano Escolar: ${grade}
+Tema: ${topic}
+${contextText ? `Texto de apoio:\n${contextText.slice(0, 1200)}` : ""}
+
+Distribuição obrigatória:
+- ${perDiff} com difficulty "facil"
+- ${perDiff} com difficulty "media"
+- ${perDiff} com difficulty "dificil"
+
+Retorne APENAS um JSON válido neste formato exato:
+{
+  "perguntas": [
+    {
+      "difficulty": "facil",
+      "enunciado": "Pergunta clara?",
+      "alternativas": ["Opção A", "Opção B", "Opção C", "Opção D"],
+      "correta": 0,
+      "explicacao": "Frase curta explicando a resposta."
+    }
+  ]
+}`;
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 9500);
+
+        try {
+          const res = await fetch("https://text.pollinations.ai/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            signal: controller.signal,
+            body: JSON.stringify({
+              messages: [
+                { role: "system", content: "Você é um professor brasileiro. Responda somente com JSON puro válido, sem markdown." },
+                { role: "user", content: prompt }
+              ],
+              model: "openai",
+              jsonMode: true
+            })
+          });
+
+          clearTimeout(timeout);
+          if (!res.ok) return null;
+
+          const text = await res.text();
+          const clean = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```$/i, "").trim();
+          const parsed = JSON.parse(clean);
+          const list = Array.isArray(parsed.perguntas) ? parsed.perguntas : Array.isArray(parsed) ? parsed : null;
+          if (!list || list.length < 3) return null;
+
+          const valid = [];
+          for (const item of list) {
+            if (!item.enunciado || !Array.isArray(item.alternativas) || item.alternativas.length !== 4) continue;
+            const c = Number(item.correta);
+            if (!Number.isInteger(c) || c < 0 || c > 3) continue;
+            const d = ["facil", "media", "dificil"].includes(item.difficulty) ? item.difficulty : "media";
+            valid.push({
+              id: Date.now() + Math.random(),
+              difficulty: d,
+              enunciado: String(item.enunciado).trim(),
+              alternativas: item.alternativas.map(a => String(a).replace(/^[A-Da-d][\)\.\:\s]+/, "").trim()),
+              correta: c,
+              explicacao: String(item.explicacao || "Conceito essencial do tema.").trim()
+            });
+          }
+          return valid.length >= 3 ? valid : null;
+        } catch {
+          clearTimeout(timeout);
+          return null;
+        }
+      }
+
+      function generateLocalPool(subject, grade, topic, contextText, perDiff) {
+        const result = [];
+        const diffs = ["facil", "media", "dificil"];
+
+        if (subject === "Matemática") {
+          const seen = new Set();
+          for (const d of diffs) {
+            let count = 0;
+            let tries = 0;
+            while (count < perDiff && tries < 60) {
+              tries++;
+              const q = generateMathQuestion(grade, topic, d);
+              if (!seen.has(q.enunciado)) {
+                seen.add(q.enunciado);
+                result.push({ id: Date.now() + Math.random() + tries, ...q });
+                count++;
+              }
+            }
+          }
+          return result;
+        }
+
+        // Se colou texto de apoio, extrai perguntas reais do texto primeiro
+        const fromText = buildQuestionsFromContext(contextText, perDiff);
+        result.push(...fromText);
+
+        // Seleciona do banco curricular pela matéria, tema e ano
+        const subjectList = CURATED_BANK[subject] || [];
+        const allOther = Object.values(CURATED_BANK).flat();
+        const topicWords = topic
+          .toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .split(/\s+/)
+          .filter(w => w.length > 2);
+
+        function scoreQuestion(item) {
+          let score = 0;
+          if (item.g.includes(grade)) score += 3;
+          const haystack = (item.q + " " + item.tags.join(" "))
+            .toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          for (const w of topicWords) {
+            if (haystack.includes(w)) score += 5;
+          }
+          return score;
+        }
+
+        for (const d of diffs) {
+          const already = result.filter(r => r.difficulty === d).length;
+          const needed = Math.max(0, perDiff - already);
+          if (needed === 0) continue;
+
+          const candidates = subjectList
+            .filter(item => item.d === d)
+            .sort((a, b) => scoreQuestion(b) - scoreQuestion(a));
+
+          // Se faltar naquela dificuldade específica da matéria, pega outras da mesma matéria ou gerais
+          const backupSameSubject = subjectList.filter(item => item.d !== d);
+          const backupGeneral = allOther.filter(item => item.d === d && !subjectList.includes(item));
+          const ordered = [...candidates, ...backupSameSubject, ...backupGeneral];
+
+          let added = 0;
+          for (const item of ordered) {
+            if (added >= needed) break;
+            if (result.some(r => r.enunciado === item.q)) continue;
+            result.push({
+              id: Date.now() + Math.random() + added,
+              difficulty: d,
+              enunciado: item.q,
+              alternativas: [...item.a],
+              correta: item.c,
+              explicacao: item.e
+            });
+            added++;
+          }
+        }
+
+        return result;
+      }
+
+      /* =====================================================
+         ELEMENTOS DO DOM
+         ===================================================== */
+      const el = {
+        setupView: document.getElementById("setupView"),
+        gameView: document.getElementById("gameView"),
+
+        displayActivityTitle: document.getElementById("displayActivityTitle"),
+        tagGrade: document.getElementById("tagGrade"),
+        tagSubject: document.getElementById("tagSubject"),
+        tagTopic: document.getElementById("tagTopic"),
+        tagTime: document.getElementById("tagTime"),
+        tagRounds: document.getElementById("tagRounds"),
+
+        btnSoundSetup: document.getElementById("btnSoundSetup"),
+        btnHeaderEditQuestions: document.getElementById("btnHeaderEditQuestions"),
+        btnStartGameTop: document.getElementById("btnStartGameTop"),
+
+        tabLinks: document.querySelectorAll(".tab-link"),
+        tabConfig: document.getElementById("tabConfig"),
+        tabQuestions: document.getElementById("tabQuestions"),
+        tabRanking: document.getElementById("tabRanking"),
+        tabQCount: document.getElementById("tabQCount"),
+
+        gradePicker: document.getElementById("gradePicker"),
+        subjectPicker: document.getElementById("subjectPicker"),
+        topicInput: document.getElementById("topicInput"),
+        timeSelect: document.getElementById("timeSelect"),
+        customTimeInput: document.getElementById("customTimeInput"),
+        roundsSelect: document.getElementById("roundsSelect"),
+        contextInput: document.getElementById("contextInput"),
+        btnAutoGenerate: document.getElementById("btnAutoGenerate"),
+        btnOpenAddModal: document.getElementById("btnOpenAddModal"),
+        btnAddInsideTab: document.getElementById("btnAddInsideTab"),
+        genStatus: document.getElementById("genStatus"),
+
+        diffFilterBar: document.getElementById("diffFilterBar"),
+        questionsList: document.getElementById("questionsList"),
+
+        rankingSummaryBadge: document.getElementById("rankingSummaryBadge"),
+        rankingBody: document.getElementById("rankingBody"),
+
+        themeOptions: document.querySelectorAll(".theme-option"),
+        fontSelect: document.getElementById("fontSelect"),
+        titleEditInput: document.getElementById("titleEditInput"),
+
+        // Modal
+        questionModal: document.getElementById("questionModal"),
+        modalTitle: document.getElementById("modalTitle"),
+        btnCloseModal: document.getElementById("btnCloseModal"),
+        btnModalCancel: document.getElementById("btnModalCancel"),
+        btnModalSave: document.getElementById("btnModalSave"),
+        mDiff: document.getElementById("mDiff"),
+        mEnunciado: document.getElementById("mEnunciado"),
+        mAlts: [
+          document.getElementById("mAlt0"),
+          document.getElementById("mAlt1"),
+          document.getElementById("mAlt2"),
+          document.getElementById("mAlt3")
+        ],
+        mCorreta: document.getElementById("mCorreta"),
+        mExp: document.getElementById("mExp"),
 
         // Jogo
-        gameQuizTitle: document.getElementById("gameQuizTitle"),
-        gameProgressPill: document.getElementById("gameProgressPill"),
-        gameScorePill: document.getElementById("gameScorePill"),
+        gameTitleDisplay: document.getElementById("gameTitleDisplay"),
+        gameMetaTags: document.getElementById("gameMetaTags"),
+        gameRoundPill: document.getElementById("gameRoundPill"),
+        gamePointsPill: document.getElementById("gamePointsPill"),
         btnSoundGame: document.getElementById("btnSoundGame"),
         btnFullscreen: document.getElementById("btnFullscreen"),
         btnExitGame: document.getElementById("btnExitGame"),
 
-        difficultyIntroCard: document.getElementById("difficultyIntroCard"),
-        introQuestionLabel: document.getElementById("introQuestionLabel"),
-        introDiffBadge: document.getElementById("introDiffBadge"),
-        introDiffDesc: document.getElementById("introDiffDesc"),
-        btnShowQuestion: document.getElementById("btnShowQuestion"),
+        intervalCard: document.getElementById("intervalCard"),
+        intervalRoundLabel: document.getElementById("intervalRoundLabel"),
+        pickFacil: document.getElementById("pickFacil"),
+        pickMedia: document.getElementById("pickMedia"),
+        pickDificil: document.getElementById("pickDificil"),
+        leftFacil: document.getElementById("leftFacil"),
+        leftMedia: document.getElementById("leftMedia"),
+        leftDificil: document.getElementById("leftDificil"),
 
-        activeQuestionWrapper: document.getElementById("activeQuestionWrapper"),
-        timerClock: document.getElementById("timerClock"),
-        timerStateLabel: document.getElementById("timerStateLabel"),
-        timerFill: document.getElementById("timerFill"),
-        stageLabel: document.getElementById("stageLabel"),
-        questionDiffBadge: document.getElementById("questionDiffBadge"),
-        questionText: document.getElementById("questionText"),
-        readingFooter: document.getElementById("readingFooter"),
-        btnStartTimerOptions: document.getElementById("btnStartTimerOptions"),
-        optionsGrid: document.getElementById("optionsGrid"),
-        feedbackPanel: document.getElementById("feedbackPanel"),
-        feedbackHeading: document.getElementById("feedbackHeading"),
-        feedbackExp: document.getElementById("feedbackExp"),
-        btnNextQuestion: document.getElementById("btnNextQuestion"),
-
-        // Final
-        finalQuizTitle: document.getElementById("finalQuizTitle"),
-        finalHits: document.getElementById("finalHits"),
-        finalPercent: document.getElementById("finalPercent"),
-        finalPoints: document.getElementById("finalPoints"),
-        finalSummaryList: document.getElementById("finalSummaryList"),
-        btnReplay: document.getElementById("btnReplay"),
-        btnBackToSetup: document.getElementById("btnBackToSetup")
+        roundWrapper: document.getElementById("roundWrapper"),
+        clockDisplay: document.getElementById("clockDisplay"),
+        timerStatusText: document.getElementById("timerStatusText"),
+        timerConfiguredLabel: document.getElementById("timerConfiguredLabel"),
+        timerProgressBar: document.getElementById("timerProgressBar"),
+        roundStageTag: document.getElementById("roundStageTag"),
+        roundDiffTag: document.getElementById("roundDiffTag"),
+        roundQuestionText: document.getElementById("roundQuestionText"),
+        readingArea: document.getElementById("readingArea"),
+        btnRevealOptions: document.getElementById("btnRevealOptions"),
+        btnTimeVal: document.getElementById("btnTimeVal"),
+        optionsContainer: document.getElementById("optionsContainer"),
+        feedbackBar: document.getElementById("feedbackBar"),
+        feedbackTitle: document.getElementById("feedbackTitle"),
+        feedbackExplain: document.getElementById("feedbackExplain"),
+        btnNextRound: document.getElementById("btnNextRound")
       };
 
       /* =====================================================
-         UTILITÁRIOS E ÁUDIO
+         ÁUDIO SUAVE VIA WEB AUDIO API
          ===================================================== */
+      let audioCtx = null;
+      function beep(freq, dur, type = "sine", vol = 0.06, delay = 0) {
+        if (!state.soundEnabled) return;
+        try {
+          if (!audioCtx) {
+            const Ctx = window.AudioContext || window.webkitAudioContext;
+            if (Ctx) audioCtx = new Ctx();
+          }
+          if (!audioCtx) return;
+          if (audioCtx.state === "suspended") audioCtx.resume();
+          const t = audioCtx.currentTime + delay;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, t);
+          gain.gain.setValueAtTime(0.001, t);
+          gain.gain.exponentialRampToValueAtTime(vol, t + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + dur + 0.02);
+        } catch {}
+      }
+
+      const sfx = {
+        reveal: () => { beep(523, 0.12, "triangle", 0.07, 0); beep(659, 0.16, "triangle", 0.07, 0.08); },
+        tick: () => beep(880, 0.05, "sine", 0.035, 0),
+        ok: () => { beep(523, 0.12, "triangle", 0.08, 0); beep(659, 0.12, "triangle", 0.08, 0.09); beep(784, 0.24, "triangle", 0.08, 0.18); },
+        bad: () => { beep(250, 0.16, "sine", 0.07, 0); beep(195, 0.24, "sine", 0.07, 0.14); },
+        timeout: () => { beep(392, 0.14, "sine", 0.06, 0); beep(311, 0.25, "sine", 0.06, 0.14); }
+      };
+
       function escapeHtml(str) {
         return String(str)
           .replace(/&/g, "&amp;")
@@ -1489,415 +1925,206 @@ Explicação: Na tabuada, 7 vezes 8 é igual a 56."></textarea>
           .replace(/'/g, "&#39;");
       }
 
-      function shuffle(arr) {
-        const copy = [...arr];
-        for (let i = copy.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [copy[i], copy[j]] = [copy[j], copy[i]];
+      /* =====================================================
+         RENDERIZAÇÃO DA TELA DE CONFIGURAÇÃO
+         ===================================================== */
+      function renderPickers() {
+        el.gradePicker.innerHTML = GRADES.map(g =>
+          `<button type="button" class="pick-btn ${state.grade === g ? "selected" : ""}" data-grade="${g}">${g}</button>`
+        ).join("");
+
+        el.gradePicker.querySelectorAll("button").forEach(btn => {
+          btn.addEventListener("click", () => {
+            state.grade = btn.getAttribute("data-grade");
+            renderPickers();
+            updateHeaderTags();
+          });
+        });
+
+        el.subjectPicker.innerHTML = SUBJECTS.map(s =>
+          `<button type="button" class="pick-btn ${state.subject === s ? "selected" : ""}" data-subj="${s}">${s}</button>`
+        ).join("");
+
+        el.subjectPicker.querySelectorAll("button").forEach(btn => {
+          btn.addEventListener("click", () => {
+            state.subject = btn.getAttribute("data-subj");
+            if (state.subject === "Matemática" && !el.topicInput.value.trim()) {
+              el.topicInput.value = "Operações e Frações";
+            }
+            renderPickers();
+            updateHeaderTags();
+          });
+        });
+      }
+
+      function updateHeaderTags() {
+        state.topic = el.topicInput.value.trim() || "Geral";
+        el.displayActivityTitle.textContent = (state.title || "ATIVIDADE EDUCATIVA").toUpperCase();
+        el.tagGrade.textContent = state.grade;
+        el.tagSubject.textContent = state.subject;
+        el.tagTopic.textContent = `Tema: ${state.topic}`;
+        el.tagTime.textContent = `Tempo: ${state.timeSeconds}s`;
+        el.tagRounds.textContent = `${state.totalRounds} Rodadas`;
+      }
+
+      function switchTab(tabName) {
+        el.tabLinks.forEach(t => t.classList.toggle("active", t.getAttribute("data-tab") === tabName));
+        el.tabConfig.classList.toggle("hidden", tabName !== "config");
+        el.tabQuestions.classList.toggle("hidden", tabName !== "questions");
+        el.tabRanking.classList.toggle("hidden", tabName !== "ranking");
+      }
+
+      function renderQuestionsTab() {
+        el.tabQCount.textContent = state.questions.length;
+        el.btnStartGameTop.disabled = state.questions.length === 0;
+
+        const filtered = state.filterDiff === "all"
+          ? state.questions
+          : state.questions.filter(q => q.difficulty === state.filterDiff);
+
+        if (filtered.length === 0) {
+          el.questionsList.innerHTML = `
+            <div style="text-align: center; padding: 28px; color: #64748b; border: 1px dashed #cbd5e1; border-radius: 6px;">
+              Nenhuma pergunta neste filtro. Clique em <strong>Gerar Perguntas Automaticamente</strong> ou adicione manualmente.
+            </div>`;
+          return;
         }
-        return copy;
+
+        el.questionsList.innerHTML = filtered.map(q => {
+          const realIndex = state.questions.indexOf(q);
+          const meta = DIFF_META[q.difficulty] || DIFF_META.facil;
+          const altsHtml = q.alternativas.map((a, i) =>
+            `<div class="q-alt-box ${i === q.correta ? "right" : ""}">${LETTERS[i]}) ${escapeHtml(a)}</div>`
+          ).join("");
+
+          return `
+            <div class="q-row-card">
+              <div class="q-row-top">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 0.82rem; font-weight: 700; color: #64748b;">#${realIndex + 1}</span>
+                  <span class="diff-tag ${meta.cls}">${meta.label}</span>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <button type="button" class="btn btn-sm" data-edit="${realIndex}">Editar</button>
+                  <button type="button" class="btn btn-sm btn-link-danger" data-del="${realIndex}">Excluir</button>
+                </div>
+              </div>
+              <div class="q-row-enunciado">${escapeHtml(q.enunciado)}</div>
+              <div class="q-row-alts">${altsHtml}</div>
+            </div>
+          `;
+        }).join("");
+
+        el.questionsList.querySelectorAll("button[data-edit]").forEach(btn => {
+          btn.addEventListener("click", () => openQuestionModal(parseInt(btn.getAttribute("data-edit"), 10)));
+        });
+
+        el.questionsList.querySelectorAll("button[data-del]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const idx = parseInt(btn.getAttribute("data-del"), 10);
+            state.questions.splice(idx, 1);
+            renderQuestionsTab();
+          });
+        });
       }
 
-      let audioCtx = null;
-      function playTone(freq, duration, type = "sine", vol = 0.07, delay = 0) {
-        if (!state.soundEnabled) return;
-        try {
-          if (!audioCtx) {
-            const Ctx = window.AudioContext || window.webkitAudioContext;
-            if (Ctx) audioCtx = new Ctx();
-          }
-          if (!audioCtx) return;
-          if (audioCtx.state === "suspended") audioCtx.resume();
+      async function handleAutoGenerate() {
+        const topic = el.topicInput.value.trim() || state.subject;
+        const contextText = el.contextInput.value.trim();
+        const perDiff = Math.max(4, Math.ceil(state.totalRounds * 0.6));
 
-          const now = audioCtx.currentTime + delay;
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = type;
-          osc.frequency.setValueAtTime(freq, now);
-          gain.gain.setValueAtTime(0.001, now);
-          gain.gain.exponentialRampToValueAtTime(vol, now + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(now);
-          osc.stop(now + duration + 0.02);
-        } catch {
-          // Ignora se navegador bloquear áudio sem interação prévia
+        el.btnAutoGenerate.disabled = true;
+        el.btnAutoGenerate.innerHTML = `<span class="spinner"></span> Gerando perguntas para ${state.subject} (${state.grade})...`;
+        el.genStatus.className = "status-msg info";
+        el.genStatus.textContent = `Criando perguntas nos níveis Fácil, Média e Difícil sobre "${topic}"...`;
+
+        let generated = null;
+
+        // Para Matemática, nosso gerador procedural garante contas 100% exatas
+        if (state.subject !== "Matemática") {
+          generated = await tryKeylessAI(state.subject, state.grade, topic, contextText, perDiff);
         }
-      }
 
-      function soundIntro() { playTone(440, 0.14, "triangle", 0.06, 0); playTone(554.37, 0.18, "triangle", 0.06, 0.09); }
-      function soundRevealOptions() { playTone(523.25, 0.12, "triangle", 0.07, 0); playTone(659.25, 0.18, "triangle", 0.07, 0.08); }
-      function soundTick() { playTone(880, 0.05, "sine", 0.035, 0); }
-      function soundCorrect() {
-        playTone(523.25, 0.12, "triangle", 0.09, 0);
-        playTone(659.25, 0.12, "triangle", 0.09, 0.09);
-        playTone(783.99, 0.25, "triangle", 0.09, 0.18);
-      }
-      function soundWrong() {
-        playTone(250, 0.16, "sine", 0.08, 0);
-        playTone(200, 0.26, "sine", 0.08, 0.14);
-      }
-      function soundTimeout() {
-        playTone(400, 0.14, "sine", 0.07, 0);
-        playTone(320, 0.16, "sine", 0.07, 0.15);
-        playTone(260, 0.3, "sine", 0.07, 0.3);
-      }
+        if (!generated) {
+          generated = generateLocalPool(state.subject, state.grade, topic, contextText, perDiff);
+        }
 
-      function updateSoundLabels() {
-        el.btnSoundTeacher.textContent = state.soundEnabled ? "Som: Ligado" : "Som: Mudo";
-        el.btnSoundGame.textContent = state.soundEnabled ? "Som: On" : "Som: Off";
-      }
+        state.questions = generated;
+        renderQuestionsTab();
 
-      function toggleSound() {
-        state.soundEnabled = !state.soundEnabled;
-        updateSoundLabels();
+        el.btnAutoGenerate.disabled = false;
+        el.btnAutoGenerate.textContent = "Gerar Perguntas Automaticamente";
+
+        const cF = generated.filter(q => q.difficulty === "facil").length;
+        const cM = generated.filter(q => q.difficulty === "media").length;
+        const cD = generated.filter(q => q.difficulty === "dificil").length;
+
+        el.genStatus.className = "status-msg ok";
+        el.genStatus.textContent = `Pronto! ${generated.length} perguntas geradas (${cF} Fáceis, ${cM} Médias, ${cD} Difíceis). Você pode clicar em "Iniciar Jogo" ou revisar na aba Perguntas.`;
       }
 
       /* =====================================================
-         PERSISTÊNCIA LOCAL E TELA DO PROFESSOR
+         MODAL DE PERGUNTA MANUAL
          ===================================================== */
-      function saveToStorage() {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify({
-            quizTitle: state.quizTitle,
-            questions: state.questions
-          }));
-        } catch {
-          // Ignora erro de quota
+      function openQuestionModal(editIndex = null) {
+        state.editingIndex = editIndex;
+        if (editIndex !== null && state.questions[editIndex]) {
+          const q = state.questions[editIndex];
+          el.modalTitle.textContent = `Editar Pergunta #${editIndex + 1}`;
+          el.mDiff.value = q.difficulty;
+          el.mEnunciado.value = q.enunciado;
+          q.alternativas.forEach((txt, i) => (el.mAlts[i].value = txt));
+          el.mCorreta.value = String(q.correta);
+          el.mExp.value = q.explicacao || "";
+        } else {
+          el.modalTitle.textContent = "Adicionar Nova Pergunta";
+          el.mDiff.value = "facil";
+          el.mEnunciado.value = "";
+          el.mAlts.forEach(inp => (inp.value = ""));
+          el.mCorreta.value = "0";
+          el.mExp.value = "";
         }
+        el.questionModal.classList.remove("hidden");
+        el.mEnunciado.focus();
       }
 
-      function loadFromStorage() {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) return false;
-          const parsed = JSON.parse(raw);
-          if (parsed.quizTitle) {
-            state.quizTitle = parsed.quizTitle;
-            el.quizTitleInput.value = parsed.quizTitle;
-          }
-          if (Array.isArray(parsed.questions) && parsed.questions.length > 0) {
-            state.questions = parsed.questions;
-            return true;
-          }
-        } catch {
-          return false;
-        }
-        return false;
+      function closeQuestionModal() {
+        el.questionModal.classList.add("hidden");
       }
 
-      function showFormAlert(type, msg) {
-        el.formAlert.className = `alert-box ${type === "ok" ? "alert-ok" : "alert-err"}`;
-        el.formAlert.textContent = msg;
-        el.formAlert.classList.remove("hidden");
-        clearTimeout(showFormAlert._t);
-        showFormAlert._t = setTimeout(() => {
-          el.formAlert.classList.add("hidden");
-        }, 4500);
-      }
+      function saveQuestionModal() {
+        const enunciado = el.mEnunciado.value.trim();
+        const alts = el.mAlts.map(i => i.value.trim());
+        const correta = parseInt(el.mCorreta.value, 10);
+        const difficulty = el.mDiff.value;
+        const explicacao = el.mExp.value.trim() || `A resposta correta é a letra ${LETTERS[correta]}.`;
 
-      function resetForm() {
-        state.editingIndex = null;
-        el.formHeading.textContent = "Adicionar Pergunta";
-        el.btnCancelEdit.classList.add("hidden");
-        el.btnSaveQuestion.textContent = "+ Adicionar Pergunta ao Quiz";
-        el.qDifficulty.value = "facil";
-        el.qEnunciado.value = "";
-        el.altInputs.forEach(inp => (inp.value = ""));
-        document.querySelector('input[name="correctOpt"][value="0"]').checked = true;
-        el.qExplicacao.value = "";
-      }
-
-      function saveQuestionFromForm() {
-        const difficulty = el.qDifficulty.value;
-        const enunciado = el.qEnunciado.value.trim();
-        const alternativas = el.altInputs.map(inp => inp.value.trim());
-        const checkedRadio = document.querySelector('input[name="correctOpt"]:checked');
-        const correta = checkedRadio ? parseInt(checkedRadio.value, 10) : 0;
-        const explicacao = el.qExplicacao.value.trim() || `A alternativa correta é a letra ${LETTERS[correta]}.`;
-
-        if (!enunciado) {
-          showFormAlert("err", "Escreva o enunciado da pergunta.");
-          el.qEnunciado.focus();
+        if (!enunciado || alts.some(a => !a)) {
+          window.alert("Preencha o enunciado e as 4 alternativas.");
           return;
-        }
-        for (let i = 0; i < 4; i++) {
-          if (!alternativas[i]) {
-            showFormAlert("err", `Preencha a alternativa ${LETTERS[i]}.`);
-            el.altInputs[i].focus();
-            return;
-          }
         }
 
         const item = {
           id: Date.now() + Math.random(),
           difficulty,
           enunciado,
-          alternativas,
+          alternativas: alts,
           correta,
           explicacao
         };
 
         if (state.editingIndex !== null) {
           state.questions[state.editingIndex] = item;
-          showFormAlert("ok", "Pergunta atualizada!");
         } else {
           state.questions.push(item);
-          showFormAlert("ok", "Pergunta adicionada!");
         }
 
-        resetForm();
-        saveToStorage();
-        renderQuestionsList();
-      }
-
-      function startEditQuestion(index) {
-        const q = state.questions[index];
-        if (!q) return;
-
-        // Volta para a aba do formulário
-        switchTab("form");
-
-        state.editingIndex = index;
-        el.formHeading.textContent = `Editando Pergunta ${index + 1}`;
-        el.btnCancelEdit.classList.remove("hidden");
-        el.btnSaveQuestion.textContent = "Salvar Alterações";
-
-        el.qDifficulty.value = q.difficulty || "facil";
-        el.qEnunciado.value = q.enunciado;
-        q.alternativas.forEach((txt, i) => {
-          el.altInputs[i].value = txt;
-        });
-        const radio = document.querySelector(`input[name="correctOpt"][value="${q.correta}"]`);
-        if (radio) radio.checked = true;
-        el.qExplicacao.value = q.explicacao || "";
-
-        el.qEnunciado.focus();
-      }
-
-      function deleteQuestion(index) {
-        if (state.editingIndex === index) resetForm();
-        state.questions.splice(index, 1);
-        saveToStorage();
-        renderQuestionsList();
-      }
-
-      function moveQuestion(index, dir) {
-        const target = index + dir;
-        if (target < 0 || target >= state.questions.length) return;
-        const temp = state.questions[index];
-        state.questions[index] = state.questions[target];
-        state.questions[target] = temp;
-        saveToStorage();
-        renderQuestionsList();
-      }
-
-      function renderQuestionsList() {
-        const count = state.questions.length;
-        el.qCountBadge.textContent = `${count} ${count === 1 ? "pergunta" : "perguntas"}`;
-        el.btnClearAll.classList.toggle("hidden", count === 0);
-
-        if (count === 0) {
-          el.questionsListContainer.innerHTML = `
-            <div class="empty-state">
-              <strong>Nenhuma pergunta adicionada ainda.</strong>
-              <p style="font-size: 0.88rem; margin-top: 6px;">
-                Use o formulário ao lado para criar suas perguntas ou clique em <em>Carregar Quiz de Exemplo</em> no topo.
-              </p>
-            </div>
-          `;
-          el.btnStartPresentation.disabled = true;
-          el.startStatusText.textContent = "Adicione pelo menos 1 pergunta para liberar a apresentação.";
-          return;
-        }
-
-        el.btnStartPresentation.disabled = false;
-        el.startStatusText.textContent = `${count} ${count === 1 ? "pergunta pronta" : "perguntas prontas"} para projetar na sala.`;
-
-        el.questionsListContainer.innerHTML = state.questions
-          .map((q, idx) => {
-            const info = DIFF_INFO[q.difficulty] || DIFF_INFO.facil;
-            const altsHtml = q.alternativas
-              .map((a, aIdx) => `<div class="q-alt-mini ${aIdx === q.correta ? "is-right" : ""}">${LETTERS[aIdx]}) ${escapeHtml(a)}</div>`)
-              .join("");
-
-            return `
-              <div class="q-item">
-                <div class="q-item-top">
-                  <div class="q-item-num">
-                    <span>#${idx + 1}</span>
-                    <span class="diff-badge ${info.cls}">${info.label}</span>
-                  </div>
-                  <div class="q-item-actions">
-                    <button type="button" class="btn btn-outline btn-sm" data-act="up" data-idx="${idx}" title="Subir" ${idx === 0 ? "disabled" : ""}>↑</button>
-                    <button type="button" class="btn btn-outline btn-sm" data-act="down" data-idx="${idx}" title="Descer" ${idx === count - 1 ? "disabled" : ""}>↓</button>
-                    <button type="button" class="btn btn-outline btn-sm" data-act="edit" data-idx="${idx}">Editar</button>
-                    <button type="button" class="btn btn-danger-ghost btn-sm" data-act="del" data-idx="${idx}">Excluir</button>
-                  </div>
-                </div>
-                <div class="q-item-title">${escapeHtml(q.enunciado)}</div>
-                <div class="q-item-alts">${altsHtml}</div>
-              </div>
-            `;
-          })
-          .join("");
-
-        el.questionsListContainer.querySelectorAll("button[data-act]").forEach(btn => {
-          btn.addEventListener("click", () => {
-            const act = btn.getAttribute("data-act");
-            const idx = parseInt(btn.getAttribute("data-idx"), 10);
-            if (act === "up") moveQuestion(idx, -1);
-            if (act === "down") moveQuestion(idx, 1);
-            if (act === "edit") startEditQuestion(idx);
-            if (act === "del") deleteQuestion(idx);
-          });
-        });
+        closeQuestionModal();
+        renderQuestionsTab();
       }
 
       /* =====================================================
-         IMPORTAÇÃO EM BLOCO (SEM API)
-         ===================================================== */
-      function normalizeDifficultyWord(text) {
-        const clean = text
-          .toLowerCase()
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .trim();
-        if (clean.includes("dificil")) return "dificil";
-        if (clean.includes("media") || clean.includes("medio")) return "media";
-        return "facil";
-      }
-
-      function importBulkQuestions() {
-        const raw = el.bulkTextInput.value.trim();
-        if (!raw) {
-          showFormAlert("err", "Cole as perguntas na caixa de texto antes de importar.");
-          return;
-        }
-
-        const blocks = raw.split(/\n\s*\n+/).map(b => b.trim()).filter(Boolean);
-        const imported = [];
-
-        try {
-          blocks.forEach((block, bIdx) => {
-            const lines = block.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-            let difficulty = "facil";
-            let enunciadoLines = [];
-            const alts = [];
-            let correta = -1;
-            let explicacao = "";
-
-            for (const line of lines) {
-              if (/^(dificuldade|nivel|nível)\s*[:\-]/i.test(line)) {
-                difficulty = normalizeDifficultyWord(line.split(/[:\-]/)[1] || "");
-              } else if (/^(explica[cç][aã]o|resp(osta)?|motivo)\s*[:\-]/i.test(line)) {
-                explicacao = line.replace(/^[^:\-]+[:\-]\s*/i, "").trim();
-              } else if (/^[A-Da-d][\)\.\-\:]\s*/.test(line)) {
-                const letter = line[0].toUpperCase();
-                const idx = LETTERS.indexOf(letter);
-                let text = line.replace(/^[A-Da-d][\)\.\-\:]\s*/, "").trim();
-                if (/\*\s*$/.test(text) || /^\*/.test(text)) {
-                  text = text.replace(/^\*|\*$/g, "").trim();
-                  correta = idx;
-                }
-                alts[idx] = text;
-              } else {
-                enunciadoLines.push(line.replace(/^(p|pergunta)\s*[:\-]\s*/i, ""));
-              }
-            }
-
-            const enunciado = enunciadoLines.join(" ").trim();
-            if (!enunciado) throw new Error(`Bloco ${bIdx + 1}: falta o enunciado da pergunta.`);
-            if (alts.filter(Boolean).length !== 4) {
-              throw new Error(`Bloco ${bIdx + 1}: precisa ter as 4 alternativas (A, B, C e D).`);
-            }
-            if (correta < 0 || correta > 3) {
-              throw new Error(`Bloco ${bIdx + 1}: marque a alternativa correta colocando um * no final dela.`);
-            }
-
-            imported.push({
-              id: Date.now() + Math.random() + bIdx,
-              difficulty,
-              enunciado,
-              alternativas: alts,
-              correta,
-              explicacao: explicacao || `A alternativa correta é a letra ${LETTERS[correta]}.`
-            });
-          });
-
-          state.questions.push(...imported);
-          el.bulkTextInput.value = "";
-          saveToStorage();
-          renderQuestionsList();
-          showFormAlert("ok", `${imported.length} pergunta(s) importada(s) com sucesso!`);
-        } catch (err) {
-          showFormAlert("err", err.message);
-        }
-      }
-
-      function loadDemoQuestions() {
-        state.quizTitle = "Revisão Geral — Quiz da Turma";
-        el.quizTitleInput.value = state.quizTitle;
-        state.questions = [
-          {
-            id: 1,
-            difficulty: "facil",
-            enunciado: "Qual é o processo pelo qual as plantas produzem seu próprio alimento usando a luz do sol?",
-            alternativas: ["Respiração celular", "Fotossíntese", "Fermentação", "Evaporação"],
-            correta: 1,
-            explicacao: "Na fotossíntese, as plantas usam luz solar, água e gás carbônico para produzir glicose."
-          },
-          {
-            id: 2,
-            difficulty: "facil",
-            enunciado: "Qual é o maior planeta do Sistema Solar?",
-            alternativas: ["Saturno", "Terra", "Júpiter", "Marte"],
-            correta: 2,
-            explicacao: "Júpiter é um gigante gasoso e o maior planeta do nosso Sistema Solar."
-          },
-          {
-            id: 3,
-            difficulty: "media",
-            enunciado: "Em qual região do Brasil está localizado o bioma Caatinga?",
-            alternativas: [
-              "Predominantemente na região Nordeste",
-              "Apenas no extremo Sul do país",
-              "Exclusivamente na região Norte",
-              "Somente no litoral de São Paulo"
-            ],
-            correta: 0,
-            explicacao: "A Caatinga é um bioma exclusivamente brasileiro localizado principalmente no Nordeste."
-          },
-          {
-            id: 4,
-            difficulty: "media",
-            enunciado: "Na frase 'Os alunos estudaram bastante para a prova', qual palavra é o verbo?",
-            alternativas: ["Alunos", "Bastante", "Estudaram", "Prova"],
-            correta: 2,
-            explicacao: "'Estudaram' indica a ação praticada pelo sujeito ('os alunos')."
-          },
-          {
-            id: 5,
-            difficulty: "dificil",
-            enunciado: "Qual foi o principal fator econômico que impulsionou a Primeira Revolução Industrial na Inglaterra?",
-            alternativas: [
-              "O uso exclusivo de energia solar nas fábricas",
-              "A mecanização da produção têxtil e o uso do carvão e do vapor",
-              "A substituição imediata de todas as ferrovias por aviões",
-              "O fim completo do comércio marítimo europeu"
-            ],
-            correta: 1,
-            explicacao: "As máquinas a vapor alimentadas a carvão revolucionaram a indústria têxtil e os transportes."
-          }
-        ];
-        saveToStorage();
-        renderQuestionsList();
-        showFormAlert("ok", "Quiz de exemplo carregado (com perguntas Fácil, Média e Difícil)!");
-      }
-
-      /* =====================================================
-         CONTROLE RIGOROSO DE CRONÔMETRO
+         CRONÔMETRO E FLUXO DO JOGO
          ===================================================== */
       function stopTimer() {
         if (state.timerId !== null) {
@@ -1906,422 +2133,457 @@ Explicação: Na tabuada, 7 vezes 8 é igual a 56."></textarea>
         }
       }
 
-      function renderTimerVisual(seconds, paused) {
-        const s = Math.max(0, Math.min(TOTAL_SECONDS, seconds));
-        const pct = (s / TOTAL_SECONDS) * 100;
+      function renderClock(seconds, paused) {
+        const total = state.timeSeconds;
+        const clamped = Math.max(0, Math.min(total, seconds));
+        const pct = total > 0 ? (clamped / total) * 100 : 0;
 
-        el.timerClock.textContent = `${s}s`;
-        el.timerFill.style.width = `${pct}%`;
+        el.clockDisplay.textContent = `${clamped}s`;
+        el.timerProgressBar.style.width = `${pct}%`;
 
-        el.timerClock.classList.remove("paused", "warn", "danger");
-        el.timerFill.classList.remove("paused", "warn", "danger");
+        el.clockDisplay.classList.remove("paused", "warn", "danger");
+        el.timerProgressBar.classList.remove("paused", "warn", "danger");
 
         if (paused) {
-          el.timerClock.classList.add("paused");
-          el.timerFill.classList.add("paused");
-        } else if (s <= 10) {
-          el.timerClock.classList.add("danger");
-          el.timerFill.classList.add("danger");
-        } else if (s <= 20) {
-          el.timerClock.classList.add("warn");
-          el.timerFill.classList.add("warn");
+          el.clockDisplay.classList.add("paused");
+          el.timerProgressBar.classList.add("paused");
+        } else if (clamped <= Math.min(10, Math.ceil(total * 0.3))) {
+          el.clockDisplay.classList.add("danger");
+          el.timerProgressBar.classList.add("danger");
+        } else if (clamped <= Math.ceil(total * 0.6)) {
+          el.clockDisplay.classList.add("warn");
+          el.timerProgressBar.classList.add("warn");
         }
       }
 
       function startCountdown() {
         stopTimer();
-        state.timeLeft = TOTAL_SECONDS;
-        state.deadlineMs = Date.now() + TOTAL_SECONDS * 1000;
-        renderTimerVisual(TOTAL_SECONDS, false);
+        state.timeLeft = state.timeSeconds;
+        state.deadlineMs = Date.now() + state.timeSeconds * 1000;
+        renderClock(state.timeSeconds, false);
 
         state.timerId = setInterval(() => {
           if (state.stage !== "answering") {
             stopTimer();
             return;
           }
-          const remaining = Math.max(0, Math.ceil((state.deadlineMs - Date.now()) / 1000));
-          if (remaining !== state.timeLeft) {
-            state.timeLeft = remaining;
-            renderTimerVisual(state.timeLeft, false);
+          const rem = Math.max(0, Math.ceil((state.deadlineMs - Date.now()) / 1000));
+          if (rem !== state.timeLeft) {
+            state.timeLeft = rem;
+            renderClock(state.timeLeft, false);
 
-            if (state.timeLeft > 0 && state.timeLeft <= 5) {
-              soundTick();
-            }
+            if (state.timeLeft > 0 && state.timeLeft <= 5) sfx.tick();
             if (state.timeLeft <= 0) {
               stopTimer();
-              handleTimeOut();
+              handleTimeExpired();
             }
           }
         }, 100);
       }
 
-      /* =====================================================
-         FLUXO DO JOGO (DIFICULDADE -> PERGUNTA -> 30s)
-         ===================================================== */
-      function showScreen(name) {
-        el.teacherScreen.classList.add("hidden");
-        el.gameScreen.classList.add("hidden");
-        el.finalScreen.classList.add("hidden");
-
-        if (name === "teacher") el.teacherScreen.classList.remove("hidden");
-        if (name === "game") el.gameScreen.classList.remove("hidden");
-        if (name === "final") el.finalScreen.classList.remove("hidden");
+      function applyVisualStyleToGame() {
+        el.gameView.classList.remove("style-classic", "style-classroom", "style-forest");
+        el.gameView.classList.add(`style-${state.visualStyle}`);
       }
 
-      function startPresentation() {
+      function getRemainingByDiff(diff) {
+        return state.questions.filter(q => q.difficulty === diff && !state.usedIds.has(q.id));
+      }
+
+      function startGame() {
         if (state.questions.length === 0) return;
-
-        state.quizTitle = el.quizTitleInput.value.trim() || "Quiz da Turma";
-        state.deck = el.orderSelect.value === "shuffled" ? shuffle(state.questions) : [...state.questions];
-        state.currentIndex = 0;
-        state.results = [];
         stopTimer();
 
-        el.gameQuizTitle.textContent = state.quizTitle;
-        showScreen("game");
+        state.usedIds = new Set();
+        state.currentRound = 1;
+        state.history = [];
+        state.currentQuestion = null;
+
+        applyVisualStyleToGame();
+        el.gameTitleDisplay.textContent = (state.title || "ATIVIDADE EDUCATIVA").toUpperCase();
+        el.gameMetaTags.textContent = `${state.grade} • ${state.subject}`;
+
+        el.setupView.classList.add("hidden");
+        el.gameView.classList.remove("hidden");
         document.documentElement.requestFullscreen?.().catch(() => {});
-        showDifficultyIntro();
+
+        showDifficultyInterval();
       }
 
-      // PASSO 0: ANTES DA PERGUNTA APARECE A DIFICULDADE
-      function showDifficultyIntro() {
+      // INTERVALO ANTES DE CADA PERGUNTA: ESCOLHER A DIFICULDADE
+      function showDifficultyInterval() {
         stopTimer();
-        state.stage = "diff";
+        state.stage = "interval";
 
-        const current = state.deck[state.currentIndex];
-        const info = DIFF_INFO[current.difficulty] || DIFF_INFO.facil;
-        const hits = state.results.filter(r => r.isCorrect).length;
+        const maxRounds = Math.min(state.totalRounds, Math.max(state.questions.length, state.subject === "Matemática" ? state.totalRounds : state.questions.length));
+        const totalPoints = state.history.reduce((s, r) => s + r.points, 0);
 
-        el.gameProgressPill.textContent = `Pergunta ${state.currentIndex + 1} de ${state.deck.length}`;
-        el.gameScorePill.textContent = `Acertos: ${hits}`;
+        el.gameRoundPill.textContent = `Pergunta ${state.currentRound} de ${maxRounds}`;
+        el.gamePointsPill.textContent = `Pontos: ${totalPoints}`;
+        el.intervalRoundLabel.textContent = `Intervalo — Pergunta ${state.currentRound} de ${maxRounds}`;
 
-        el.activeQuestionWrapper.classList.add("hidden");
-        el.difficultyIntroCard.classList.remove("hidden");
+        const remF = getRemainingByDiff("facil").length;
+        const remM = getRemainingByDiff("media").length;
+        const remD = getRemainingByDiff("dificil").length;
 
-        el.introQuestionLabel.textContent = `Pergunta ${state.currentIndex + 1} de ${state.deck.length}`;
-        el.introDiffBadge.className = `intro-diff-pill ${info.cls}`;
-        el.introDiffBadge.textContent = info.label;
-        el.introDiffDesc.textContent = info.desc;
+        // Se for Matemática, sempre pode gerar mais na hora se acabar!
+        const isMath = state.subject === "Matemática";
+        el.leftFacil.textContent = isMath ? "Sempre disponível" : `Disponíveis: ${remF}`;
+        el.leftMedia.textContent = isMath ? "Sempre disponível" : `Disponíveis: ${remM}`;
+        el.leftDificil.textContent = isMath ? "Sempre disponível" : `Disponíveis: ${remD}`;
 
-        soundIntro();
+        el.pickFacil.disabled = !isMath && remF === 0;
+        el.pickMedia.disabled = !isMath && remM === 0;
+        el.pickDificil.disabled = !isMath && remD === 0;
+
+        // Se todas esgotaram por algum motivo, encerra com ranking
+        if (el.pickFacil.disabled && el.pickMedia.disabled && el.pickDificil.disabled) {
+          finishGameAndShowRanking();
+          return;
+        }
+
+        el.roundWrapper.classList.add("hidden");
+        el.intervalCard.classList.remove("hidden");
       }
 
-      // PASSO 1: LEITURA LIVRE (SEM TEMPO, OPÇÕES OCULTAS)
-      function revealQuestionReading() {
-        if (state.stage !== "diff") return;
+      function chooseDifficultyAndStartQuestion(chosenDiff) {
+        if (state.stage !== "interval") return;
+
+        let pool = getRemainingByDiff(chosenDiff);
+        let selected = null;
+
+        if (pool.length > 0) {
+          selected = pool[Math.floor(Math.random() * pool.length)];
+          state.usedIds.add(selected.id);
+        } else if (state.subject === "Matemática") {
+          selected = {
+            id: Date.now() + Math.random(),
+            ...generateMathQuestion(state.grade, state.topic, chosenDiff)
+          };
+          state.usedIds.add(selected.id);
+        } else {
+          return;
+        }
+
+        state.currentQuestion = selected;
+        enterReadingStage();
+      }
+
+      function enterReadingStage() {
         stopTimer();
         state.stage = "reading";
-        state.timeLeft = TOTAL_SECONDS;
+        const q = state.currentQuestion;
+        const meta = DIFF_META[q.difficulty] || DIFF_META.facil;
 
-        const current = state.deck[state.currentIndex];
-        const info = DIFF_INFO[current.difficulty] || DIFF_INFO.facil;
+        el.intervalCard.classList.add("hidden");
+        el.roundWrapper.classList.remove("hidden");
 
-        el.difficultyIntroCard.classList.add("hidden");
-        el.activeQuestionWrapper.classList.remove("hidden");
+        renderClock(state.timeSeconds, true);
+        el.timerStatusText.textContent = "Leitura livre — tempo parado";
+        el.timerConfiguredLabel.textContent = `${state.timeSeconds} segundos`;
+        el.btnTimeVal.textContent = state.timeSeconds;
 
-        renderTimerVisual(TOTAL_SECONDS, true);
-        el.timerStateLabel.textContent = "Leitura livre — tempo parado";
+        el.roundStageTag.textContent = "Etapa 1 — Leitura Livre";
+        el.roundDiffTag.className = `diff-tag ${meta.cls}`;
+        el.roundDiffTag.textContent = `Dificuldade: ${meta.label}`;
+        el.roundQuestionText.textContent = q.enunciado;
 
-        el.stageLabel.textContent = "Etapa 1 — Leitura Livre";
-        el.questionDiffBadge.className = `diff-badge ${info.cls}`;
-        el.questionDiffBadge.textContent = `Dificuldade: ${info.label}`;
-        el.questionText.textContent = current.enunciado;
-
-        el.readingFooter.classList.remove("hidden");
-        el.optionsGrid.classList.add("hidden");
-        el.optionsGrid.innerHTML = "";
-        el.feedbackPanel.classList.add("hidden");
+        el.readingArea.classList.remove("hidden");
+        el.optionsContainer.classList.add("hidden");
+        el.optionsContainer.innerHTML = "";
+        el.feedbackBar.classList.add("hidden");
       }
 
-      // PASSO 2: MOSTRAR OPÇÕES E INICIAR 30s
-      function revealOptionsAndStart() {
+      function revealOptionsAndStartTimer() {
         if (state.stage !== "reading") return;
         state.stage = "answering";
 
-        const current = state.deck[state.currentIndex];
-        soundRevealOptions();
+        const q = state.currentQuestion;
+        sfx.reveal();
 
-        el.readingFooter.classList.add("hidden");
-        el.stageLabel.textContent = "Etapa 2 — Tempo Valendo!";
-        el.timerStateLabel.textContent = "Escolha uma alternativa";
+        el.readingArea.classList.add("hidden");
+        el.roundStageTag.textContent = "Etapa 2 — Tempo Valendo!";
+        el.timerStatusText.textContent = "Valendo! Escolha uma alternativa";
 
-        el.optionsGrid.innerHTML = current.alternativas
-          .map((alt, i) => `
-            <button type="button" class="opt-card" data-opt="${i}">
-              <span class="opt-badge">${LETTERS[i]}</span>
-              <span class="opt-text">${escapeHtml(alt)}</span>
-            </button>
-          `)
-          .join("");
+        el.optionsContainer.innerHTML = q.alternativas.map((alt, i) => `
+          <button type="button" class="option-card-btn" data-opt="${i}">
+            <span class="opt-letter-square">${LETTERS[i]}</span>
+            <span class="opt-content-text">${escapeHtml(alt)}</span>
+          </button>
+        `).join("");
 
-        el.optionsGrid.querySelectorAll(".opt-card").forEach(btn => {
+        el.optionsContainer.querySelectorAll(".option-card-btn").forEach(btn => {
           btn.addEventListener("click", () => {
-            const idx = parseInt(btn.getAttribute("data-opt"), 10);
-            selectOption(idx);
+            handleAnswerSelected(parseInt(btn.getAttribute("data-opt"), 10));
           });
         });
 
-        el.optionsGrid.classList.remove("hidden");
+        el.optionsContainer.classList.remove("hidden");
         startCountdown();
       }
 
-      function selectOption(chosenIdx) {
+      function handleAnswerSelected(chosenIdx) {
         if (state.stage !== "answering") return;
         stopTimer();
         state.stage = "feedback";
 
-        const current = state.deck[state.currentIndex];
-        const info = DIFF_INFO[current.difficulty] || DIFF_INFO.facil;
-        const isCorrect = chosenIdx === current.correta;
-        const timeSpent = TOTAL_SECONDS - state.timeLeft;
+        const q = state.currentQuestion;
+        const meta = DIFF_META[q.difficulty] || DIFF_META.facil;
+        const isCorrect = chosenIdx === q.correta;
+        const timeSpent = Math.max(0.1, Number((state.timeSeconds - state.timeLeft).toFixed(1)));
 
-        state.results.push({
-          difficulty: current.difficulty,
-          enunciado: current.enunciado,
+        state.history.push({
+          round: state.currentRound,
+          difficulty: q.difficulty,
           isCorrect,
           timedOut: false,
           timeSpent,
-          points: isCorrect ? info.points : 0
+          points: isCorrect ? meta.points : 0
         });
 
-        if (isCorrect) soundCorrect();
-        else soundWrong();
+        if (isCorrect) sfx.ok();
+        else sfx.bad();
 
-        showFeedback(chosenIdx, current.correta, isCorrect, false);
+        showFeedback(chosenIdx, q.correta, isCorrect, false);
       }
 
-      function handleTimeOut() {
+      function handleTimeExpired() {
         if (state.stage !== "answering") return;
         stopTimer();
         state.stage = "feedback";
 
-        const current = state.deck[state.currentIndex];
-        state.results.push({
-          difficulty: current.difficulty,
-          enunciado: current.enunciado,
+        const q = state.currentQuestion;
+        state.history.push({
+          round: state.currentRound,
+          difficulty: q.difficulty,
           isCorrect: false,
           timedOut: true,
-          timeSpent: TOTAL_SECONDS,
+          timeSpent: state.timeSeconds,
           points: 0
         });
 
-        soundTimeout();
-        showFeedback(null, current.correta, false, true);
+        sfx.timeout();
+        showFeedback(null, q.correta, false, true);
       }
 
       function showFeedback(chosenIdx, correctIdx, isCorrect, timedOut) {
-        const current = state.deck[state.currentIndex];
-        const hits = state.results.filter(r => r.isCorrect).length;
-        el.gameScorePill.textContent = `Acertos: ${hits}`;
+        const q = state.currentQuestion;
+        const totalPoints = state.history.reduce((s, r) => s + r.points, 0);
+        el.gamePointsPill.textContent = `Pontos: ${totalPoints}`;
 
-        el.stageLabel.textContent = "Resultado";
-        el.timerStateLabel.textContent = timedOut ? "Tempo esgotado" : "Tempo encerrado";
+        el.roundStageTag.textContent = "Resultado";
+        el.timerStatusText.textContent = timedOut ? "Tempo esgotado!" : "Tempo encerrado";
 
-        el.optionsGrid.querySelectorAll(".opt-card").forEach(btn => {
+        el.optionsContainer.querySelectorAll(".option-card-btn").forEach(btn => {
           btn.disabled = true;
-          const idx = parseInt(btn.getAttribute("data-opt"), 10);
-          if (idx === correctIdx) {
-            btn.classList.add("correct");
-          } else if (chosenIdx !== null && idx === chosenIdx && !isCorrect) {
-            btn.classList.add("wrong");
-          } else {
-            btn.classList.add("dim");
-          }
+          const i = parseInt(btn.getAttribute("data-opt"), 10);
+          if (i === correctIdx) btn.classList.add("is-correct");
+          else if (chosenIdx !== null && i === chosenIdx && !isCorrect) btn.classList.add("is-wrong");
+          else btn.classList.add("is-dim");
         });
 
-        el.feedbackPanel.classList.remove("hidden", "is-wrong");
+        el.feedbackBar.classList.remove("hidden", "wrong");
         if (isCorrect) {
-          el.feedbackHeading.className = "feedback-heading ok";
-          el.feedbackHeading.textContent = `Resposta Correta! (${LETTERS[correctIdx]})`;
+          el.feedbackTitle.style.color = "var(--green-800)";
+          el.feedbackTitle.textContent = `Resposta Correta! (${LETTERS[correctIdx]})`;
         } else if (timedOut) {
-          el.feedbackPanel.classList.add("is-wrong");
-          el.feedbackHeading.className = "feedback-heading err";
-          el.feedbackHeading.textContent = `Tempo Esgotado! A correta era ${LETTERS[correctIdx]}`;
+          el.feedbackBar.classList.add("wrong");
+          el.feedbackTitle.style.color = "var(--red-800)";
+          el.feedbackTitle.textContent = `Tempo esgotado! A certa era ${LETTERS[correctIdx]}`;
         } else {
-          el.feedbackPanel.classList.add("is-wrong");
-          el.feedbackHeading.className = "feedback-heading err";
-          el.feedbackHeading.textContent = `Resposta Incorreta — a certa era ${LETTERS[correctIdx]}`;
+          el.feedbackBar.classList.add("wrong");
+          el.feedbackTitle.style.color = "var(--red-800)";
+          el.feedbackTitle.textContent = `Resposta incorreta — a certa era ${LETTERS[correctIdx]}`;
         }
 
-        el.feedbackExp.textContent = current.explicacao;
-        const isLast = state.currentIndex >= state.deck.length - 1;
-        el.btnNextQuestion.textContent = isLast ? "Ver Placar Final" : "Próxima Pergunta";
+        el.feedbackExplain.textContent = q.explicacao;
+
+        const maxRounds = state.subject === "Matemática"
+          ? state.totalRounds
+          : Math.min(state.totalRounds, state.questions.length);
+
+        const isLast = state.currentRound >= maxRounds;
+        el.btnNextRound.textContent = isLast ? "Finalizar e Ver Ranking" : "Próxima Pergunta";
       }
 
-      function goToNext() {
+      function nextStepOrFinish() {
         stopTimer();
-        if (state.currentIndex < state.deck.length - 1) {
-          state.currentIndex += 1;
-          showDifficultyIntro();
+        const maxRounds = state.subject === "Matemática"
+          ? state.totalRounds
+          : Math.min(state.totalRounds, state.questions.length);
+
+        if (state.currentRound < maxRounds) {
+          state.currentRound += 1;
+          showDifficultyInterval();
         } else {
-          showFinalScreen();
+          finishGameAndShowRanking();
         }
       }
 
-      /* =====================================================
-         TELA FINAL
-         ===================================================== */
-      function showFinalScreen() {
+      function finishGameAndShowRanking() {
         stopTimer();
         state.stage = "idle";
-        showScreen("final");
+        if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
 
-        const total = state.results.length;
-        const hits = state.results.filter(r => r.isCorrect).length;
-        const pct = total > 0 ? Math.round((hits / total) * 100) : 0;
-        const totalPoints = state.results.reduce((sum, r) => sum + r.points, 0);
+        el.gameView.classList.add("hidden");
+        el.setupView.classList.remove("hidden");
 
-        el.finalQuizTitle.textContent = `${state.quizTitle} — Concluído!`;
-        el.finalHits.textContent = `${hits} / ${total}`;
-        el.finalPercent.textContent = `${pct}%`;
-        el.finalPoints.textContent = `${totalPoints} pts`;
+        renderRankingTable();
+        switchTab("ranking");
+      }
 
-        el.finalSummaryList.innerHTML = state.results
-          .map((r, i) => {
-            const info = DIFF_INFO[r.difficulty] || DIFF_INFO.facil;
-            const statusText = r.isCorrect
-              ? `Acertou (+${r.points} pts • ${r.timeSpent}s)`
-              : r.timedOut
-              ? "Tempo esgotado"
-              : "Errou";
+      function renderRankingTable() {
+        if (state.history.length === 0) return;
 
-            return `
-              <div class="summary-row">
-                <div class="summary-row-left">
-                  <div style="display: flex; align-items: center; gap: 8px;">
-                    <strong style="font-size: 0.85rem; color: var(--text-soft);">Pergunta ${i + 1}</strong>
-                    <span class="diff-badge ${info.cls}">${info.label}</span>
-                  </div>
-                  <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(r.enunciado)}</div>
-                </div>
-                <span class="summary-status ${r.isCorrect ? "hit" : "miss"}">${statusText}</span>
-              </div>
-            `;
-          })
-          .join("");
+        const hits = state.history.filter(h => h.isCorrect).length;
+        const total = state.history.length;
+        const pts = state.history.reduce((s, h) => s + h.points, 0);
+        const pct = Math.round((hits / total) * 100);
+
+        el.rankingSummaryBadge.textContent = `${hits}/${total} acertos (${pct}%) • ${pts} pontos`;
+
+        el.rankingBody.innerHTML = state.history.map(h => {
+          const meta = DIFF_META[h.difficulty] || DIFF_META.facil;
+          const resLabel = h.isCorrect ? "Acertou" : h.timedOut ? "Tempo esgotado" : "Errou";
+          const resColor = h.isCorrect ? "var(--green-800)" : "var(--red-800)";
+          return `
+            <tr>
+              <td><strong>${h.round}ª</strong></td>
+              <td><span class="diff-tag ${meta.cls}">${meta.label}</span></td>
+              <td style="font-weight: 700; color: ${resColor};">${resLabel}</td>
+              <td>${h.timeSpent}s</td>
+              <td><strong>${h.points}</strong></td>
+            </tr>
+          `;
+        }).join("");
       }
 
       /* =====================================================
-         EVENTOS E NAVEGAÇÃO
+         EVENTOS E INICIALIZAÇÃO
          ===================================================== */
-      function switchTab(tab) {
-        el.tabButtons.forEach(b => b.classList.toggle("active", b.getAttribute("data-tab") === tab));
-        el.tabForm.classList.toggle("hidden", tab !== "form");
-        el.tabBulk.classList.toggle("hidden", tab !== "bulk");
-      }
-
-      el.tabButtons.forEach(btn => {
+      el.tabLinks.forEach(btn => {
         btn.addEventListener("click", () => switchTab(btn.getAttribute("data-tab")));
       });
 
-      el.quizTitleInput.addEventListener("input", () => {
-        state.quizTitle = el.quizTitleInput.value;
-        saveToStorage();
+      el.btnHeaderEditQuestions.addEventListener("click", () => switchTab("questions"));
+
+      el.topicInput.addEventListener("input", updateHeaderTags);
+      el.titleEditInput.addEventListener("input", () => {
+        state.title = el.titleEditInput.value;
+        updateHeaderTags();
       });
 
-      el.btnSaveQuestion.addEventListener("click", saveQuestionFromForm);
-      el.btnCancelEdit.addEventListener("click", resetForm);
-      el.btnImportBulk.addEventListener("click", importBulkQuestions);
-      el.btnFillBulkExample.addEventListener("click", () => {
-        el.bulkTextInput.value = `Dificuldade: Fácil
-Qual órgão do corpo humano é responsável por bombear o sangue?
-A) Pulmão
-B) Coração *
-C) Estômago
-D) Fígado
-Explicação: O coração bombeia o sangue para todo o corpo através dos vasos sanguíneos.
-
-Dificuldade: Média
-Qual é o resultado de 12 x 5?
-A) 50
-B) 55
-C) 60 *
-D) 65
-Explicação: Multiplicando 12 por 5 obtemos 60.
-
-Dificuldade: Difícil
-Em que ano foi promulgada a atual Constituição Federal do Brasil?
-A) 1964
-B) 1985
-C) 1988 *
-D) 1994
-Explicação: A Constituição Cidadã foi promulgada em 5 de outubro de 1988.`;
+      el.timeSelect.addEventListener("change", () => {
+        if (el.timeSelect.value === "custom") {
+          el.customTimeInput.classList.remove("hidden");
+          state.timeSeconds = Math.max(5, Math.min(300, parseInt(el.customTimeInput.value, 10) || 30));
+        } else {
+          el.customTimeInput.classList.add("hidden");
+          state.timeSeconds = parseInt(el.timeSelect.value, 10);
+        }
+        updateHeaderTags();
       });
 
-      el.btnClearAll.addEventListener("click", () => {
-        if (window.confirm("Tem certeza que deseja apagar todas as perguntas da lista?")) {
-          state.questions = [];
-          resetForm();
-          saveToStorage();
-          renderQuestionsList();
+      el.customTimeInput.addEventListener("input", () => {
+        state.timeSeconds = Math.max(5, Math.min(300, parseInt(el.customTimeInput.value, 10) || 30));
+        updateHeaderTags();
+      });
+
+      el.roundsSelect.addEventListener("change", () => {
+        state.totalRounds = parseInt(el.roundsSelect.value, 10);
+        updateHeaderTags();
+      });
+
+      el.diffFilterBar.querySelectorAll("button").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.filterDiff = btn.getAttribute("data-filter");
+          el.diffFilterBar.querySelectorAll("button").forEach(b => b.classList.toggle("selected", b === btn));
+          renderQuestionsTab();
+        });
+      });
+
+      el.themeOptions.forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.visualStyle = btn.getAttribute("data-style");
+          el.themeOptions.forEach(b => b.classList.toggle("active", b === btn));
+          applyVisualStyleToGame();
+        });
+      });
+
+      el.fontSelect.addEventListener("change", () => {
+        const val = el.fontSelect.value;
+        state.fontChoice = val;
+        if (val === "comic") {
+          document.documentElement.style.setProperty("--font-active", '"Trebuchet MS", "Comic Sans MS", Verdana, sans-serif');
+        } else if (val === "didactic") {
+          document.documentElement.style.setProperty("--font-active", 'Verdana, Geneva, Tahoma, sans-serif');
+        } else {
+          document.documentElement.style.setProperty("--font-active", '"Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif');
         }
       });
 
-      el.btnLoadDemo.addEventListener("click", loadDemoQuestions);
-      el.btnSoundTeacher.addEventListener("click", toggleSound);
-      el.btnSoundGame.addEventListener("click", toggleSound);
+      function updateSoundUI() {
+        el.btnSoundSetup.textContent = state.soundEnabled ? "Som: Ligado" : "Som: Mudo";
+        el.btnSoundGame.textContent = state.soundEnabled ? "Som: On" : "Som: Off";
+      }
 
-      el.btnStartPresentation.addEventListener("click", startPresentation);
-      el.btnShowQuestion.addEventListener("click", revealQuestionReading);
-      el.btnStartTimerOptions.addEventListener("click", revealOptionsAndStart);
-      el.btnNextQuestion.addEventListener("click", goToNext);
+      el.btnSoundSetup.addEventListener("click", () => { state.soundEnabled = !state.soundEnabled; updateSoundUI(); });
+      el.btnSoundGame.addEventListener("click", () => { state.soundEnabled = !state.soundEnabled; updateSoundUI(); });
+
+      el.btnAutoGenerate.addEventListener("click", handleAutoGenerate);
+      el.btnOpenAddModal.addEventListener("click", () => openQuestionModal(null));
+      el.btnAddInsideTab.addEventListener("click", () => openQuestionModal(null));
+      el.btnCloseModal.addEventListener("click", closeQuestionModal);
+      el.btnModalCancel.addEventListener("click", closeQuestionModal);
+      el.btnModalSave.addEventListener("click", saveQuestionModal);
+
+      el.btnStartGameTop.addEventListener("click", startGame);
+      el.pickFacil.addEventListener("click", () => chooseDifficultyAndStartQuestion("facil"));
+      el.pickMedia.addEventListener("click", () => chooseDifficultyAndStartQuestion("media"));
+      el.pickDificil.addEventListener("click", () => chooseDifficultyAndStartQuestion("dificil"));
+      el.btnRevealOptions.addEventListener("click", revealOptionsAndStartTimer);
+      el.btnNextRound.addEventListener("click", nextStepOrFinish);
 
       el.btnFullscreen.addEventListener("click", () => {
-        if (document.fullscreenElement) {
-          document.exitFullscreen?.().catch(() => {});
-        } else {
-          document.documentElement.requestFullscreen?.().catch(() => {});
-        }
+        if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
+        else document.documentElement.requestFullscreen?.().catch(() => {});
       });
 
       el.btnExitGame.addEventListener("click", () => {
-        if (state.stage !== "idle" && !window.confirm("Sair do jogo e voltar para as perguntas?")) return;
+        if (!window.confirm("Voltar para a tela da atividade?")) return;
         stopTimer();
         state.stage = "idle";
         if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
-        showScreen("teacher");
+        el.gameView.classList.add("hidden");
+        el.setupView.classList.remove("hidden");
       });
 
-      el.btnReplay.addEventListener("click", startPresentation);
-      el.btnBackToSetup.addEventListener("click", () => {
-        stopTimer();
-        state.stage = "idle";
-        if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
-        showScreen("teacher");
-      });
-
-      // Atalhos de teclado durante a projeção (Espaço/Enter avança; A-D ou 1-4 responde)
+      // Atalhos de teclado durante o jogo
       document.addEventListener("keydown", e => {
-        if (el.gameScreen.classList.contains("hidden")) return;
-
+        if (el.gameView.classList.contains("hidden")) return;
         if (e.code === "Space" || e.code === "Enter") {
-          if (state.stage === "diff") {
+          if (state.stage === "reading") {
             e.preventDefault();
-            revealQuestionReading();
-          } else if (state.stage === "reading") {
-            e.preventDefault();
-            revealOptionsAndStart();
+            revealOptionsAndStartTimer();
           } else if (state.stage === "feedback") {
             e.preventDefault();
-            goToNext();
+            nextStepOrFinish();
           }
         } else if (state.stage === "answering") {
           const map = { KeyA: 0, Digit1: 0, KeyB: 1, Digit2: 1, KeyC: 2, Digit3: 2, KeyD: 3, Digit4: 3 };
           if (e.code in map) {
             e.preventDefault();
-            selectOption(map[e.code]);
+            handleAnswerSelected(map[e.code]);
           }
         }
       });
 
-      // Inicialização
-      updateSoundLabels();
-      const loaded = loadFromStorage();
-      if (!loaded) {
-        loadDemoQuestions();
-      } else {
-        renderQuestionsList();
-      }
+      // Inicializa pronto para uso imediato
+      renderPickers();
+      updateHeaderTags();
+      updateSoundUI();
+      state.questions = generateLocalPool(state.subject, state.grade, state.topic, "", 5);
+      renderQuestionsTab();
     })();
   </script>
 </body>
