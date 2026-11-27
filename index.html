@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Atividade em Sala — Quiz Educativo</title>
+  <title>Quiz Educativo — Sala de Aula</title>
   <style>
     :root {
       --bg-page: #eef3f0;
@@ -12,70 +12,35 @@
       --border-strong: #b7cbc0;
       --text: #1e293b;
       --text-muted: #64748b;
-
       --green-950: #052e16;
-      --green-900: #14532d;
       --green-800: #166534;
       --green-700: #15803d;
       --green-600: #16a34a;
       --green-100: #dcfce7;
       --green-50: #f0fdf4;
-
       --amber-100: #fef3c7;
       --amber-600: #d97706;
       --amber-800: #92400e;
-
       --red-100: #fee2e2;
       --red-600: #dc2626;
       --red-800: #991b1b;
-
       --font-active: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       min-height: 100%;
       font-family: var(--font-active);
       background: var(--bg-page);
       color: var(--text);
       line-height: 1.45;
-      -webkit-font-smoothing: antialiased;
     }
+    button, input, select, textarea { font-family: inherit; }
+    .hidden { display: none !important; }
 
-    button, input, select, textarea {
-      font-family: inherit;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* =====================================================
-       BARRA SUPERIOR E CABEÇALHO DA ATIVIDADE (ESTILO LIMPO)
-       ===================================================== */
-    .app-wrap {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 20px 18px 50px;
-    }
-
-    .main-layout {
-      display: grid;
-      grid-template-columns: 1fr 270px;
-      gap: 20px;
-      align-items: start;
-    }
-
-    @media (max-width: 960px) {
-      .main-layout {
-        grid-template-columns: 1fr;
-      }
-    }
+    .app-wrap { max-width: 1220px; margin: 0 auto; padding: 20px 18px 50px; }
+    .main-layout { display: grid; grid-template-columns: 1fr 265px; gap: 20px; align-items: start; }
+    @media (max-width: 960px) { .main-layout { grid-template-columns: 1fr; } }
 
     .activity-card {
       background: var(--white);
@@ -94,28 +59,9 @@
       margin-bottom: 16px;
     }
 
-    .activity-title-area h1 {
-      font-size: 1.55rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      color: #0f172a;
-      margin-bottom: 4px;
-    }
-
-    .activity-subtitle {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-
-    .tags-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      align-items: center;
-    }
-
+    .activity-title-area h1 { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; color: #0f172a; margin-bottom: 4px; }
+    .activity-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; }
+    .tags-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
     .tag-chip {
       background: #e9efec;
       color: #334155;
@@ -125,21 +71,9 @@
       padding: 3px 9px;
       border-radius: 4px;
     }
+    .tag-chip.green { background: var(--green-100); color: var(--green-800); border-color: #bbf7d0; }
+    .header-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 
-    .tag-chip.green {
-      background: var(--green-100);
-      color: var(--green-800);
-      border-color: #bbf7d0;
-    }
-
-    .header-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    /* Botões Limpos */
     .btn {
       border: 1px solid var(--border-strong);
       background: var(--white);
@@ -153,61 +87,18 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+      transition: background-color 0.15s, border-color 0.15s;
     }
+    .btn:hover:not(:disabled) { background: #f8faf9; border-color: var(--green-700); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-green { background: var(--green-700); border-color: var(--green-700); color: var(--white); }
+    .btn-green:hover:not(:disabled) { background: var(--green-800); border-color: var(--green-800); }
+    .btn-sm { padding: 6px 11px; font-size: 0.82rem; }
+    .btn-lg { padding: 12px 22px; font-size: 1rem; }
+    .btn-link-danger { border: none; background: transparent; color: var(--red-600); padding: 5px 8px; }
+    .btn-link-danger:hover:not(:disabled) { background: var(--red-100); }
 
-    .btn:hover:not(:disabled) {
-      background: #f8faf9;
-      border-color: var(--green-700);
-    }
-
-    .btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .btn-green {
-      background: var(--green-700);
-      border-color: var(--green-700);
-      color: var(--white);
-    }
-
-    .btn-green:hover:not(:disabled) {
-      background: var(--green-800);
-      border-color: var(--green-800);
-    }
-
-    .btn-sm {
-      padding: 6px 11px;
-      font-size: 0.82rem;
-    }
-
-    .btn-lg {
-      padding: 12px 22px;
-      font-size: 1rem;
-    }
-
-    .btn-link-danger {
-      border: none;
-      background: transparent;
-      color: var(--red-600);
-      padding: 5px 8px;
-    }
-
-    .btn-link-danger:hover:not(:disabled) {
-      background: var(--red-100);
-      border-color: transparent;
-    }
-
-    /* Abas horizontais estilo Wordwall */
-    .tabs-bar {
-      display: flex;
-      border-bottom: 1px solid var(--border);
-      padding: 0 22px;
-      gap: 22px;
-      overflow-x: auto;
-    }
-
+    .tabs-bar { display: flex; border-bottom: 1px solid var(--border); padding: 0 22px; gap: 22px; overflow-x: auto; }
     .tab-link {
       background: none;
       border: none;
@@ -218,41 +109,13 @@
       color: var(--text-muted);
       cursor: pointer;
       white-space: nowrap;
-      transition: color 0.15s, border-color 0.15s;
     }
+    .tab-link.active { color: var(--green-700); border-bottom-color: var(--green-700); }
+    .tab-body { padding: 22px; }
 
-    .tab-link:hover {
-      color: var(--text);
-    }
-
-    .tab-link.active {
-      color: var(--green-700);
-      border-bottom-color: var(--green-700);
-    }
-
-    .tab-body {
-      padding: 22px;
-    }
-
-    /* Seletores de Matéria e Ano (Botões Clicáveis) */
-    .section-block {
-      margin-bottom: 20px;
-    }
-
-    .block-label {
-      display: block;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 8px;
-    }
-
-    .pill-picker {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
+    .section-block { margin-bottom: 18px; }
+    .block-label { display: block; font-size: 0.88rem; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+    .pill-picker { display: flex; flex-wrap: wrap; gap: 7px; }
     .pick-btn {
       border: 1px solid #cbd5e1;
       background: var(--white);
@@ -262,37 +125,13 @@
       font-size: 0.86rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.14s;
     }
+    .pick-btn:hover { border-color: var(--green-600); background: var(--green-50); }
+    .pick-btn.selected { background: var(--green-700); border-color: var(--green-700); color: var(--white); }
 
-    .pick-btn:hover {
-      border-color: var(--green-600);
-      background: var(--green-50);
-    }
-
-    .pick-btn.selected {
-      background: var(--green-700);
-      border-color: var(--green-700);
-      color: var(--white);
-    }
-
-    .form-grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .form-grid-3 {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 14px;
-    }
-
-    @media (max-width: 720px) {
-      .form-grid-2, .form-grid-3 {
-        grid-template-columns: 1fr;
-      }
-    }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-grid-3 { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 14px; }
+    @media (max-width: 720px) { .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; } }
 
     input[type="text"], input[type="number"], select, textarea {
       width: 100%;
@@ -303,69 +142,22 @@
       color: #0f172a;
       background: var(--white);
     }
-
     input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: var(--green-700);
       box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.15);
     }
 
-    .status-msg {
-      margin-top: 12px;
-      padding: 10px 13px;
-      border-radius: 5px;
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
+    .status-msg { margin-top: 12px; padding: 11px 14px; border-radius: 5px; font-size: 0.88rem; font-weight: 600; }
+    .status-msg.ok { background: var(--green-100); color: var(--green-800); border: 1px solid #bbf7d0; }
+    .status-msg.info { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+    .status-msg.warn { background: var(--amber-100); color: var(--amber-800); border: 1px solid #fde68a; }
+    .status-msg.err { background: var(--red-100); color: var(--red-800); border: 1px solid #fecaca; }
 
-    .status-msg.ok {
-      background: var(--green-100);
-      color: var(--green-800);
-      border: 1px solid #bbf7d0;
-    }
-
-    .status-msg.info {
-      background: #f1f5f9;
-      color: #334155;
-      border: 1px solid #cbd5e1;
-    }
-
-    .status-msg.err {
-      background: var(--red-100);
-      color: var(--red-800);
-      border: 1px solid #fecaca;
-    }
-
-    /* Lista / Tabela de Perguntas */
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .q-table-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .q-row-card {
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 13px 15px;
-      background: #fbfdfc;
-    }
-
-    .q-row-top {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
+    .filter-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .q-table-list { display: grid; gap: 10px; }
+    .q-row-card { border: 1px solid var(--border); border-radius: 6px; padding: 13px 15px; background: #fbfdfc; }
+    .q-row-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px; }
 
     .diff-tag {
       display: inline-block;
@@ -376,72 +168,21 @@
       border-radius: 4px;
       letter-spacing: 0.04em;
     }
-
     .diff-facil { background: var(--green-100); color: var(--green-800); }
     .diff-media { background: var(--amber-100); color: var(--amber-800); }
     .diff-dificil { background: var(--red-100); color: var(--red-800); }
 
-    .q-row-enunciado {
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
-      color: #0f172a;
-    }
+    .q-row-enunciado { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; color: #0f172a; }
+    .q-row-alts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 0.83rem; }
+    @media (max-width: 600px) { .q-row-alts { grid-template-columns: 1fr; } }
+    .q-alt-box { padding: 5px 8px; border-radius: 4px; background: #f1f5f9; color: #475569; }
+    .q-alt-box.right { background: var(--green-100); color: var(--green-800); font-weight: 700; }
 
-    .q-row-alts {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      font-size: 0.83rem;
-    }
+    .ranking-table { width: 100%; border-collapse: collapse; border-radius: 6px; overflow: hidden; font-size: 0.9rem; }
+    .ranking-table thead th { background: var(--green-700); color: var(--white); text-align: left; padding: 10px 14px; font-weight: 700; }
+    .ranking-table tbody td { padding: 10px 14px; border-bottom: 1px solid #e2e8f0; color: #1e293b; }
+    .ranking-table tbody tr:nth-child(even) { background: #f4f7f5; }
 
-    @media (max-width: 600px) {
-      .q-row-alts {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .q-alt-box {
-      padding: 5px 8px;
-      border-radius: 4px;
-      background: #f1f5f9;
-      color: #475569;
-    }
-
-    .q-alt-box.right {
-      background: var(--green-100);
-      color: var(--green-800);
-      font-weight: 700;
-    }
-
-    /* Tabela Ranking Limpa (igual à referência da imagem!) */
-    .ranking-table {
-      width: 100%;
-      border-collapse: collapse;
-      border-radius: 6px;
-      overflow: hidden;
-      font-size: 0.9rem;
-    }
-
-    .ranking-table thead th {
-      background: var(--green-700);
-      color: var(--white);
-      text-align: left;
-      padding: 10px 14px;
-      font-weight: 700;
-    }
-
-    .ranking-table tbody td {
-      padding: 10px 14px;
-      border-bottom: 1px solid #e2e8f0;
-      color: #1e293b;
-    }
-
-    .ranking-table tbody tr:nth-child(even) {
-      background: #f4f7f5;
-    }
-
-    /* Sidebar Direita (Estilo visual e Fontes) */
     .sidebar-card {
       background: var(--white);
       border: 1px solid var(--border);
@@ -449,457 +190,172 @@
       padding: 16px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
-
-    .sidebar-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
+    .sidebar-title { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; }
     .theme-option {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      padding: 8px;
-      border: 1px solid transparent;
-      border-radius: 5px;
-      background: transparent;
-      cursor: pointer;
-      text-align: left;
-      margin-bottom: 6px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text);
+      display: flex; align-items: center; gap: 10px; width: 100%;
+      padding: 8px; border: 1px solid transparent; border-radius: 5px;
+      background: transparent; cursor: pointer; text-align: left;
+      margin-bottom: 6px; font-size: 0.88rem; font-weight: 600; color: var(--text);
     }
-
-    .theme-option:hover {
-      background: #f8faf9;
-    }
-
-    .theme-option.active {
-      background: var(--green-700);
-      color: var(--white);
-    }
-
+    .theme-option:hover { background: #f8faf9; }
+    .theme-option.active { background: var(--green-700); color: var(--white); }
     .theme-thumb {
-      width: 48px;
-      height: 32px;
-      border-radius: 4px;
-      border: 1px solid rgba(0, 0, 0, 0.14);
-      flex-shrink: 0;
-      display: grid;
-      place-items: center;
-      font-size: 0.7rem;
-      font-weight: 800;
+      width: 48px; height: 32px; border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.14); flex-shrink: 0;
+      display: grid; place-items: center; font-size: 0.7rem; font-weight: 800;
     }
-
     .thumb-classic { background: linear-gradient(135deg, #15803d 55%, #ffffff 55%); color: #052e16; }
     .thumb-classroom { background: #f8faf9; border-top: 8px solid #16a34a; color: #166534; }
     .thumb-forest { background: #052e16; color: #ffffff; }
 
-    /* Modal simples de adicionar/editar pergunta */
     .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.48);
-      display: grid;
-      place-items: center;
-      padding: 16px;
-      z-index: 100;
+      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.48);
+      display: grid; place-items: center; padding: 16px; z-index: 100;
     }
-
     .modal-box {
-      background: var(--white);
-      border-radius: 8px;
-      max-width: 580px;
-      width: 100%;
-      padding: 22px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
-      max-height: 92vh;
-      overflow-y: auto;
+      background: var(--white); border-radius: 8px; max-width: 580px; width: 100%;
+      padding: 22px; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25); max-height: 92vh; overflow-y: auto;
     }
 
-    /* =====================================================
-       TELA DO JOGO (PROJEÇÃO PARA A SALA)
-       ===================================================== */
-    .game-screen {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: clamp(14px, 2vw, 24px);
-      transition: background 0.25s;
-    }
-
-    .game-screen.style-classic {
-      background: linear-gradient(165deg, #166534 0%, #14532d 100%);
-      color: var(--white);
-    }
-
-    .game-screen.style-classroom {
-      background: #eef4f0;
-      color: #0f172a;
-    }
-
-    .game-screen.style-forest {
-      background: #052e16;
-      color: var(--white);
-    }
+    /* TELA DO JOGO */
+    .game-screen { min-height: 100vh; display: flex; flex-direction: column; padding: clamp(14px, 2vw, 24px); }
+    .game-screen.style-classic { background: linear-gradient(165deg, #166534 0%, #14532d 100%); color: var(--white); }
+    .game-screen.style-classroom { background: #eef4f0; color: #0f172a; }
+    .game-screen.style-forest { background: #052e16; color: var(--white); }
 
     .game-topbar {
-      max-width: 1120px;
-      width: 100%;
-      margin: 0 auto 18px;
-      background: var(--white);
-      color: #0f172a;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 18px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      max-width: 1120px; width: 100%; margin: 0 auto 18px;
+      background: var(--white); color: #0f172a; border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 18px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     }
-
-    .game-title-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .game-title-left strong {
-      font-size: 1.05rem;
-      color: var(--green-800);
-    }
-
-    .game-meta-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .game-title-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .game-title-left strong { font-size: 1.05rem; color: var(--green-800); }
+    .game-meta-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .game-stage {
-      max-width: 1120px;
-      width: 100%;
-      margin: 0 auto;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 16px;
+      max-width: 1120px; width: 100%; margin: 0 auto; flex: 1;
+      display: flex; flex-direction: column; justify-content: center; gap: 16px;
     }
 
-    /* INTERVALO ENTRE PERGUNTAS: ESCOLHA DA DIFICULDADE */
     .diff-choice-card {
-      background: var(--white);
-      color: #0f172a;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: clamp(24px, 4vw, 44px);
-      text-align: center;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+      background: var(--white); color: #0f172a; border: 1px solid var(--border);
+      border-radius: 10px; padding: clamp(24px, 4vw, 44px);
+      text-align: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
     }
-
-    .diff-choice-card h2 {
-      font-size: clamp(1.4rem, 2.8vw, 2.1rem);
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: #0f172a;
-    }
-
-    .diff-choice-sub {
-      font-size: 1rem;
-      color: var(--text-muted);
-      margin-bottom: 26px;
-    }
-
-    .diff-buttons-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      max-width: 820px;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 680px) {
-      .diff-buttons-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    .diff-choice-card h2 { font-size: clamp(1.4rem, 2.8vw, 2.1rem); font-weight: 800; margin-bottom: 8px; }
+    .diff-choice-sub { font-size: 1rem; color: var(--text-muted); margin-bottom: 26px; }
+    .diff-buttons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 820px; margin: 0 auto; }
+    @media (max-width: 680px) { .diff-buttons-grid { grid-template-columns: 1fr; } }
 
     .diff-pick-card {
-      border: 2px solid #cbd5e1;
-      background: var(--white);
-      border-radius: 10px;
-      padding: 24px 16px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
+      border: 2px solid #cbd5e1; background: var(--white); border-radius: 10px;
+      padding: 24px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;
       transition: transform 0.12s, border-color 0.15s, box-shadow 0.15s;
     }
-
-    .diff-pick-card:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
-    }
-
-    .diff-pick-card:disabled {
-      opacity: 0.42;
-      cursor: not-allowed;
-    }
-
+    .diff-pick-card:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1); }
+    .diff-pick-card:disabled { opacity: 0.42; cursor: not-allowed; }
     .diff-pick-card.facil { border-color: #86efac; background: #f0fdf4; }
-    .diff-pick-card.facil:hover:not(:disabled) { border-color: var(--green-700); }
-
     .diff-pick-card.media { border-color: #fcd34d; background: #fffbeb; }
-    .diff-pick-card.media:hover:not(:disabled) { border-color: var(--amber-600); }
-
     .diff-pick-card.dificil { border-color: #fca5a5; background: #fef2f2; }
-    .diff-pick-card.dificil:hover:not(:disabled) { border-color: var(--red-600); }
-
-    .diff-pick-name {
-      font-size: 1.55rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
+    .diff-pick-name { font-size: 1.55rem; font-weight: 900; text-transform: uppercase; }
     .diff-pick-card.facil .diff-pick-name { color: var(--green-800); }
     .diff-pick-card.media .diff-pick-name { color: var(--amber-800); }
     .diff-pick-card.dificil .diff-pick-name { color: var(--red-800); }
+    .diff-pick-pts { font-size: 0.92rem; font-weight: 700; color: #475569; }
+    .diff-pick-left { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
 
-    .diff-pick-pts {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: #475569;
-    }
-
-    .diff-pick-left {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    /* CRONÔMETRO + PERGUNTA + OPÇÕES */
     .timer-bar-card {
-      background: var(--white);
-      color: #0f172a;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      background: var(--white); color: #0f172a; border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 18px; display: flex; align-items: center; gap: 16px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     }
-
     .clock-pill {
-      min-width: 84px;
-      text-align: center;
-      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-      font-weight: 900;
-      font-variant-numeric: tabular-nums;
-      padding: 6px 10px;
-      border-radius: 8px;
-      background: var(--green-50);
-      color: var(--green-800);
-      border: 2px solid var(--green-600);
+      min-width: 84px; text-align: center; font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      font-weight: 900; font-variant-numeric: tabular-nums; padding: 6px 10px;
+      border-radius: 8px; background: var(--green-50); color: var(--green-800); border: 2px solid var(--green-600);
     }
-
     .clock-pill.paused { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
     .clock-pill.warn { background: var(--amber-100); color: var(--amber-800); border-color: var(--amber-600); }
     .clock-pill.danger { background: var(--red-100); color: var(--red-800); border-color: var(--red-600); }
 
-    .progress-track {
-      width: 100%;
-      height: 14px;
-      background: #e2e8f0;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 6px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 100%;
-      background: var(--green-600);
-      transition: width 0.2s linear, background-color 0.25s;
-    }
-
+    .progress-track { width: 100%; height: 14px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 6px; }
+    .progress-fill { height: 100%; width: 100%; background: var(--green-600); transition: width 0.2s linear, background-color 0.25s; }
     .progress-fill.paused { background: #94a3b8; }
     .progress-fill.warn { background: var(--amber-600); }
     .progress-fill.danger { background: var(--red-600); }
 
     .question-stage-card {
-      background: var(--white);
-      color: #0f172a;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: clamp(22px, 3.5vw, 38px);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      background: var(--white); color: #0f172a; border: 1px solid var(--border);
+      border-radius: 10px; padding: clamp(22px, 3.5vw, 38px); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
     }
-
-    .question-stage-text {
-      font-size: clamp(1.4rem, 2.9vw, 2.2rem);
-      font-weight: 800;
-      line-height: 1.32;
-      color: #0f172a;
-      margin-top: 12px;
-    }
-
+    .question-stage-text { font-size: clamp(1.4rem, 2.9vw, 2.2rem); font-weight: 800; line-height: 1.32; color: #0f172a; margin-top: 12px; }
     .reading-cta {
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px dashed #cbd5e1;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
+      margin-top: 24px; padding-top: 20px; border-top: 1px dashed #cbd5e1;
+      text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;
     }
 
-    .options-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    @media (max-width: 740px) {
-      .options-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    @media (max-width: 740px) { .options-grid { grid-template-columns: 1fr; } }
 
     .option-card-btn {
-      background: var(--white);
-      color: #0f172a;
-      border: 2px solid #cbd5e1;
-      border-radius: 10px;
-      padding: clamp(14px, 2vw, 20px);
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-align: left;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: border-color 0.15s, background-color 0.15s, transform 0.1s;
+      background: var(--white); color: #0f172a; border: 2px solid #cbd5e1; border-radius: 10px;
+      padding: clamp(14px, 2vw, 20px); display: flex; align-items: center; gap: 14px;
+      text-align: left; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
-
-    .option-card-btn:hover:not(:disabled) {
-      border-color: var(--green-700);
-      background: var(--green-50);
-      transform: translateY(-1px);
-    }
-
-    .option-card-btn:disabled {
-      cursor: default;
-    }
-
+    .option-card-btn:hover:not(:disabled) { border-color: var(--green-700); background: var(--green-50); }
+    .option-card-btn:disabled { cursor: default; }
     .opt-letter-square {
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
-      background: var(--green-700);
-      color: var(--white);
-      font-size: 1.25rem;
-      font-weight: 800;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
+      width: 44px; height: 44px; border-radius: 8px; background: var(--green-700); color: var(--white);
+      font-size: 1.25rem; font-weight: 800; display: grid; place-items: center; flex-shrink: 0;
     }
-
-    .opt-content-text {
-      font-size: clamp(1.05rem, 1.8vw, 1.32rem);
-      font-weight: 700;
-    }
-
-    .option-card-btn.is-correct {
-      background: var(--green-100);
-      border-color: var(--green-600);
-    }
-
-    .option-card-btn.is-wrong {
-      background: var(--red-100);
-      border-color: var(--red-600);
-    }
-
-    .option-card-btn.is-wrong .opt-letter-square {
-      background: var(--red-600);
-    }
-
-    .option-card-btn.is-dim {
-      opacity: 0.55;
-    }
+    .opt-content-text { font-size: clamp(1.05rem, 1.8vw, 1.32rem); font-weight: 700; }
+    .option-card-btn.is-correct { background: var(--green-100); border-color: var(--green-600); }
+    .option-card-btn.is-wrong { background: var(--red-100); border-color: var(--red-600); }
+    .option-card-btn.is-wrong .opt-letter-square { background: var(--red-600); }
+    .option-card-btn.is-dim { opacity: 0.55; }
 
     .feedback-bar {
-      background: var(--white);
-      color: #0f172a;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      border-left: 7px solid var(--green-600);
-      padding: 18px 22px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
+      background: var(--white); color: #0f172a; border-radius: 10px; border: 1px solid var(--border);
+      border-left: 7px solid var(--green-600); padding: 18px 22px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
       box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
     }
-
-    .feedback-bar.wrong {
-      border-left-color: var(--red-600);
-    }
+    .feedback-bar.wrong { border-left-color: var(--red-600); }
 
     .spinner {
-      width: 15px;
-      height: 15px;
-      border: 2px solid rgba(255, 255, 255, 0.35);
-      border-top-color: #ffffff;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      display: inline-block;
+      width: 15px; height: 15px; border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block;
     }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-  <!-- =========================================================
-       1. TELA PRINCIPAL / CONFIGURAÇÃO DA ATIVIDADE
-       ========================================================= -->
+  <!-- TELA DE CONFIGURAÇÃO -->
   <div id="setupView" class="app-wrap">
-    <!-- Cabeçalho da atividade estilo Wordwall -->
     <header class="activity-card activity-header">
       <div class="activity-title-area">
         <h1 id="displayActivityTitle">ATIVIDADE EDUCATIVA</h1>
-        <div class="activity-subtitle">Quiz interativo para projeção em sala de aula</div>
+        <div class="activity-subtitle">Quiz interativo para sala de aula com geração automática por IA</div>
         <div class="tags-row">
           <span id="tagGrade" class="tag-chip">5º Ano</span>
-          <span id="tagSubject" class="tag-chip">Matemática</span>
-          <span id="tagTopic" class="tag-chip green">Tema: Geral</span>
+          <span id="tagSubject" class="tag-chip">Ciências</span>
+          <span id="tagTopic" class="tag-chip green">Tema: Sistema Solar e Planetas</span>
           <span id="tagTime" class="tag-chip">Tempo: 30s</span>
-          <span id="tagRounds" class="tag-chip">10 Rodadas</span>
+          <span id="tagRounds" class="tag-chip">9 Rodadas</span>
         </div>
       </div>
 
       <div class="header-actions">
         <button type="button" id="btnSoundSetup" class="btn btn-sm">Som: Ligado</button>
         <button type="button" id="btnHeaderEditQuestions" class="btn btn-sm">Editar perguntas</button>
-        <button type="button" id="btnStartGameTop" class="btn btn-green btn-lg">Iniciar Jogo</button>
+        <button type="button" id="btnStartGameTop" class="btn btn-green btn-lg" disabled>Iniciar Jogo</button>
       </div>
     </header>
 
     <div class="main-layout">
-      <!-- Coluna Principal com Abas -->
       <section class="activity-card">
         <nav class="tabs-bar">
           <button type="button" class="tab-link active" data-tab="config">Configurações de atividade</button>
@@ -907,7 +363,7 @@
           <button type="button" class="tab-link" data-tab="ranking">Ranking e Resultado</button>
         </nav>
 
-        <!-- ABA 1: CONFIGURAÇÕES E GERAÇÃO AUTOMÁTICA -->
+        <!-- ABA 1: CONFIGURAÇÕES -->
         <div id="tabConfig" class="tab-body">
           <div class="section-block">
             <span class="block-label">1. Escolha o Ano Escolar:</span>
@@ -922,7 +378,7 @@
           <div class="form-grid-3 section-block">
             <div>
               <label class="block-label" for="topicInput">3. Tema da Aula (para gerar as perguntas):</label>
-              <input type="text" id="topicInput" value="Operações e Frações" placeholder="Ex: Frações, Verbos, Sistema Solar, Independência..." />
+              <input type="text" id="topicInput" value="Sistema Solar e Planetas" placeholder="Ex: Animais vertebrados, Fotossíntese, Frações, Verbos..." />
             </div>
             <div>
               <label class="block-label" for="timeSelect">4. Tempo por Pergunta:</label>
@@ -940,35 +396,33 @@
             <div>
               <label class="block-label" for="roundsSelect">5. Quantidade de Rodadas:</label>
               <select id="roundsSelect">
-                <option value="5">5 perguntas</option>
-                <option value="8">8 perguntas</option>
-                <option value="10" selected>10 perguntas</option>
+                <option value="6">6 perguntas</option>
+                <option value="9" selected>9 perguntas</option>
                 <option value="12">12 perguntas</option>
-                <option value="15">15 perguntas</option>
               </select>
             </div>
           </div>
 
           <div class="section-block">
-            <label class="block-label" for="contextInput">Texto ou tópicos extras da aula (opcional):</label>
-            <textarea id="contextInput" rows="3" placeholder="Se quiser, cole um resumo ou palavras-chave aqui para direcionar ainda mais as perguntas..."></textarea>
+            <label class="block-label" for="contextInput">Conteúdo / texto da aula para a IA focar no essencial (opcional):</label>
+            <textarea id="contextInput" rows="3" placeholder="Se quiser, cole aqui um resumo da aula para a IA se basear exatamente no que você explicou..."></textarea>
           </div>
 
           <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
             <button type="button" id="btnAutoGenerate" class="btn btn-green btn-lg">
-              Gerar Perguntas Automaticamente
+              Gerar Perguntas com IA
             </button>
             <button type="button" id="btnOpenAddModal" class="btn">
               + Adicionar Pergunta Manual
             </button>
           </div>
 
-          <div id="genStatus" class="status-msg info" style="margin-top: 14px;">
-            O sistema gera perguntas nos 3 níveis (Fácil, Média e Difícil) para que a turma escolha a dificuldade no intervalo de cada rodada.
+          <div id="genStatus" class="status-msg info">
+            Escolha a matéria, o ano e digite o tema. Clique em <strong>Gerar Perguntas com IA</strong> para criar perguntas Fáceis, Médias e Difíceis sobre o seu tema.
           </div>
         </div>
 
-        <!-- ABA 2: LISTA DE PERGUNTAS GERADAS / EDITÁVEIS -->
+        <!-- ABA 2: PERGUNTAS -->
         <div id="tabQuestions" class="tab-body hidden">
           <div class="filter-bar">
             <div class="pill-picker" id="diffFilterBar">
@@ -979,11 +433,10 @@
             </div>
             <button type="button" id="btnAddInsideTab" class="btn btn-green btn-sm">+ Nova Pergunta</button>
           </div>
-
           <div id="questionsList" class="q-table-list"></div>
         </div>
 
-        <!-- ABA 3: RANKING / RESULTADO (ESTILO TABELA DA IMAGEM) -->
+        <!-- ABA 3: RANKING -->
         <div id="tabRanking" class="tab-body hidden">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
             <h2 style="font-size: 1.05rem; font-weight: 700;">Ranking da Última Partida</h2>
@@ -1003,7 +456,7 @@
             <tbody id="rankingBody">
               <tr>
                 <td colspan="5" style="text-align: center; color: #64748b; padding: 22px;">
-                  Inicie o jogo para registrar os resultados da turma aqui.
+                  Inicie o jogo para registrar os resultados aqui.
                 </td>
               </tr>
             </tbody>
@@ -1011,7 +464,7 @@
         </div>
       </section>
 
-      <!-- Barra Lateral Direita: Estilo Visual e Fontes (como no Wordwall) -->
+      <!-- BARRA LATERAL -->
       <aside class="sidebar-card">
         <div class="sidebar-title">Estilo visual</div>
         <button type="button" class="theme-option active" data-style="classic">
@@ -1042,16 +495,13 @@
     </div>
   </div>
 
-  <!-- =========================================================
-       2. MODAL ADICIONAR / EDITAR PERGUNTA
-       ========================================================= -->
+  <!-- MODAL PERGUNTA MANUAL -->
   <div id="questionModal" class="modal-backdrop hidden">
     <div class="modal-box">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
         <h3 id="modalTitle" style="font-size: 1.1rem; font-weight: 800;">Nova Pergunta</h3>
         <button type="button" id="btnCloseModal" class="btn btn-sm">Fechar</button>
       </div>
-
       <div class="section-block" style="margin-bottom: 12px;">
         <label class="block-label" for="mDiff">Dificuldade</label>
         <select id="mDiff">
@@ -1060,31 +510,16 @@
           <option value="dificil">Difícil</option>
         </select>
       </div>
-
       <div class="section-block" style="margin-bottom: 12px;">
         <label class="block-label" for="mEnunciado">Enunciado</label>
         <textarea id="mEnunciado" rows="2" placeholder="Digite a pergunta..."></textarea>
       </div>
-
       <div class="form-grid-2" style="margin-bottom: 12px;">
-        <div>
-          <label class="block-label" for="mAlt0">Alternativa A</label>
-          <input type="text" id="mAlt0" />
-        </div>
-        <div>
-          <label class="block-label" for="mAlt1">Alternativa B</label>
-          <input type="text" id="mAlt1" />
-        </div>
-        <div>
-          <label class="block-label" for="mAlt2">Alternativa C</label>
-          <input type="text" id="mAlt2" />
-        </div>
-        <div>
-          <label class="block-label" for="mAlt3">Alternativa D</label>
-          <input type="text" id="mAlt3" />
-        </div>
+        <div><label class="block-label" for="mAlt0">Alternativa A</label><input type="text" id="mAlt0" /></div>
+        <div><label class="block-label" for="mAlt1">Alternativa B</label><input type="text" id="mAlt1" /></div>
+        <div><label class="block-label" for="mAlt2">Alternativa C</label><input type="text" id="mAlt2" /></div>
+        <div><label class="block-label" for="mAlt3">Alternativa D</label><input type="text" id="mAlt3" /></div>
       </div>
-
       <div class="form-grid-2" style="margin-bottom: 14px;">
         <div>
           <label class="block-label" for="mCorreta">Resposta Correta</label>
@@ -1100,7 +535,6 @@
           <input type="text" id="mExp" placeholder="Por que esta é a certa?" />
         </div>
       </div>
-
       <div style="display: flex; justify-content: flex-end; gap: 8px;">
         <button type="button" id="btnModalCancel" class="btn">Cancelar</button>
         <button type="button" id="btnModalSave" class="btn btn-green">Salvar Pergunta</button>
@@ -1108,17 +542,15 @@
     </div>
   </div>
 
-  <!-- =========================================================
-       3. TELA DO JOGO (PROJEÇÃO PARA OS ALUNOS)
-       ===================================================== -->
+  <!-- TELA DO JOGO -->
   <section id="gameView" class="game-screen style-classic hidden">
     <header class="game-topbar">
       <div class="game-title-left">
         <strong id="gameTitleDisplay">ATIVIDADE EDUCATIVA</strong>
-        <span id="gameMetaTags" class="tag-chip">5º Ano • Matemática</span>
+        <span id="gameMetaTags" class="tag-chip">5º Ano • Ciências</span>
       </div>
       <div class="game-meta-right">
-        <span id="gameRoundPill" class="tag-chip green">Pergunta 1 de 10</span>
+        <span id="gameRoundPill" class="tag-chip green">Pergunta 1 de 9</span>
         <span id="gamePointsPill" class="tag-chip">Pontos: 0</span>
         <button type="button" id="btnSoundGame" class="btn btn-sm">Som: On</button>
         <button type="button" id="btnFullscreen" class="btn btn-sm">Tela cheia</button>
@@ -1127,10 +559,10 @@
     </header>
 
     <main class="game-stage">
-      <!-- INTERVALO ANTES DE CADA PERGUNTA: ESCOLHER A DIFICULDADE -->
+      <!-- INTERVALO ENTRE PERGUNTAS: ESCOLHER A DIFICULDADE -->
       <div id="intervalCard" class="diff-choice-card">
         <div id="intervalRoundLabel" style="font-size: 0.92rem; font-weight: 800; color: var(--green-700); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">
-          Rodada 1 de 10
+          Intervalo — Pergunta 1 de 9
         </div>
         <h2>Escolha a Dificuldade da Pergunta</h2>
         <p class="diff-choice-sub">A turma escolhe o nível agora, antes de a pergunta começar.</p>
@@ -1139,24 +571,22 @@
           <button type="button" id="pickFacil" class="diff-pick-card facil">
             <span class="diff-pick-name">Fácil</span>
             <span class="diff-pick-pts">100 pontos</span>
-            <span id="leftFacil" class="diff-pick-left">Disponíveis: 5</span>
+            <span id="leftFacil" class="diff-pick-left">Disponíveis: 0</span>
           </button>
-
           <button type="button" id="pickMedia" class="diff-pick-card media">
             <span class="diff-pick-name">Média</span>
             <span class="diff-pick-pts">200 pontos</span>
-            <span id="leftMedia" class="diff-pick-left">Disponíveis: 5</span>
+            <span id="leftMedia" class="diff-pick-left">Disponíveis: 0</span>
           </button>
-
           <button type="button" id="pickDificil" class="diff-pick-card dificil">
             <span class="diff-pick-name">Difícil</span>
             <span class="diff-pick-pts">300 pontos</span>
-            <span id="leftDificil" class="diff-pick-left">Disponíveis: 5</span>
+            <span id="leftDificil" class="diff-pick-left">Disponíveis: 0</span>
           </button>
         </div>
       </div>
 
-      <!-- RODADA ATIVA: LEITURA LIVRE -> 4 OPÇÕES + CRONÔMETRO -->
+      <!-- PERGUNTA ATIVA -->
       <div id="roundWrapper" class="hidden" style="display: flex; flex-direction: column; gap: 16px;">
         <div class="timer-bar-card">
           <div id="clockDisplay" class="clock-pill paused">30s</div>
@@ -1165,9 +595,7 @@
               <span id="timerStatusText">Leitura livre — tempo parado</span>
               <span id="timerConfiguredLabel">30 segundos</span>
             </div>
-            <div class="progress-track">
-              <div id="timerProgressBar" class="progress-fill paused"></div>
-            </div>
+            <div class="progress-track"><div id="timerProgressBar" class="progress-fill paused"></div></div>
           </div>
         </div>
 
@@ -1176,9 +604,7 @@
             <span id="roundStageTag" class="tag-chip green">Etapa 1 — Leitura Livre</span>
             <span id="roundDiffTag" class="diff-tag diff-facil">Fácil</span>
           </div>
-
           <h2 id="roundQuestionText" class="question-stage-text"></h2>
-
           <div id="readingArea" class="reading-cta">
             <p style="color: #475569; font-weight: 600;">
               Leiam a pergunta com atenção. As alternativas estão ocultas e o tempo só começa ao clicar abaixo.
@@ -1196,9 +622,7 @@
             <div id="feedbackTitle" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 4px;"></div>
             <div id="feedbackExplain" style="font-size: 1rem; color: #475569; font-weight: 600;"></div>
           </div>
-          <button type="button" id="btnNextRound" class="btn btn-green btn-lg">
-            Próxima Pergunta
-          </button>
+          <button type="button" id="btnNextRound" class="btn btn-green btn-lg">Próxima Pergunta</button>
         </div>
       </div>
     </main>
@@ -1208,17 +632,9 @@
     (() => {
       "use strict";
 
-      const GRADES = [
-        "1º Ano", "2º Ano", "3º Ano", "4º Ano", "5º Ano",
-        "6º Ano", "7º Ano", "8º Ano", "9º Ano", "Ensino Médio"
-      ];
-
-      const SUBJECTS = [
-        "Matemática", "Português", "Ciências", "História", "Geografia", "Inglês", "Conhecimentos Gerais"
-      ];
-
-      const LETTERS = ["A", "B", "C", "D"];
-
+      const GRADES = ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano","6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"];
+      const SUBJECTS = ["Ciências","Matemática","Português","História","Geografia","Inglês","Conhecimentos Gerais"];
+      const LETTERS = ["A","B","C","D"];
       const DIFF_META = {
         facil: { label: "Fácil", points: 100, cls: "diff-facil" },
         media: { label: "Média", points: 200, cls: "diff-media" },
@@ -1228,583 +644,42 @@
       const state = {
         title: "ATIVIDADE EDUCATIVA",
         grade: "5º Ano",
-        subject: "Matemática",
-        topic: "Operações e Frações",
+        subject: "Ciências",
+        topic: "Sistema Solar e Planetas",
         timeSeconds: 30,
-        totalRounds: 10,
+        totalRounds: 9,
         visualStyle: "classic",
-        fontChoice: "default",
         soundEnabled: true,
-
-        questions: [], // [{ id, difficulty, enunciado, alternativas[4], correta, explicacao }]
+        questions: [],
         filterDiff: "all",
         editingIndex: null,
-
-        // Jogo em andamento
         usedIds: new Set(),
         currentRound: 0,
         currentQuestion: null,
-        stage: "idle", // "interval" | "reading" | "answering" | "feedback" | "idle"
+        stage: "idle",
         timeLeft: 30,
         timerId: null,
         deadlineMs: 0,
-        history: [] // [{ round, difficulty, isCorrect, timedOut, timeSpent, points }]
+        history: []
       };
 
-      /* =====================================================
-         BANCO CURRICULAR BRASILEIRO INTEGRADO (SEM API KEY)
-         ===================================================== */
-      const CURATED_BANK = {
-        "Português": [
-          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["ortografia","silaba","vogais","alfabeto"], q: "Qual das palavras abaixo está escrita corretamente?", a: ["Cachorro","Caxorro","Cachoro","Cachôrro"], c: 0, e: "Escreve-se 'cachorro' com CH e RR." },
-          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["substantivo","classes","palavras"], q: "Na frase 'O menino joga bola no parque', qual palavra é um substantivo comum?", a: ["Joga","Menino","No","O"], c: 1, e: "'Menino' nomeia um ser e é um substantivo comum." },
-          { d: "facil", g: ["4º Ano","5º Ano","6º Ano","7º Ano"], tags: ["verbo","acao"], q: "Qual palavra indica uma ação (verbo) na frase 'Mariana leu o livro inteiro'?", a: ["Mariana","Livro","Leu","Inteiro"], c: 2, e: "'Leu' é a forma conjugada do verbo ler." },
-          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["sinonimo","antonimo","vocabulario"], q: "Qual é o antônimo (sentido contrário) da palavra 'alegre'?", a: ["Feliz","Triste","Rápido","Grande"], c: 1, e: "'Triste' expressa o oposto de 'alegre'." },
-          { d: "media", g: ["4º Ano","5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["acentuacao","oxitona","paroxitona"], q: "Por que a palavra 'café' recebe acento agudo?", a: ["Por ser uma oxítona terminada em E","Por ser uma proparoxítona","Por ter mais de quatro letras","Por começar com a letra C"], c: 0, e: "Oxítonas terminadas em A, E, O (seguidas ou não de S) são acentuadas." },
-          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["sujeito","predicado","sintaxe","frase"], q: "Na oração 'Os estudantes resolveram o desafio', quem é o sujeito?", a: ["Resolveram","O desafio","Os estudantes","Desafio"], c: 2, e: "'Os estudantes' é quem pratica a ação de resolver." },
-          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["adjetivo","caracteristica"], q: "Na expressão 'dia ensolarado', a palavra 'ensolarado' tem função de:", a: ["Verbo","Adjetivo","Preposição","Advérbio"], c: 1, e: "Adjetivos caracterizam ou qualificam um substantivo ('dia')." },
-          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["pontuacao","virgula","crase"], q: "Qual sinal de pontuação é usado antes de enumerar itens ou introduzir uma fala?", a: ["Ponto final","Dois-pontos","Ponto de interrogação","Reticências"], c: 1, e: "Os dois-pontos anunciam explicações, falas ou enumerações." },
-          { d: "dificil", g: ["6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["figuras","metafora","linguagem"], q: "Na frase 'Aquele aluno é uma enciclopédia ambulante', qual figura de linguagem foi usada?", a: ["Hipérbole","Metáfora","Onomatopeia","Aliteração"], c: 1, e: "A metáfora faz uma comparação implícita sem usar 'como'." },
-          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["concordancia","regencia","crase","gramatica"], q: "Em qual alternativa o uso de 'mas' ou 'mais' está empregado corretamente?", a: ["Quero estudar mas português hoje.","Ele estudou muito, mas não foi bem.","Ela gosta mais de ler, mas não tem tempo nenhum e mais nada.","Choveu mas forte ontem à noite."], c: 1, e: "'Mas' indica oposição/ideia contrária (equivalente a 'porém')." },
-          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["interpretacao","coesao","conjuncoes"], q: "Na frase 'Estudou bastante, portanto conseguiu ótima nota', a palavra 'portanto' expressa ideia de:", a: ["Oposição","Tempo","Conclusão","Condição"], c: 2, e: "'Portanto' é uma conjunção coordenativa conclusiva." }
-        ],
-        "Ciências": [
-          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["plantas","fotossintese","natureza"], q: "Do que as plantas precisam para fazer fotossíntese e produzir seu alimento?", a: ["Luz solar, água e gás carbônico","Apenas vento e areia","Somente escuridão total","Óleo e sal"], c: 0, e: "A fotossíntese usa luz do sol, água e gás carbônico." },
-          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["sistema solar","planetas","espaco"], q: "Qual é a estrela localizada no centro do nosso Sistema Solar?", a: ["Lua","Terra","Sol","Marte"], c: 2, e: "O Sol é a estrela central ao redor da qual os planetas orbitam." },
-          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["agua","estados fisicos","ciclo da agua"], q: "Quando a água líquida esquenta e vira vapor, como se chama essa mudança de estado?", a: ["Solidificação","Evaporação","Condensação","Fusão"], c: 1, e: "A passagem do estado líquido para o gasoso por aquecimento lento é a evaporação." },
-          { d: "facil", g: ["4º Ano","5º Ano","6º Ano","7º Ano"], tags: ["corpo humano","orgaos","sangue"], q: "Qual órgão é responsável por bombear o sangue para todo o corpo humano?", a: ["Estômago","Pulmão","Coração","Rim"], c: 2, e: "O coração impulsiona o sangue pelos vasos sanguíneos." },
-          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["ecologia","cadeia alimentar","seres vivos"], q: "Em uma cadeia alimentar, qual grupo representa os seres produtores?", a: ["Animais carnívoros","Plantas e algas","Fungos decompositores","Animais herbívoros"], c: 1, e: "Produtores fabricam o próprio alimento pela fotossíntese." },
-          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["celula","biologia","organelas"], q: "Qual parte da célula contém o material genético (DNA) nas células eucariontes?", a: ["Membrana plasmática","Núcleo","Parede celular","Vacúolo"], c: 1, e: "O núcleo celular protege e organiza o DNA nas células eucariontes." },
-          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["respiracao","sistema respiratorio","oxigenio"], q: "Qual gás é absorvido pelos pulmões durante a inspiração e levado às células?", a: ["Gás carbônico","Gás oxigênio","Gás hélio","Monóxido de carbono"], c: 1, e: "O oxigênio (O2) é essencial para a respiração celular." },
-          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["energia","fisica","eletricidade"], q: "Segundo o princípio da conservação de energia, a energia no universo:", a: ["Pode ser criada do nada em usinas","Desaparece quando o aparelho desliga","Não é criada nem destruída, apenas transformada","Existe apenas em forma de calor"], c: 2, e: "A energia muda de uma forma para outra (ex: elétrica para luminosa), conservando o total." },
-          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["quimica","atomos","tabela"], q: "Na molécula da água (H2O), quantos átomos de hidrogênio estão ligados a um átomo de oxigênio?", a: ["1 átomo","2 átomos","3 átomos","4 átomos"], c: 1, e: "A fórmula H2O indica 2 átomos de hidrogênio e 1 de oxigênio." },
-          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["genetica","evolucao","biologia"], q: "Como se chama o processo proposto por Charles Darwin em que seres mais bem adaptados sobrevivem e se reproduzem mais?", a: ["Geração espontânea","Seleção natural","Metamorfose completa","Clonagem celular"], c: 1, e: "A seleção natural favorece características vantajosas em determinado ambiente." }
-        ],
-        "História": [
-          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["brasil","independencia","historia do brasil"], q: "Em que data é comemorada a Independência do Brasil?", a: ["15 de novembro","7 de setembro","21 de abril","12 de outubro"], c: 1, e: "A Independência do Brasil foi proclamada em 7 de setembro de 1822." },
-          { d: "facil", g: ["4º Ano","5º Ano","6º Ano"], tags: ["descobrimento","colonizacao","portugueses"], q: "Qual navegador português comandou a frota que chegou ao território brasileiro em 1500?", a: ["Cristóvão Colombo","Pedro Álvares Cabral","Vasco da Gama","Fernão de Magalhães"], c: 1, e: "Pedro Álvares Cabral liderou a expedição portuguesa que chegou em abril de 1500." },
-          { d: "facil", g: ["4º Ano","5º Ano","6º Ano","7º Ano"], tags: ["egito","antiguidade","piramides"], q: "Qual grande rio foi fundamental para o desenvolvimento da civilização do Egito Antigo?", a: ["Rio Amazonas","Rio Nilo","Rio Danúbio","Rio Tejo"], c: 1, e: "As cheias do Rio Nilo fertilizavam o solo para a agricultura egípcia." },
-          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["republica","brasil","imperio"], q: "Em 15 de novembro de 1889 ocorreu qual acontecimento histórico importante no Brasil?", a: ["Proclamação da República","Abolição da escravatura","Chegada da Família Real","Revolução de 1930"], c: 0, e: "Em 1889 o Brasil deixou de ser uma monarquia e tornou-se uma República." },
-          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["idade media","feudalismo","europa"], q: "Qual era a principal base econômica da sociedade feudal na Europa medieval?", a: ["Indústria automobilística","Agricultura e posse de terras","Comércio eletrônico","Mineração de petróleo"], c: 1, e: "O feudalismo girava em torno da terra (feudos) e da produção agrícola." },
-          { d: "media", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["revolucao industrial","maquinas","inglesa"], q: "Em qual país começou a Primeira Revolução Industrial no século XVIII?", a: ["França","Inglaterra","Brasil","Itália"], c: 1, e: "A Inglaterra reuniu capitais, carvão mineral e mão de obra para iniciar a industrialização." },
-          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["revolucao francesa","iluminismo"], q: "Qual lema ficou famoso por sintetizar os ideais da Revolução Francesa de 1789?", a: ["Ordem e Progresso","Liberdade, Igualdade e Fraternidade","Paz, Terra e Pão","Independência ou Morte"], c: 1, e: "O lema 'Liberdade, Igualdade, Fraternidade' expressava o fim dos privilégios absolutistas." },
-          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["guerra fria","seculo xx","guerras"], q: "O que caracterizou a chamada Guerra Fria entre Estados Unidos e União Soviética?", a: ["Combates diretos com bombas nucleares entre os dois países","Disputa ideológica, política e tecnológica sem confronto militar direto entre as potências","Uma guerra ocorrida apenas na Antártida","A união dos dois países em um único governo"], c: 1, e: "Foi um conflito indireto entre o bloco capitalista (EUA) e o socialista (URSS)." }
-        ],
-        "Geografia": [
-          { d: "facil", g: ["2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["pontos cardeais","bussola","orientacao"], q: "Em qual ponto cardeal o Sol aparenta nascer pela manhã?", a: ["Oeste","Norte","Leste","Sul"], c: 2, e: "O Sol nasce na direção Leste e se põe a Oeste." },
-          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["brasil","regioes","estados"], q: "Quantas grandes regiões geográficas compõem oficialmente o Brasil segundo o IBGE?", a: ["3 regiões","5 regiões","7 regiões","10 regiões"], c: 1, e: "São 5 regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul." },
-          { d: "facil", g: ["4º Ano","5º Ano","6º Ano","7º Ano"], tags: ["continentes","planeta","mapas"], q: "Em qual continente o Brasil está localizado?", a: ["Europa","África","América do Sul","Ásia"], c: 2, e: "O Brasil fica na porção centro-oriental da América do Sul." },
-          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["biomas","amazonia","cerrado","caatinga"], q: "Qual bioma brasileiro é típico do semiárido nordestino, com vegetação adaptada à seca?", a: ["Pampa","Caatinga","Pantanal","Mata de Araucárias"], c: 1, e: "A Caatinga é um bioma exclusivo do Brasil adaptado ao clima semiárido." },
-          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["clima","tempo","camadas","atmosfera"], q: "Qual é a principal diferença entre 'tempo atmosférico' e 'clima'?", a: ["Não há nenhuma diferença","Tempo é momentâneo; clima é o padrão observado por décadas","Clima muda toda hora; tempo dura 100 anos","Tempo só existe no verão"], c: 1, e: "O tempo varia ao longo do dia; o clima é a média histórica de uma região." },
-          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["urbanizacao","populacao","campo"], q: "Como se chama o deslocamento em massa de pessoas do campo para viver nas cidades?", a: ["Êxodo rural","Imigração marítima","Turismo sazonal","Rotação agrícola"], c: 0, e: "Êxodo rural é a saída de moradores da zona rural para a zona urbana." },
-          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["relevo","placas tectonicas","terremotos"], q: "Qual fenômeno geológico explica a formação de grandes cadeias de montanhas como os Andes e o Himalaia?", a: ["Erosão apenas pelo vento","Choque entre placas tectônicas","Maré alta dos oceanos","Resfriamento das nuvens"], c: 1, e: "O movimento convergente das placas tectônicas dobra e eleva a crosta terrestre." },
-          { d: "dificil", g: ["8º Ano","9º Ano","Ensino Médio"], tags: ["globalizacao","economia","blocos"], q: "Qual bloco econômico reúne Brasil, Argentina, Paraguai e Uruguai como membros fundadores?", a: ["União Europeia","Mercosul","NAFTA","OTAN"], c: 1, e: "O Mercosul foi criado em 1991 para integração econômica na América do Sul." }
-        ],
-        "Inglês": [
-          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano"], tags: ["cores","vocabulario","basico"], q: "Como se diz a cor 'Verde' em inglês?", a: ["Blue","Yellow","Green","White"], c: 2, e: "'Green' significa verde em inglês." },
-          { d: "facil", g: ["3º Ano","4º Ano","5º Ano","6º Ano"], tags: ["cumprimentos","saudacoes"], q: "Qual expressão em inglês significa 'Bom dia'?", a: ["Good night","Good morning","See you later","Thank you"], c: 1, e: "'Good morning' é usado para cumprimentar pela manhã." },
-          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano"], tags: ["verbo to be","gramatica"], q: "Complete corretamente: 'She ___ my best friend.'", a: ["are","am","is","be"], c: 2, e: "Para 'he', 'she' e 'it', o verbo 'to be' no presente é 'is'." },
-          { d: "media", g: ["6º Ano","7º Ano","8º Ano","9º Ano"], tags: ["simple present","rotina"], q: "Qual frase está correta no Simple Present?", a: ["He play soccer every day.","He plays soccer every day.","He playing soccer every day.","He to play soccer every day."], c: 1, e: "Na 3ª pessoa do singular (he/she/it), acrescentamos -s ao verbo no presente." },
-          { d: "dificil", g: ["7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["past","passado","verbos irregulares"], q: "Qual é a forma correta no passado simples (Simple Past) do verbo 'go' (ir)?", a: ["Goed","Going","Went","Gone"], c: 2, e: "'Go' é um verbo irregular; seu passado simples é 'went'." }
-        ],
-        "Conhecimentos Gerais": [
-          { d: "facil", g: ["1º Ano","2º Ano","3º Ano","4º Ano","5º Ano","6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["geral","brasil"], q: "Qual é a capital do Brasil?", a: ["São Paulo","Rio de Janeiro","Brasília","Belo Horizonte"], c: 2, e: "Brasília é a capital federal do Brasil desde 1960." },
-          { d: "media", g: ["5º Ano","6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["geral","planeta","oceanos"], q: "Qual é o maior oceano da Terra?", a: ["Oceano Atlântico","Oceano Índico","Oceano Pacífico","Oceano Ártico"], c: 2, e: "O Oceano Pacífico cobre cerca de um terço da superfície terrestre." },
-          { d: "dificil", g: ["6º Ano","7º Ano","8º Ano","9º Ano","Ensino Médio"], tags: ["geral","ciencia","historia"], q: "Qual cientista formulou a Teoria da Relatividade?", a: ["Isaac Newton","Albert Einstein","Galileu Galilei","Louis Pasteur"], c: 1, e: "Albert Einstein publicou a Teoria da Relatividade no início do século XX." }
-        ]
-      };
-
-      /* =====================================================
-         MOTOR PROCEDURAL DE MATEMÁTICA (EXATO POR ANO E TEMA)
-         ===================================================== */
-      function randInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
-
-      function buildMathOptions(correctVal, candidateWrongValues, suffix = "") {
-        const set = new Set([String(correctVal)]);
-        const wrongs = [];
-        for (const w of candidateWrongValues) {
-          const s = String(w);
-          if (!set.has(s) && Number(w) >= 0) {
-            set.add(s);
-            wrongs.push(s);
-          }
-          if (wrongs.length === 3) break;
-        }
-        let guard = 0;
-        while (wrongs.length < 3 && guard < 40) {
-          guard++;
-          const offset = randInt(1, 9) * (Math.random() > 0.5 ? 1 : -1);
-          const num = Number(correctVal) + offset;
-          const s = String(num >= 0 ? num : Math.abs(num) + 2);
-          if (!set.has(s)) {
-            set.add(s);
-            wrongs.push(s);
-          }
-        }
-        const all = [
-          { txt: `${correctVal}${suffix}`, ok: true },
-          ...wrongs.map(w => ({ txt: `${w}${suffix}`, ok: false }))
-        ];
-        // Embaralha alternativas
-        for (let i = all.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [all[i], all[j]] = [all[j], all[i]];
-        }
-        return {
-          alternativas: all.map(o => o.txt),
-          correta: all.findIndex(o => o.ok)
-        };
-      }
-
-      function generateMathQuestion(grade, topic, difficulty) {
-        const gradeNum = grade === "Ensino Médio" ? 10 : parseInt(grade, 10) || 5;
-        const t = topic.toLowerCase();
-
-        // Detecta subtema
-        const isFraction = /fra[cç]|meio|ter[cç]|quarto/.test(t);
-        const isPercent = /porcent|%/.test(t);
-        const isGeometry = /geometr|[áa]rea|per[íi]metro|tri[âa]ngulo|quadrado|ret[âa]ngulo/.test(t);
-        const isEquation = /equa[cç]|inc[óo]gnita|alg[eé]b/.test(t);
-        const isMultDiv = /multiplica|divis|tabuada/.test(t);
-
-        const modes = [];
-        if (isFraction) modes.push("fraction");
-        if (isPercent) modes.push("percent");
-        if (isGeometry) modes.push("geometry");
-        if (isEquation) modes.push("equation");
-        if (isMultDiv) modes.push("multdiv");
-
-        if (modes.length === 0) {
-          if (gradeNum <= 3) modes.push("addsub", "multdiv");
-          else if (gradeNum <= 5) modes.push("addsub", "multdiv", "fraction", "geometry");
-          else if (gradeNum <= 7) modes.push("multdiv", "fraction", "percent", "geometry", "equation");
-          else modes.push("percent", "geometry", "equation", "power");
-        }
-
-        const mode = modes[randInt(0, modes.length - 1)];
-
-        if (mode === "fraction") {
-          if (difficulty === "facil") {
-            const den = [2, 3, 4, 5, 6, 8][randInt(0, 5)];
-            const num = randInt(1, den - 1);
-            const total = den * randInt(2, 6);
-            const ans = (total / den) * num;
-            const opts = buildMathOptions(ans, [ans + 2, ans - 1, total / 2, num + den]);
-            return {
-              difficulty,
-              enunciado: `Quanto vale ${num}/${den} de ${total}?`,
-              ...opts,
-              explicacao: `Dividimos ${total} por ${den} (dá ${total / den}) e multiplicamos por ${num}, resultando em ${ans}.`
-            };
-          }
-          if (difficulty === "media") {
-            const den = [4, 5, 6, 8, 10][randInt(0, 4)];
-            const a = randInt(1, Math.floor(den / 2));
-            const b = randInt(1, den - a);
-            const sum = a + b;
-            const correctTxt = `${sum}/${den}`;
-            const wrongSet = [`${sum}/${den * 2}`, `${Math.abs(a - b) + 1}/${den}`, `${sum + 1}/${den}`, `${a * b}/${den}`];
-            const alts = [correctTxt, ...wrongSet.filter(w => w !== correctTxt).slice(0, 3)];
-            const shuffled = alts.map((txt, idx) => ({ txt, ok: idx === 0 })).sort(() => Math.random() - 0.5);
-            return {
-              difficulty,
-              enunciado: `Qual é o resultado da soma ${a}/${den} + ${b}/${den}?`,
-              alternativas: shuffled.map(x => x.txt),
-              correta: shuffled.findIndex(x => x.ok),
-              explicacao: `Com denominadores iguais, somamos os numeradores (${a} + ${b} = ${sum}) e mantemos o ${den}.`
-            };
-          }
-          // difícil
-          const den1 = [2, 3, 4][randInt(0, 2)];
-          const den2 = den1 === 2 ? 4 : den1 === 3 ? 6 : 8;
-          const n1 = randInt(1, den1 - 1);
-          const n2 = 1;
-          const mult = den2 / den1;
-          const finalNum = n1 * mult + n2;
-          const correctTxt = `${finalNum}/${den2}`;
-          const candidates = [`${n1 + n2}/${den1 + den2}`, `${finalNum + 1}/${den2}`, `${n1 + n2}/${den2}`, `${finalNum}/${den1}`];
-          const uniques = [...new Set(candidates.filter(x => x !== correctTxt))].slice(0, 3);
-          while (uniques.length < 3) uniques.push(`${finalNum + uniques.length + 2}/${den2}`);
-          const shuffled = [correctTxt, ...uniques].map((txt, idx) => ({ txt, ok: idx === 0 })).sort(() => Math.random() - 0.5);
-          return {
-            difficulty,
-            enunciado: `Calcule a soma das frações com denominadores diferentes: ${n1}/${den1} + ${n2}/${den2}`,
-            alternativas: shuffled.map(x => x.txt),
-            correta: shuffled.findIndex(x => x.ok),
-            explicacao: `Transformando ${n1}/${den1} em ${n1 * mult}/${den2} e somando ${n2}/${den2}, obtemos ${correctTxt}.`
-          };
-        }
-
-        if (mode === "percent") {
-          const pct = difficulty === "facil" ? [10, 25, 50][randInt(0, 2)]
-                    : difficulty === "media" ? [15, 20, 30, 40][randInt(0, 3)]
-                    : [12, 18, 35, 75][randInt(0, 3)];
-          const base = difficulty === "facil" ? randInt(2, 10) * 20
-                     : difficulty === "media" ? randInt(3, 12) * 50
-                     : randInt(2, 9) * 100;
-          const ans = Math.round((pct / 100) * base);
-          const opts = buildMathOptions(ans, [ans + 10, Math.max(1, ans - 10), Math.round(ans / 2), base - ans]);
-          return {
-            difficulty,
-            enunciado: `Quanto é ${pct}% de ${base}?`,
-            ...opts,
-            explicacao: `Calculamos (${pct} × ${base}) ÷ 100, que é igual a ${ans}.`
-          };
-        }
-
-        if (mode === "geometry") {
-          const w = difficulty === "facil" ? randInt(3, 9) : difficulty === "media" ? randInt(6, 15) : randInt(12, 24);
-          const h = difficulty === "facil" ? randInt(2, 7) : difficulty === "media" ? randInt(4, 12) : randInt(7, 16);
-          if (difficulty === "facil") {
-            const per = 2 * (w + h);
-            const opts = buildMathOptions(per, [w * h, w + h, per + 4, per - 2], " cm");
-            return {
-              difficulty,
-              enunciado: `Um retângulo mede ${w} cm de largura e ${h} cm de altura. Qual é o seu perímetro?`,
-              ...opts,
-              explicacao: `O perímetro é a soma dos 4 lados: ${w} + ${w} + ${h} + ${h} = ${per} cm.`
-            };
-          }
-          if (difficulty === "media") {
-            const area = w * h;
-            const opts = buildMathOptions(area, [2 * (w + h), area + w, area - h, w + h], " cm²");
-            return {
-              difficulty,
-              enunciado: `Qual é a área de um retângulo com ${w} cm de base e ${h} cm de altura?`,
-              ...opts,
-              explicacao: `A área do retângulo é base × altura: ${w} × ${h} = ${area} cm².`
-            };
-          }
-          const triBase = w % 2 === 0 ? w : w + 1;
-          const areaTri = (triBase * h) / 2;
-          const opts = buildMathOptions(areaTri, [triBase * h, triBase + h, areaTri + 6, areaTri * 2 + 2], " cm²");
-          return {
-            difficulty,
-            enunciado: `Um triângulo tem base de ${triBase} cm e altura de ${h} cm. Qual é a sua área?`,
-            ...opts,
-            explicacao: `A área do triângulo é (base × altura) ÷ 2 = (${triBase} × ${h}) ÷ 2 = ${areaTri} cm².`
-          };
-        }
-
-        if (mode === "equation") {
-          const x = difficulty === "facil" ? randInt(2, 12) : difficulty === "media" ? randInt(3, 15) : randInt(4, 18);
-          const a = difficulty === "facil" ? 1 : randInt(2, 5);
-          const b = randInt(2, 14);
-          const rhs = a * x + b;
-          const opts = buildMathOptions(x, [x + 1, Math.max(1, x - 2), rhs - b, x + 3]);
-          const eqStr = a === 1 ? `x + ${b} = ${rhs}` : `${a}x + ${b} = ${rhs}`;
-          return {
-            difficulty,
-            enunciado: `Qual é o valor de x na equação ${eqStr}?`,
-            ...opts,
-            explicacao: `Subtraindo ${b} de ${rhs} obtemos ${rhs - b}${a > 1 ? ` e dividindo por ${a}` : ""}, encontramos x = ${x}.`
-          };
-        }
-
-        if (mode === "power") {
-          const base = difficulty === "facil" ? randInt(2, 6) : difficulty === "media" ? randInt(3, 9) : randInt(2, 5);
-          const exp = difficulty === "dificil" ? randInt(3, 4) : 2;
-          const ans = Math.pow(base, exp);
-          const opts = buildMathOptions(ans, [base * exp, ans + base, Math.max(1, ans - base), Math.pow(base, exp - 1) + 2]);
-          return {
-            difficulty,
-            enunciado: `Qual é o valor da potência ${base}^${exp} (${base} elevado a ${exp})?`,
-            ...opts,
-            explicacao: `Multiplicando ${base} por ele mesmo ${exp} vezes, o resultado é ${ans}.`
-          };
-        }
-
-        if (mode === "multdiv") {
-          const a = difficulty === "facil" ? randInt(2, 9) : difficulty === "media" ? randInt(6, 14) : randInt(12, 25);
-          const b = difficulty === "facil" ? randInt(2, 9) : difficulty === "media" ? randInt(4, 12) : randInt(6, 15);
-          const prod = a * b;
-          if (Math.random() > 0.4) {
-            const opts = buildMathOptions(prod, [prod + a, Math.max(1, prod - b), a + b, prod + 10]);
-            return {
-              difficulty,
-              enunciado: `Qual é o resultado da multiplicação ${a} × ${b}?`,
-              ...opts,
-              explicacao: `${a} vezes ${b} é igual a ${prod}.`
-            };
-          } else {
-            const opts = buildMathOptions(b, [b + 1, Math.max(1, b - 1), b + 2, a]);
-            return {
-              difficulty,
-              enunciado: `Qual é o resultado da divisão ${prod} ÷ ${a}?`,
-              ...opts,
-              explicacao: `Dividindo ${prod} por ${a}, obtemos exatamente ${b}.`
-            };
-          }
-        }
-
-        // addsub
-        const maxN = difficulty === "facil" ? 30 : difficulty === "media" ? 150 : 600;
-        const x = randInt(10, maxN);
-        const y = randInt(5, maxN);
-        if (Math.random() > 0.45) {
-          const ans = x + y;
-          const opts = buildMathOptions(ans, [ans + 10, Math.max(1, ans - 10), ans + 2, Math.abs(x - y)]);
-          return {
-            difficulty,
-            enunciado: `Qual é o resultado de ${x} + ${y}?`,
-            ...opts,
-            explicacao: `Somando ${x} com ${y}, chegamos a ${ans}.`
-          };
-        } else {
-          const big = Math.max(x, y) + 5;
-          const small = Math.min(x, y);
-          const ans = big - small;
-          const opts = buildMathOptions(ans, [ans + 10, Math.max(1, ans - 2), big + small, ans + 4]);
-          return {
-            difficulty,
-            enunciado: `Qual é o resultado de ${big} − ${small}?`,
-            ...opts,
-            explicacao: `Subtraindo ${small} de ${big}, resta ${ans}.`
-          };
-        }
-      }
-
-      /* =====================================================
-         EXTRATOR LOCAL DE TEXTO (SE O PROFESSOR COLAR RESUMO)
-         ===================================================== */
-      function buildQuestionsFromContext(contextText, neededPerDiff) {
-        if (!contextText || contextText.trim().length < 40) return [];
-        const sentences = contextText
-          .replace(/\s+/g, " ")
-          .split(/(?<=[.!?])\s+/)
-          .map(s => s.trim())
-          .filter(s => s.length >= 45 && s.length <= 190);
-
-        const created = [];
-        const nounsPool = [];
-
-        sentences.forEach(s => {
-          const words = s.match(/[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]{3,}|[a-záéíóúâêôãõç]{6,}/g) || [];
-          words.forEach(w => {
-            if (!nounsPool.includes(w)) nounsPool.push(w);
-          });
-        });
-
-        const diffs = ["facil", "media", "dificil"];
-        sentences.forEach((sentence, idx) => {
-          const match = sentence.match(/\b(é|são|significa|consiste em|chama-se|responsável por|produz)\s+([a-záéíóúâêôãõçA-ZÁÉÍÓÚÂÊÔÃÕÇ\s,]{6,50}?)(?:[.,;]|$)/i);
-          if (!match) return;
-
-          const targetPhrase = match[2].trim();
-          const blanked = sentence.replace(targetPhrase, "__________");
-          if (blanked === sentence) return;
-
-          const distractors = nounsPool
-            .filter(w => w.toLowerCase() !== targetPhrase.toLowerCase() && !targetPhrase.toLowerCase().includes(w.toLowerCase()))
-            .slice(0, 6);
-
-          const fallbacks = ["nenhuma das anteriores", "um processo secundário", "apenas energia térmica", "um fenômeno aleatório"];
-          while (distractors.length < 3) {
-            distractors.push(fallbacks[distractors.length]);
-          }
-
-          const all = [
-            { txt: targetPhrase, ok: true },
-            ...distractors.slice(0, 3).map(d => ({ txt: d, ok: false }))
-          ].sort(() => Math.random() - 0.5);
-
-          created.push({
-            id: Date.now() + Math.random() + idx,
-            difficulty: diffs[idx % 3],
-            enunciado: `Complete corretamente com base no texto da aula: "${blanked}"`,
-            alternativas: all.map(o => o.txt),
-            correta: all.findIndex(o => o.ok),
-            explicacao: `De acordo com o conteúdo estudado: ${sentence}`
-          });
-        });
-
-        return created.slice(0, neededPerDiff * 3);
-      }
-
-      /* =====================================================
-         MOTOR DE GERAÇÃO AUTOMÁTICA (IA SEM CHAVE + FALLBACK LOCAL)
-         ===================================================== */
-      async function tryKeylessAI(subject, grade, topic, contextText, perDiff) {
-        const totalNeeded = perDiff * 3;
-        const prompt = `Crie exatamente ${totalNeeded} perguntas de múltipla escolha em Português do Brasil para sala de aula.
-Matéria: ${subject}
-Ano Escolar: ${grade}
-Tema: ${topic}
-${contextText ? `Texto de apoio:\n${contextText.slice(0, 1200)}` : ""}
-
-Distribuição obrigatória:
-- ${perDiff} com difficulty "facil"
-- ${perDiff} com difficulty "media"
-- ${perDiff} com difficulty "dificil"
-
-Retorne APENAS um JSON válido neste formato exato:
-{
-  "perguntas": [
-    {
-      "difficulty": "facil",
-      "enunciado": "Pergunta clara?",
-      "alternativas": ["Opção A", "Opção B", "Opção C", "Opção D"],
-      "correta": 0,
-      "explicacao": "Frase curta explicando a resposta."
-    }
-  ]
-}`;
-
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 9500);
-
-        try {
-          const res = await fetch("https://text.pollinations.ai/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            signal: controller.signal,
-            body: JSON.stringify({
-              messages: [
-                { role: "system", content: "Você é um professor brasileiro. Responda somente com JSON puro válido, sem markdown." },
-                { role: "user", content: prompt }
-              ],
-              model: "openai",
-              jsonMode: true
-            })
-          });
-
-          clearTimeout(timeout);
-          if (!res.ok) return null;
-
-          const text = await res.text();
-          const clean = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```$/i, "").trim();
-          const parsed = JSON.parse(clean);
-          const list = Array.isArray(parsed.perguntas) ? parsed.perguntas : Array.isArray(parsed) ? parsed : null;
-          if (!list || list.length < 3) return null;
-
-          const valid = [];
-          for (const item of list) {
-            if (!item.enunciado || !Array.isArray(item.alternativas) || item.alternativas.length !== 4) continue;
-            const c = Number(item.correta);
-            if (!Number.isInteger(c) || c < 0 || c > 3) continue;
-            const d = ["facil", "media", "dificil"].includes(item.difficulty) ? item.difficulty : "media";
-            valid.push({
-              id: Date.now() + Math.random(),
-              difficulty: d,
-              enunciado: String(item.enunciado).trim(),
-              alternativas: item.alternativas.map(a => String(a).replace(/^[A-Da-d][\)\.\:\s]+/, "").trim()),
-              correta: c,
-              explicacao: String(item.explicacao || "Conceito essencial do tema.").trim()
-            });
-          }
-          return valid.length >= 3 ? valid : null;
-        } catch {
-          clearTimeout(timeout);
-          return null;
-        }
-      }
-
-      function generateLocalPool(subject, grade, topic, contextText, perDiff) {
-        const result = [];
-        const diffs = ["facil", "media", "dificil"];
-
-        if (subject === "Matemática") {
-          const seen = new Set();
-          for (const d of diffs) {
-            let count = 0;
-            let tries = 0;
-            while (count < perDiff && tries < 60) {
-              tries++;
-              const q = generateMathQuestion(grade, topic, d);
-              if (!seen.has(q.enunciado)) {
-                seen.add(q.enunciado);
-                result.push({ id: Date.now() + Math.random() + tries, ...q });
-                count++;
-              }
-            }
-          }
-          return result;
-        }
-
-        // Se colou texto de apoio, extrai perguntas reais do texto primeiro
-        const fromText = buildQuestionsFromContext(contextText, perDiff);
-        result.push(...fromText);
-
-        // Seleciona do banco curricular pela matéria, tema e ano
-        const subjectList = CURATED_BANK[subject] || [];
-        const allOther = Object.values(CURATED_BANK).flat();
-        const topicWords = topic
-          .toLowerCase()
-          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-          .split(/\s+/)
-          .filter(w => w.length > 2);
-
-        function scoreQuestion(item) {
-          let score = 0;
-          if (item.g.includes(grade)) score += 3;
-          const haystack = (item.q + " " + item.tags.join(" "))
-            .toLowerCase()
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-          for (const w of topicWords) {
-            if (haystack.includes(w)) score += 5;
-          }
-          return score;
-        }
-
-        for (const d of diffs) {
-          const already = result.filter(r => r.difficulty === d).length;
-          const needed = Math.max(0, perDiff - already);
-          if (needed === 0) continue;
-
-          const candidates = subjectList
-            .filter(item => item.d === d)
-            .sort((a, b) => scoreQuestion(b) - scoreQuestion(a));
-
-          // Se faltar naquela dificuldade específica da matéria, pega outras da mesma matéria ou gerais
-          const backupSameSubject = subjectList.filter(item => item.d !== d);
-          const backupGeneral = allOther.filter(item => item.d === d && !subjectList.includes(item));
-          const ordered = [...candidates, ...backupSameSubject, ...backupGeneral];
-
-          let added = 0;
-          for (const item of ordered) {
-            if (added >= needed) break;
-            if (result.some(r => r.enunciado === item.q)) continue;
-            result.push({
-              id: Date.now() + Math.random() + added,
-              difficulty: d,
-              enunciado: item.q,
-              alternativas: [...item.a],
-              correta: item.c,
-              explicacao: item.e
-            });
-            added++;
-          }
-        }
-
-        return result;
-      }
-
-      /* =====================================================
-         ELEMENTOS DO DOM
-         ===================================================== */
       const el = {
         setupView: document.getElementById("setupView"),
         gameView: document.getElementById("gameView"),
-
         displayActivityTitle: document.getElementById("displayActivityTitle"),
         tagGrade: document.getElementById("tagGrade"),
         tagSubject: document.getElementById("tagSubject"),
         tagTopic: document.getElementById("tagTopic"),
         tagTime: document.getElementById("tagTime"),
         tagRounds: document.getElementById("tagRounds"),
-
         btnSoundSetup: document.getElementById("btnSoundSetup"),
         btnHeaderEditQuestions: document.getElementById("btnHeaderEditQuestions"),
         btnStartGameTop: document.getElementById("btnStartGameTop"),
-
         tabLinks: document.querySelectorAll(".tab-link"),
         tabConfig: document.getElementById("tabConfig"),
         tabQuestions: document.getElementById("tabQuestions"),
         tabRanking: document.getElementById("tabRanking"),
         tabQCount: document.getElementById("tabQCount"),
-
         gradePicker: document.getElementById("gradePicker"),
         subjectPicker: document.getElementById("subjectPicker"),
         topicInput: document.getElementById("topicInput"),
@@ -1816,18 +691,13 @@ Retorne APENAS um JSON válido neste formato exato:
         btnOpenAddModal: document.getElementById("btnOpenAddModal"),
         btnAddInsideTab: document.getElementById("btnAddInsideTab"),
         genStatus: document.getElementById("genStatus"),
-
         diffFilterBar: document.getElementById("diffFilterBar"),
         questionsList: document.getElementById("questionsList"),
-
         rankingSummaryBadge: document.getElementById("rankingSummaryBadge"),
         rankingBody: document.getElementById("rankingBody"),
-
         themeOptions: document.querySelectorAll(".theme-option"),
         fontSelect: document.getElementById("fontSelect"),
         titleEditInput: document.getElementById("titleEditInput"),
-
-        // Modal
         questionModal: document.getElementById("questionModal"),
         modalTitle: document.getElementById("modalTitle"),
         btnCloseModal: document.getElementById("btnCloseModal"),
@@ -1835,16 +705,9 @@ Retorne APENAS um JSON válido neste formato exato:
         btnModalSave: document.getElementById("btnModalSave"),
         mDiff: document.getElementById("mDiff"),
         mEnunciado: document.getElementById("mEnunciado"),
-        mAlts: [
-          document.getElementById("mAlt0"),
-          document.getElementById("mAlt1"),
-          document.getElementById("mAlt2"),
-          document.getElementById("mAlt3")
-        ],
+        mAlts: [document.getElementById("mAlt0"),document.getElementById("mAlt1"),document.getElementById("mAlt2"),document.getElementById("mAlt3")],
         mCorreta: document.getElementById("mCorreta"),
         mExp: document.getElementById("mExp"),
-
-        // Jogo
         gameTitleDisplay: document.getElementById("gameTitleDisplay"),
         gameMetaTags: document.getElementById("gameMetaTags"),
         gameRoundPill: document.getElementById("gameRoundPill"),
@@ -1852,7 +715,6 @@ Retorne APENAS um JSON válido neste formato exato:
         btnSoundGame: document.getElementById("btnSoundGame"),
         btnFullscreen: document.getElementById("btnFullscreen"),
         btnExitGame: document.getElementById("btnExitGame"),
-
         intervalCard: document.getElementById("intervalCard"),
         intervalRoundLabel: document.getElementById("intervalRoundLabel"),
         pickFacil: document.getElementById("pickFacil"),
@@ -1861,7 +723,6 @@ Retorne APENAS um JSON válido neste formato exato:
         leftFacil: document.getElementById("leftFacil"),
         leftMedia: document.getElementById("leftMedia"),
         leftDificil: document.getElementById("leftDificil"),
-
         roundWrapper: document.getElementById("roundWrapper"),
         clockDisplay: document.getElementById("clockDisplay"),
         timerStatusText: document.getElementById("timerStatusText"),
@@ -1880,18 +741,14 @@ Retorne APENAS um JSON válido neste formato exato:
         btnNextRound: document.getElementById("btnNextRound")
       };
 
-      /* =====================================================
-         ÁUDIO SUAVE VIA WEB AUDIO API
-         ===================================================== */
+      const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+
+      /* ÁUDIO SUAVE */
       let audioCtx = null;
       function beep(freq, dur, type = "sine", vol = 0.06, delay = 0) {
         if (!state.soundEnabled) return;
         try {
-          if (!audioCtx) {
-            const Ctx = window.AudioContext || window.webkitAudioContext;
-            if (Ctx) audioCtx = new Ctx();
-          }
-          if (!audioCtx) return;
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           if (audioCtx.state === "suspended") audioCtx.resume();
           const t = audioCtx.currentTime + delay;
           const osc = audioCtx.createOscillator();
@@ -1901,38 +758,231 @@ Retorne APENAS um JSON válido neste formato exato:
           gain.gain.setValueAtTime(0.001, t);
           gain.gain.exponentialRampToValueAtTime(vol, t + 0.02);
           gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(t);
-          osc.stop(t + dur + 0.02);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(t); osc.stop(t + dur + 0.02);
         } catch {}
       }
-
       const sfx = {
-        reveal: () => { beep(523, 0.12, "triangle", 0.07, 0); beep(659, 0.16, "triangle", 0.07, 0.08); },
-        tick: () => beep(880, 0.05, "sine", 0.035, 0),
-        ok: () => { beep(523, 0.12, "triangle", 0.08, 0); beep(659, 0.12, "triangle", 0.08, 0.09); beep(784, 0.24, "triangle", 0.08, 0.18); },
-        bad: () => { beep(250, 0.16, "sine", 0.07, 0); beep(195, 0.24, "sine", 0.07, 0.14); },
-        timeout: () => { beep(392, 0.14, "sine", 0.06, 0); beep(311, 0.25, "sine", 0.06, 0.14); }
+        reveal: () => { beep(523,0.12,"triangle",0.07,0); beep(659,0.16,"triangle",0.07,0.08); },
+        tick: () => beep(880,0.05,"sine",0.035,0),
+        ok: () => { beep(523,0.12,"triangle",0.08,0); beep(659,0.12,"triangle",0.08,0.09); beep(784,0.24,"triangle",0.08,0.18); },
+        bad: () => { beep(250,0.16,"sine",0.07,0); beep(195,0.24,"sine",0.07,0.14); },
+        timeout: () => { beep(392,0.14,"sine",0.06,0); beep(311,0.25,"sine",0.06,0.14); }
       };
 
-      function escapeHtml(str) {
-        return String(str)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#39;");
+      /* =====================================================
+         PROMPT E PARSER PARA IA (SEM CHAVE E SEM PUTER)
+         ===================================================== */
+      function buildAIPrompt(subject, grade, topic, contextText, perDiff) {
+        const total = perDiff * 3;
+        return `Você é um professor brasileiro especialista em ${subject} para o ${grade}.
+Crie exatamente ${total} perguntas de múltipla escolha em Português do Brasil EXCLUSIVAMENTE sobre o tema: "${topic}" (dentro da matéria ${subject}).
+
+REGRAS OBRIGATÓRIAS:
+- Linguagem e nível adequados ao ${grade}.
+- Foque apenas nos conceitos essenciais do tema "${topic}". Nunca misture outras matérias.
+- Quantidade exata por dificuldade:
+  * ${perDiff} perguntas com "difficulty": "facil"
+  * ${perDiff} perguntas com "difficulty": "media"
+  * ${perDiff} perguntas com "difficulty": "dificil"
+- Cada pergunta tem 4 alternativas claras (sem colocar "A)", "B)" no texto) e apenas 1 correta (índice 0, 1, 2 ou 3).
+- Inclua "explicacao" com 1 frase curta explicando a resposta certa.
+${contextText ? `\nCONTEÚDO DA AULA:\n"""\n${contextText.slice(0, 1500)}\n"""` : ""}
+
+Retorne SOMENTE um JSON válido neste formato exato (sem markdown):
+{"perguntas":[{"difficulty":"facil","enunciado":"Pergunta?","alternativas":["Op 1","Op 2","Op 3","Op 4"],"correta":0,"explicacao":"Motivo curto."}]}`;
       }
 
-      /* =====================================================
-         RENDERIZAÇÃO DA TELA DE CONFIGURAÇÃO
-         ===================================================== */
+      function parseAIJsonText(rawText) {
+        if (!rawText || typeof rawText !== "string") return null;
+        let text = rawText.replace(/```json/gi, "").replace(/```/g, "").trim();
+        const firstBrace = text.indexOf("{");
+        const lastBrace = text.lastIndexOf("}");
+        if (firstBrace !== -1 && lastBrace > firstBrace) {
+          text = text.slice(firstBrace, lastBrace + 1);
+        }
+        const parsed = JSON.parse(text);
+        const list = Array.isArray(parsed.perguntas) ? parsed.perguntas : Array.isArray(parsed) ? parsed : null;
+        if (!list) return null;
+
+        const out = [];
+        for (const item of list) {
+          if (!item || !item.enunciado || !Array.isArray(item.alternativas) || item.alternativas.length !== 4) continue;
+          let c = item.correta;
+          if (typeof c === "string") {
+            const idx = LETTERS.indexOf(c.trim().toUpperCase());
+            c = idx !== -1 ? idx : parseInt(c, 10);
+          }
+          if (!Number.isInteger(c) || c < 0 || c > 3) continue;
+
+          const diffRaw = String(item.difficulty || "media").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          const difficulty = diffRaw.includes("facil") ? "facil" : diffRaw.includes("dificil") ? "dificil" : "media";
+
+          out.push({
+            id: Date.now() + Math.random(),
+            difficulty,
+            enunciado: String(item.enunciado).trim(),
+            alternativas: item.alternativas.map(a => String(a).replace(/^[A-Da-d][\)\.\:\-\s]+/, "").trim()),
+            correta: c,
+            explicacao: String(item.explicacao || "Conceito essencial do tema.").trim()
+          });
+        }
+        return out.length >= 3 ? out : null;
+      }
+
+      async function callOpenAIEndpoint(url, model, prompt, timeoutMs = 22000) {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+        try {
+          const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            signal: ctrl.signal,
+            body: JSON.stringify({
+              model,
+              messages: [
+                { role: "system", content: "Você gera questões escolares em JSON puro válido em Português do Brasil." },
+                { role: "user", content: prompt }
+              ],
+              temperature: 0.45
+            })
+          });
+          clearTimeout(timer);
+          if (!res.ok) return null;
+          const data = await res.json();
+          return parseAIJsonText(data?.choices?.[0]?.message?.content);
+        } catch {
+          clearTimeout(timer);
+          return null;
+        }
+      }
+
+      async function callSimpleGetAI(prompt, timeoutMs = 20000) {
+        if (prompt.length > 1800) return null;
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+        try {
+          const res = await fetch(`https://api.apiaifreekeys.com/ask?q=${encodeURIComponent(prompt)}`, {
+            method: "GET",
+            signal: ctrl.signal
+          });
+          clearTimeout(timer);
+          if (!res.ok) return null;
+          const txt = await res.text();
+          return parseAIJsonText(txt);
+        } catch {
+          clearTimeout(timer);
+          return null;
+        }
+      }
+
+      /* GERADOR DE MATEMÁTICA EXATO (OFFLINE DE APOIO) */
+      function generateMathFallback(topic, perDiff) {
+        const rand = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+        const out = [];
+        const diffs = ["facil", "media", "dificil"];
+        const isFrac = /fra[cç]/i.test(topic);
+        const isPct = /porcent|%/i.test(topic);
+
+        for (const d of diffs) {
+          for (let i = 0; i < perDiff; i++) {
+            let enunciado, ans, exp;
+            if (isPct) {
+              const p = d === "facil" ? [10,20,50][rand(0,2)] : d === "media" ? [15,25,30][rand(0,2)] : [12,35,75][rand(0,2)];
+              const b = rand(2, 9) * (d === "facil" ? 10 : 50);
+              ans = Math.round((p / 100) * b);
+              enunciado = `Quanto é ${p}% de ${b}?`;
+              exp = `(${p} × ${b}) ÷ 100 = ${ans}.`;
+            } else if (isFrac) {
+              const den = d === "facil" ? 2 : d === "media" ? 4 : 5;
+              const num = rand(1, den - 1);
+              const tot = den * rand(2, 8);
+              ans = (tot / den) * num;
+              enunciado = `Quanto vale ${num}/${den} de ${tot}?`;
+              exp = `Dividimos ${tot} por ${den} (${tot / den}) e multiplicamos por ${num}: ${ans}.`;
+            } else {
+              const x = d === "facil" ? rand(3, 15) : d === "media" ? rand(12, 45) : rand(15, 80);
+              const y = d === "facil" ? rand(2, 9) : d === "media" ? rand(4, 15) : rand(6, 18);
+              ans = x * y;
+              enunciado = `Qual é o resultado de ${x} × ${y}?`;
+              exp = `Multiplicando ${x} por ${y}, o resultado é ${ans}.`;
+            }
+            const wrongs = new Set([ans]);
+            const alts = [String(ans)];
+            while (alts.length < 4) {
+              const w = Math.max(1, ans + rand(-9, 12));
+              if (!wrongs.has(w)) { wrongs.add(w); alts.push(String(w)); }
+            }
+            const mixed = alts.map((t, idx) => ({ t, ok: idx === 0 })).sort(() => Math.random() - 0.5);
+            out.push({
+              id: Date.now() + Math.random() + i,
+              difficulty: d,
+              enunciado,
+              alternativas: mixed.map(m => m.t),
+              correta: mixed.findIndex(m => m.ok),
+              explicacao: exp
+            });
+          }
+        }
+        return out;
+      }
+
+      /* DISPARO DA GERAÇÃO COM IA */
+      async function handleGenerateWithAI() {
+        const topic = el.topicInput.value.trim();
+        if (!topic) {
+          el.genStatus.className = "status-msg err";
+          el.genStatus.textContent = "Digite o tema da aula para a IA criar as perguntas.";
+          el.topicInput.focus();
+          return;
+        }
+
+        const contextText = el.contextInput.value.trim();
+        const perDiff = Math.max(3, Math.ceil(state.totalRounds / 3));
+        const prompt = buildAIPrompt(state.subject, state.grade, topic, contextText, perDiff);
+
+        el.btnAutoGenerate.disabled = true;
+        el.btnAutoGenerate.innerHTML = `<span class="spinner"></span> IA criando perguntas de ${state.subject} (${topic})...`;
+        el.genStatus.className = "status-msg info";
+        el.genStatus.textContent = `Gerando perguntas com IA sobre "${topic}" para o ${state.grade}...`;
+
+        // Cadeia de endpoints abertos sem chave e sem Puter
+        let questions = await callOpenAIEndpoint("https://api.apiaifreekeys.com/v1/chat/completions", "free-ai", prompt);
+        if (!questions) {
+          questions = await callOpenAIEndpoint("https://api.freeopenaiapikey.com/v1/chat/completions", "free-ai", prompt);
+        }
+        if (!questions) {
+          questions = await callOpenAIEndpoint("https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions", "Meta-Llama-3_3-70B-Instruct", prompt);
+        }
+        if (!questions) {
+          questions = await callSimpleGetAI(prompt);
+        }
+        if (!questions && state.subject === "Matemática") {
+          questions = generateMathFallback(topic, perDiff);
+        }
+
+        el.btnAutoGenerate.disabled = false;
+        el.btnAutoGenerate.textContent = "Gerar Perguntas com IA";
+
+        if (questions && questions.length > 0) {
+          state.questions = questions;
+          renderQuestionsTab();
+          const f = questions.filter(q => q.difficulty === "facil").length;
+          const m = questions.filter(q => q.difficulty === "media").length;
+          const d = questions.filter(q => q.difficulty === "dificil").length;
+          el.genStatus.className = "status-msg ok";
+          el.genStatus.textContent = `Pronto! A IA criou ${questions.length} perguntas sobre "${topic}" (${f} Fáceis, ${m} Médias, ${d} Difíceis). Clique em "Iniciar Jogo" ou confira na aba Perguntas.`;
+        } else {
+          el.genStatus.className = "status-msg warn";
+          el.genStatus.textContent = `Não foi possível alcançar o servidor de IA nesta conexão agora. Verifique sua internet e tente novamente em alguns segundos, ou adicione perguntas pelo botão "+ Adicionar Pergunta Manual".`;
+        }
+      }
+
+      /* INTERFACE DE CONFIGURAÇÃO */
       function renderPickers() {
         el.gradePicker.innerHTML = GRADES.map(g =>
           `<button type="button" class="pick-btn ${state.grade === g ? "selected" : ""}" data-grade="${g}">${g}</button>`
         ).join("");
-
         el.gradePicker.querySelectorAll("button").forEach(btn => {
           btn.addEventListener("click", () => {
             state.grade = btn.getAttribute("data-grade");
@@ -1944,12 +994,15 @@ Retorne APENAS um JSON válido neste formato exato:
         el.subjectPicker.innerHTML = SUBJECTS.map(s =>
           `<button type="button" class="pick-btn ${state.subject === s ? "selected" : ""}" data-subj="${s}">${s}</button>`
         ).join("");
-
         el.subjectPicker.querySelectorAll("button").forEach(btn => {
           btn.addEventListener("click", () => {
+            const prev = state.subject;
             state.subject = btn.getAttribute("data-subj");
-            if (state.subject === "Matemática" && !el.topicInput.value.trim()) {
-              el.topicInput.value = "Operações e Frações";
+            if (prev !== state.subject) {
+              state.questions = [];
+              renderQuestionsTab();
+              el.genStatus.className = "status-msg info";
+              el.genStatus.textContent = `Matéria alterada para ${state.subject}. Digite o tema e clique em "Gerar Perguntas com IA".`;
             }
             renderPickers();
             updateHeaderTags();
@@ -1985,111 +1038,65 @@ Retorne APENAS um JSON válido neste formato exato:
         if (filtered.length === 0) {
           el.questionsList.innerHTML = `
             <div style="text-align: center; padding: 28px; color: #64748b; border: 1px dashed #cbd5e1; border-radius: 6px;">
-              Nenhuma pergunta neste filtro. Clique em <strong>Gerar Perguntas Automaticamente</strong> ou adicione manualmente.
+              Nenhuma pergunta gerada ainda para <strong>${esc(state.subject)}</strong>. Volte em <em>Configurações de atividade</em> e clique em <strong>Gerar Perguntas com IA</strong>.
             </div>`;
           return;
         }
 
         el.questionsList.innerHTML = filtered.map(q => {
-          const realIndex = state.questions.indexOf(q);
+          const idx = state.questions.indexOf(q);
           const meta = DIFF_META[q.difficulty] || DIFF_META.facil;
           const altsHtml = q.alternativas.map((a, i) =>
-            `<div class="q-alt-box ${i === q.correta ? "right" : ""}">${LETTERS[i]}) ${escapeHtml(a)}</div>`
+            `<div class="q-alt-box ${i === q.correta ? "right" : ""}">${LETTERS[i]}) ${esc(a)}</div>`
           ).join("");
-
           return `
             <div class="q-row-card">
               <div class="q-row-top">
                 <div style="display: flex; align-items: center; gap: 8px;">
-                  <span style="font-size: 0.82rem; font-weight: 700; color: #64748b;">#${realIndex + 1}</span>
+                  <span style="font-size: 0.82rem; font-weight: 700; color: #64748b;">#${idx + 1}</span>
                   <span class="diff-tag ${meta.cls}">${meta.label}</span>
                 </div>
                 <div style="display: flex; gap: 6px;">
-                  <button type="button" class="btn btn-sm" data-edit="${realIndex}">Editar</button>
-                  <button type="button" class="btn btn-sm btn-link-danger" data-del="${realIndex}">Excluir</button>
+                  <button type="button" class="btn btn-sm" data-edit="${idx}">Editar</button>
+                  <button type="button" class="btn btn-sm btn-link-danger" data-del="${idx}">Excluir</button>
                 </div>
               </div>
-              <div class="q-row-enunciado">${escapeHtml(q.enunciado)}</div>
+              <div class="q-row-enunciado">${esc(q.enunciado)}</div>
               <div class="q-row-alts">${altsHtml}</div>
-            </div>
-          `;
+            </div>`;
         }).join("");
 
-        el.questionsList.querySelectorAll("button[data-edit]").forEach(btn => {
-          btn.addEventListener("click", () => openQuestionModal(parseInt(btn.getAttribute("data-edit"), 10)));
-        });
-
-        el.questionsList.querySelectorAll("button[data-del]").forEach(btn => {
-          btn.addEventListener("click", () => {
-            const idx = parseInt(btn.getAttribute("data-del"), 10);
-            state.questions.splice(idx, 1);
+        el.questionsList.querySelectorAll("button[data-edit]").forEach(b =>
+          b.addEventListener("click", () => openQuestionModal(parseInt(b.getAttribute("data-edit"), 10)))
+        );
+        el.questionsList.querySelectorAll("button[data-del]").forEach(b =>
+          b.addEventListener("click", () => {
+            state.questions.splice(parseInt(b.getAttribute("data-del"), 10), 1);
             renderQuestionsTab();
-          });
-        });
+          })
+        );
       }
 
-      async function handleAutoGenerate() {
-        const topic = el.topicInput.value.trim() || state.subject;
-        const contextText = el.contextInput.value.trim();
-        const perDiff = Math.max(4, Math.ceil(state.totalRounds * 0.6));
-
-        el.btnAutoGenerate.disabled = true;
-        el.btnAutoGenerate.innerHTML = `<span class="spinner"></span> Gerando perguntas para ${state.subject} (${state.grade})...`;
-        el.genStatus.className = "status-msg info";
-        el.genStatus.textContent = `Criando perguntas nos níveis Fácil, Média e Difícil sobre "${topic}"...`;
-
-        let generated = null;
-
-        // Para Matemática, nosso gerador procedural garante contas 100% exatas
-        if (state.subject !== "Matemática") {
-          generated = await tryKeylessAI(state.subject, state.grade, topic, contextText, perDiff);
-        }
-
-        if (!generated) {
-          generated = generateLocalPool(state.subject, state.grade, topic, contextText, perDiff);
-        }
-
-        state.questions = generated;
-        renderQuestionsTab();
-
-        el.btnAutoGenerate.disabled = false;
-        el.btnAutoGenerate.textContent = "Gerar Perguntas Automaticamente";
-
-        const cF = generated.filter(q => q.difficulty === "facil").length;
-        const cM = generated.filter(q => q.difficulty === "media").length;
-        const cD = generated.filter(q => q.difficulty === "dificil").length;
-
-        el.genStatus.className = "status-msg ok";
-        el.genStatus.textContent = `Pronto! ${generated.length} perguntas geradas (${cF} Fáceis, ${cM} Médias, ${cD} Difíceis). Você pode clicar em "Iniciar Jogo" ou revisar na aba Perguntas.`;
-      }
-
-      /* =====================================================
-         MODAL DE PERGUNTA MANUAL
-         ===================================================== */
-      function openQuestionModal(editIndex = null) {
-        state.editingIndex = editIndex;
-        if (editIndex !== null && state.questions[editIndex]) {
-          const q = state.questions[editIndex];
-          el.modalTitle.textContent = `Editar Pergunta #${editIndex + 1}`;
+      /* MODAL MANUAL */
+      function openQuestionModal(editIdx = null) {
+        state.editingIndex = editIdx;
+        if (editIdx !== null && state.questions[editIdx]) {
+          const q = state.questions[editIdx];
+          el.modalTitle.textContent = `Editar Pergunta #${editIdx + 1}`;
           el.mDiff.value = q.difficulty;
           el.mEnunciado.value = q.enunciado;
-          q.alternativas.forEach((txt, i) => (el.mAlts[i].value = txt));
+          q.alternativas.forEach((t, i) => (el.mAlts[i].value = t));
           el.mCorreta.value = String(q.correta);
           el.mExp.value = q.explicacao || "";
         } else {
           el.modalTitle.textContent = "Adicionar Nova Pergunta";
           el.mDiff.value = "facil";
           el.mEnunciado.value = "";
-          el.mAlts.forEach(inp => (inp.value = ""));
+          el.mAlts.forEach(i => (i.value = ""));
           el.mCorreta.value = "0";
           el.mExp.value = "";
         }
         el.questionModal.classList.remove("hidden");
-        el.mEnunciado.focus();
-      }
-
-      function closeQuestionModal() {
-        el.questionModal.classList.add("hidden");
       }
 
       function saveQuestionModal() {
@@ -2098,34 +1105,17 @@ Retorne APENAS um JSON válido neste formato exato:
         const correta = parseInt(el.mCorreta.value, 10);
         const difficulty = el.mDiff.value;
         const explicacao = el.mExp.value.trim() || `A resposta correta é a letra ${LETTERS[correta]}.`;
+        if (!enunciado || alts.some(a => !a)) return window.alert("Preencha o enunciado e as 4 alternativas.");
 
-        if (!enunciado || alts.some(a => !a)) {
-          window.alert("Preencha o enunciado e as 4 alternativas.");
-          return;
-        }
+        const item = { id: Date.now() + Math.random(), difficulty, enunciado, alternativas: alts, correta, explicacao };
+        if (state.editingIndex !== null) state.questions[state.editingIndex] = item;
+        else state.questions.push(item);
 
-        const item = {
-          id: Date.now() + Math.random(),
-          difficulty,
-          enunciado,
-          alternativas: alts,
-          correta,
-          explicacao
-        };
-
-        if (state.editingIndex !== null) {
-          state.questions[state.editingIndex] = item;
-        } else {
-          state.questions.push(item);
-        }
-
-        closeQuestionModal();
+        el.questionModal.classList.add("hidden");
         renderQuestionsTab();
       }
 
-      /* =====================================================
-         CRONÔMETRO E FLUXO DO JOGO
-         ===================================================== */
+      /* CRONÔMETRO E JOGO */
       function stopTimer() {
         if (state.timerId !== null) {
           clearInterval(state.timerId);
@@ -2136,23 +1126,16 @@ Retorne APENAS um JSON válido neste formato exato:
       function renderClock(seconds, paused) {
         const total = state.timeSeconds;
         const clamped = Math.max(0, Math.min(total, seconds));
-        const pct = total > 0 ? (clamped / total) * 100 : 0;
-
         el.clockDisplay.textContent = `${clamped}s`;
-        el.timerProgressBar.style.width = `${pct}%`;
-
-        el.clockDisplay.classList.remove("paused", "warn", "danger");
-        el.timerProgressBar.classList.remove("paused", "warn", "danger");
-
+        el.timerProgressBar.style.width = `${total > 0 ? (clamped / total) * 100 : 0}%`;
+        el.clockDisplay.classList.remove("paused","warn","danger");
+        el.timerProgressBar.classList.remove("paused","warn","danger");
         if (paused) {
-          el.clockDisplay.classList.add("paused");
-          el.timerProgressBar.classList.add("paused");
+          el.clockDisplay.classList.add("paused"); el.timerProgressBar.classList.add("paused");
         } else if (clamped <= Math.min(10, Math.ceil(total * 0.3))) {
-          el.clockDisplay.classList.add("danger");
-          el.timerProgressBar.classList.add("danger");
+          el.clockDisplay.classList.add("danger"); el.timerProgressBar.classList.add("danger");
         } else if (clamped <= Math.ceil(total * 0.6)) {
-          el.clockDisplay.classList.add("warn");
-          el.timerProgressBar.classList.add("warn");
+          el.clockDisplay.classList.add("warn"); el.timerProgressBar.classList.add("warn");
         }
       }
 
@@ -2161,29 +1144,16 @@ Retorne APENAS um JSON válido neste formato exato:
         state.timeLeft = state.timeSeconds;
         state.deadlineMs = Date.now() + state.timeSeconds * 1000;
         renderClock(state.timeSeconds, false);
-
         state.timerId = setInterval(() => {
-          if (state.stage !== "answering") {
-            stopTimer();
-            return;
-          }
+          if (state.stage !== "answering") { stopTimer(); return; }
           const rem = Math.max(0, Math.ceil((state.deadlineMs - Date.now()) / 1000));
           if (rem !== state.timeLeft) {
             state.timeLeft = rem;
             renderClock(state.timeLeft, false);
-
             if (state.timeLeft > 0 && state.timeLeft <= 5) sfx.tick();
-            if (state.timeLeft <= 0) {
-              stopTimer();
-              handleTimeExpired();
-            }
+            if (state.timeLeft <= 0) { stopTimer(); handleTimeExpired(); }
           }
         }, 100);
-      }
-
-      function applyVisualStyleToGame() {
-        el.gameView.classList.remove("style-classic", "style-classroom", "style-forest");
-        el.gameView.classList.add(`style-${state.visualStyle}`);
       }
 
       function getRemainingByDiff(diff) {
@@ -2193,29 +1163,26 @@ Retorne APENAS um JSON válido neste formato exato:
       function startGame() {
         if (state.questions.length === 0) return;
         stopTimer();
-
         state.usedIds = new Set();
         state.currentRound = 1;
         state.history = [];
         state.currentQuestion = null;
 
-        applyVisualStyleToGame();
+        el.gameView.classList.remove("style-classic","style-classroom","style-forest");
+        el.gameView.classList.add(`style-${state.visualStyle}`);
         el.gameTitleDisplay.textContent = (state.title || "ATIVIDADE EDUCATIVA").toUpperCase();
         el.gameMetaTags.textContent = `${state.grade} • ${state.subject}`;
 
         el.setupView.classList.add("hidden");
         el.gameView.classList.remove("hidden");
         document.documentElement.requestFullscreen?.().catch(() => {});
-
         showDifficultyInterval();
       }
 
-      // INTERVALO ANTES DE CADA PERGUNTA: ESCOLHER A DIFICULDADE
       function showDifficultyInterval() {
         stopTimer();
         state.stage = "interval";
-
-        const maxRounds = Math.min(state.totalRounds, Math.max(state.questions.length, state.subject === "Matemática" ? state.totalRounds : state.questions.length));
+        const maxRounds = Math.min(state.totalRounds, state.questions.length);
         const totalPoints = state.history.reduce((s, r) => s + r.points, 0);
 
         el.gameRoundPill.textContent = `Pergunta ${state.currentRound} de ${maxRounds}`;
@@ -2226,46 +1193,28 @@ Retorne APENAS um JSON válido neste formato exato:
         const remM = getRemainingByDiff("media").length;
         const remD = getRemainingByDiff("dificil").length;
 
-        // Se for Matemática, sempre pode gerar mais na hora se acabar!
-        const isMath = state.subject === "Matemática";
-        el.leftFacil.textContent = isMath ? "Sempre disponível" : `Disponíveis: ${remF}`;
-        el.leftMedia.textContent = isMath ? "Sempre disponível" : `Disponíveis: ${remM}`;
-        el.leftDificil.textContent = isMath ? "Sempre disponível" : `Disponíveis: ${remD}`;
+        el.leftFacil.textContent = `Disponíveis: ${remF}`;
+        el.leftMedia.textContent = `Disponíveis: ${remM}`;
+        el.leftDificil.textContent = `Disponíveis: ${remD}`;
 
-        el.pickFacil.disabled = !isMath && remF === 0;
-        el.pickMedia.disabled = !isMath && remM === 0;
-        el.pickDificil.disabled = !isMath && remD === 0;
+        el.pickFacil.disabled = remF === 0;
+        el.pickMedia.disabled = remM === 0;
+        el.pickDificil.disabled = remD === 0;
 
-        // Se todas esgotaram por algum motivo, encerra com ranking
-        if (el.pickFacil.disabled && el.pickMedia.disabled && el.pickDificil.disabled) {
-          finishGameAndShowRanking();
-          return;
-        }
+        if (remF === 0 && remM === 0 && remD === 0) { finishGame(); return; }
 
         el.roundWrapper.classList.add("hidden");
         el.intervalCard.classList.remove("hidden");
       }
 
-      function chooseDifficultyAndStartQuestion(chosenDiff) {
+      function chooseDifficulty(diff) {
         if (state.stage !== "interval") return;
+        const pool = getRemainingByDiff(diff);
+        if (pool.length === 0) return;
 
-        let pool = getRemainingByDiff(chosenDiff);
-        let selected = null;
-
-        if (pool.length > 0) {
-          selected = pool[Math.floor(Math.random() * pool.length)];
-          state.usedIds.add(selected.id);
-        } else if (state.subject === "Matemática") {
-          selected = {
-            id: Date.now() + Math.random(),
-            ...generateMathQuestion(state.grade, state.topic, chosenDiff)
-          };
-          state.usedIds.add(selected.id);
-        } else {
-          return;
-        }
-
-        state.currentQuestion = selected;
+        const chosen = pool[Math.floor(Math.random() * pool.length)];
+        state.usedIds.add(chosen.id);
+        state.currentQuestion = chosen;
         enterReadingStage();
       }
 
@@ -2297,27 +1246,22 @@ Retorne APENAS um JSON válido neste formato exato:
       function revealOptionsAndStartTimer() {
         if (state.stage !== "reading") return;
         state.stage = "answering";
-
-        const q = state.currentQuestion;
         sfx.reveal();
 
         el.readingArea.classList.add("hidden");
         el.roundStageTag.textContent = "Etapa 2 — Tempo Valendo!";
         el.timerStatusText.textContent = "Valendo! Escolha uma alternativa";
 
-        el.optionsContainer.innerHTML = q.alternativas.map((alt, i) => `
+        el.optionsContainer.innerHTML = state.currentQuestion.alternativas.map((alt, i) => `
           <button type="button" class="option-card-btn" data-opt="${i}">
             <span class="opt-letter-square">${LETTERS[i]}</span>
-            <span class="opt-content-text">${escapeHtml(alt)}</span>
+            <span class="opt-content-text">${esc(alt)}</span>
           </button>
         `).join("");
 
-        el.optionsContainer.querySelectorAll(".option-card-btn").forEach(btn => {
-          btn.addEventListener("click", () => {
-            handleAnswerSelected(parseInt(btn.getAttribute("data-opt"), 10));
-          });
-        });
-
+        el.optionsContainer.querySelectorAll(".option-card-btn").forEach(btn =>
+          btn.addEventListener("click", () => handleAnswerSelected(parseInt(btn.getAttribute("data-opt"), 10)))
+        );
         el.optionsContainer.classList.remove("hidden");
         startCountdown();
       }
@@ -2332,18 +1276,8 @@ Retorne APENAS um JSON válido neste formato exato:
         const isCorrect = chosenIdx === q.correta;
         const timeSpent = Math.max(0.1, Number((state.timeSeconds - state.timeLeft).toFixed(1)));
 
-        state.history.push({
-          round: state.currentRound,
-          difficulty: q.difficulty,
-          isCorrect,
-          timedOut: false,
-          timeSpent,
-          points: isCorrect ? meta.points : 0
-        });
-
-        if (isCorrect) sfx.ok();
-        else sfx.bad();
-
+        state.history.push({ round: state.currentRound, difficulty: q.difficulty, isCorrect, timedOut: false, timeSpent, points: isCorrect ? meta.points : 0 });
+        isCorrect ? sfx.ok() : sfx.bad();
         showFeedback(chosenIdx, q.correta, isCorrect, false);
       }
 
@@ -2351,26 +1285,15 @@ Retorne APENAS um JSON válido neste formato exato:
         if (state.stage !== "answering") return;
         stopTimer();
         state.stage = "feedback";
-
         const q = state.currentQuestion;
-        state.history.push({
-          round: state.currentRound,
-          difficulty: q.difficulty,
-          isCorrect: false,
-          timedOut: true,
-          timeSpent: state.timeSeconds,
-          points: 0
-        });
-
+        state.history.push({ round: state.currentRound, difficulty: q.difficulty, isCorrect: false, timedOut: true, timeSpent: state.timeSeconds, points: 0 });
         sfx.timeout();
         showFeedback(null, q.correta, false, true);
       }
 
       function showFeedback(chosenIdx, correctIdx, isCorrect, timedOut) {
-        const q = state.currentQuestion;
         const totalPoints = state.history.reduce((s, r) => s + r.points, 0);
         el.gamePointsPill.textContent = `Pontos: ${totalPoints}`;
-
         el.roundStageTag.textContent = "Resultado";
         el.timerStatusText.textContent = timedOut ? "Tempo esgotado!" : "Tempo encerrado";
 
@@ -2382,96 +1305,61 @@ Retorne APENAS um JSON válido neste formato exato:
           else btn.classList.add("is-dim");
         });
 
-        el.feedbackBar.classList.remove("hidden", "wrong");
+        el.feedbackBar.classList.remove("hidden","wrong");
         if (isCorrect) {
           el.feedbackTitle.style.color = "var(--green-800)";
           el.feedbackTitle.textContent = `Resposta Correta! (${LETTERS[correctIdx]})`;
-        } else if (timedOut) {
-          el.feedbackBar.classList.add("wrong");
-          el.feedbackTitle.style.color = "var(--red-800)";
-          el.feedbackTitle.textContent = `Tempo esgotado! A certa era ${LETTERS[correctIdx]}`;
         } else {
           el.feedbackBar.classList.add("wrong");
           el.feedbackTitle.style.color = "var(--red-800)";
-          el.feedbackTitle.textContent = `Resposta incorreta — a certa era ${LETTERS[correctIdx]}`;
+          el.feedbackTitle.textContent = timedOut
+            ? `Tempo esgotado! A certa era ${LETTERS[correctIdx]}`
+            : `Resposta incorreta — a certa era ${LETTERS[correctIdx]}`;
         }
+        el.feedbackExplain.textContent = state.currentQuestion.explicacao;
 
-        el.feedbackExplain.textContent = q.explicacao;
-
-        const maxRounds = state.subject === "Matemática"
-          ? state.totalRounds
-          : Math.min(state.totalRounds, state.questions.length);
-
-        const isLast = state.currentRound >= maxRounds;
-        el.btnNextRound.textContent = isLast ? "Finalizar e Ver Ranking" : "Próxima Pergunta";
+        const maxRounds = Math.min(state.totalRounds, state.questions.length);
+        el.btnNextRound.textContent = state.currentRound >= maxRounds ? "Finalizar e Ver Ranking" : "Próxima Pergunta";
       }
 
       function nextStepOrFinish() {
         stopTimer();
-        const maxRounds = state.subject === "Matemática"
-          ? state.totalRounds
-          : Math.min(state.totalRounds, state.questions.length);
-
+        const maxRounds = Math.min(state.totalRounds, state.questions.length);
         if (state.currentRound < maxRounds) {
           state.currentRound += 1;
           showDifficultyInterval();
         } else {
-          finishGameAndShowRanking();
+          finishGame();
         }
       }
 
-      function finishGameAndShowRanking() {
+      function finishGame() {
         stopTimer();
         state.stage = "idle";
         if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
-
         el.gameView.classList.add("hidden");
         el.setupView.classList.remove("hidden");
 
-        renderRankingTable();
+        if (state.history.length > 0) {
+          const hits = state.history.filter(h => h.isCorrect).length;
+          const total = state.history.length;
+          const pts = state.history.reduce((s, h) => s + h.points, 0);
+          el.rankingSummaryBadge.textContent = `${hits}/${total} acertos (${Math.round((hits/total)*100)}%) • ${pts} pontos`;
+          el.rankingBody.innerHTML = state.history.map(h => {
+            const meta = DIFF_META[h.difficulty] || DIFF_META.facil;
+            const res = h.isCorrect ? "Acertou" : h.timedOut ? "Tempo esgotado" : "Errou";
+            const col = h.isCorrect ? "var(--green-800)" : "var(--red-800)";
+            return `<tr><td><strong>${h.round}ª</strong></td><td><span class="diff-tag ${meta.cls}">${meta.label}</span></td><td style="font-weight:700;color:${col};">${res}</td><td>${h.timeSpent}s</td><td><strong>${h.points}</strong></td></tr>`;
+          }).join("");
+        }
         switchTab("ranking");
       }
 
-      function renderRankingTable() {
-        if (state.history.length === 0) return;
-
-        const hits = state.history.filter(h => h.isCorrect).length;
-        const total = state.history.length;
-        const pts = state.history.reduce((s, h) => s + h.points, 0);
-        const pct = Math.round((hits / total) * 100);
-
-        el.rankingSummaryBadge.textContent = `${hits}/${total} acertos (${pct}%) • ${pts} pontos`;
-
-        el.rankingBody.innerHTML = state.history.map(h => {
-          const meta = DIFF_META[h.difficulty] || DIFF_META.facil;
-          const resLabel = h.isCorrect ? "Acertou" : h.timedOut ? "Tempo esgotado" : "Errou";
-          const resColor = h.isCorrect ? "var(--green-800)" : "var(--red-800)";
-          return `
-            <tr>
-              <td><strong>${h.round}ª</strong></td>
-              <td><span class="diff-tag ${meta.cls}">${meta.label}</span></td>
-              <td style="font-weight: 700; color: ${resColor};">${resLabel}</td>
-              <td>${h.timeSpent}s</td>
-              <td><strong>${h.points}</strong></td>
-            </tr>
-          `;
-        }).join("");
-      }
-
-      /* =====================================================
-         EVENTOS E INICIALIZAÇÃO
-         ===================================================== */
-      el.tabLinks.forEach(btn => {
-        btn.addEventListener("click", () => switchTab(btn.getAttribute("data-tab")));
-      });
-
+      /* EVENTOS */
+      el.tabLinks.forEach(b => b.addEventListener("click", () => switchTab(b.getAttribute("data-tab"))));
       el.btnHeaderEditQuestions.addEventListener("click", () => switchTab("questions"));
-
       el.topicInput.addEventListener("input", updateHeaderTags);
-      el.titleEditInput.addEventListener("input", () => {
-        state.title = el.titleEditInput.value;
-        updateHeaderTags();
-      });
+      el.titleEditInput.addEventListener("input", () => { state.title = el.titleEditInput.value; updateHeaderTags(); });
 
       el.timeSelect.addEventListener("change", () => {
         if (el.timeSelect.value === "custom") {
@@ -2483,16 +1371,11 @@ Retorne APENAS um JSON válido neste formato exato:
         }
         updateHeaderTags();
       });
-
       el.customTimeInput.addEventListener("input", () => {
         state.timeSeconds = Math.max(5, Math.min(300, parseInt(el.customTimeInput.value, 10) || 30));
         updateHeaderTags();
       });
-
-      el.roundsSelect.addEventListener("change", () => {
-        state.totalRounds = parseInt(el.roundsSelect.value, 10);
-        updateHeaderTags();
-      });
+      el.roundsSelect.addEventListener("change", () => { state.totalRounds = parseInt(el.roundsSelect.value, 10); updateHeaderTags(); });
 
       el.diffFilterBar.querySelectorAll("button").forEach(btn => {
         btn.addEventListener("click", () => {
@@ -2506,51 +1389,43 @@ Retorne APENAS um JSON válido neste formato exato:
         btn.addEventListener("click", () => {
           state.visualStyle = btn.getAttribute("data-style");
           el.themeOptions.forEach(b => b.classList.toggle("active", b === btn));
-          applyVisualStyleToGame();
         });
       });
 
       el.fontSelect.addEventListener("change", () => {
-        const val = el.fontSelect.value;
-        state.fontChoice = val;
-        if (val === "comic") {
-          document.documentElement.style.setProperty("--font-active", '"Trebuchet MS", "Comic Sans MS", Verdana, sans-serif');
-        } else if (val === "didactic") {
-          document.documentElement.style.setProperty("--font-active", 'Verdana, Geneva, Tahoma, sans-serif');
-        } else {
-          document.documentElement.style.setProperty("--font-active", '"Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif');
-        }
+        const f = el.fontSelect.value === "comic" ? '"Trebuchet MS","Comic Sans MS",Verdana,sans-serif'
+                : el.fontSelect.value === "didactic" ? 'Verdana,Geneva,Tahoma,sans-serif'
+                : '"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif';
+        document.documentElement.style.setProperty("--font-active", f);
       });
 
-      function updateSoundUI() {
+      function toggleSound() {
+        state.soundEnabled = !state.soundEnabled;
         el.btnSoundSetup.textContent = state.soundEnabled ? "Som: Ligado" : "Som: Mudo";
         el.btnSoundGame.textContent = state.soundEnabled ? "Som: On" : "Som: Off";
       }
+      el.btnSoundSetup.addEventListener("click", toggleSound);
+      el.btnSoundGame.addEventListener("click", toggleSound);
 
-      el.btnSoundSetup.addEventListener("click", () => { state.soundEnabled = !state.soundEnabled; updateSoundUI(); });
-      el.btnSoundGame.addEventListener("click", () => { state.soundEnabled = !state.soundEnabled; updateSoundUI(); });
-
-      el.btnAutoGenerate.addEventListener("click", handleAutoGenerate);
+      el.btnAutoGenerate.addEventListener("click", handleGenerateWithAI);
       el.btnOpenAddModal.addEventListener("click", () => openQuestionModal(null));
       el.btnAddInsideTab.addEventListener("click", () => openQuestionModal(null));
-      el.btnCloseModal.addEventListener("click", closeQuestionModal);
-      el.btnModalCancel.addEventListener("click", closeQuestionModal);
+      el.btnCloseModal.addEventListener("click", () => el.questionModal.classList.add("hidden"));
+      el.btnModalCancel.addEventListener("click", () => el.questionModal.classList.add("hidden"));
       el.btnModalSave.addEventListener("click", saveQuestionModal);
 
       el.btnStartGameTop.addEventListener("click", startGame);
-      el.pickFacil.addEventListener("click", () => chooseDifficultyAndStartQuestion("facil"));
-      el.pickMedia.addEventListener("click", () => chooseDifficultyAndStartQuestion("media"));
-      el.pickDificil.addEventListener("click", () => chooseDifficultyAndStartQuestion("dificil"));
+      el.pickFacil.addEventListener("click", () => chooseDifficulty("facil"));
+      el.pickMedia.addEventListener("click", () => chooseDifficulty("media"));
+      el.pickDificil.addEventListener("click", () => chooseDifficulty("dificil"));
       el.btnRevealOptions.addEventListener("click", revealOptionsAndStartTimer);
       el.btnNextRound.addEventListener("click", nextStepOrFinish);
-
       el.btnFullscreen.addEventListener("click", () => {
         if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
         else document.documentElement.requestFullscreen?.().catch(() => {});
       });
-
       el.btnExitGame.addEventListener("click", () => {
-        if (!window.confirm("Voltar para a tela da atividade?")) return;
+        if (!window.confirm("Sair do jogo e voltar?")) return;
         stopTimer();
         state.stage = "idle";
         if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
@@ -2558,31 +1433,19 @@ Retorne APENAS um JSON válido neste formato exato:
         el.setupView.classList.remove("hidden");
       });
 
-      // Atalhos de teclado durante o jogo
       document.addEventListener("keydown", e => {
         if (el.gameView.classList.contains("hidden")) return;
         if (e.code === "Space" || e.code === "Enter") {
-          if (state.stage === "reading") {
-            e.preventDefault();
-            revealOptionsAndStartTimer();
-          } else if (state.stage === "feedback") {
-            e.preventDefault();
-            nextStepOrFinish();
-          }
+          if (state.stage === "reading") { e.preventDefault(); revealOptionsAndStartTimer(); }
+          else if (state.stage === "feedback") { e.preventDefault(); nextStepOrFinish(); }
         } else if (state.stage === "answering") {
-          const map = { KeyA: 0, Digit1: 0, KeyB: 1, Digit2: 1, KeyC: 2, Digit3: 2, KeyD: 3, Digit4: 3 };
-          if (e.code in map) {
-            e.preventDefault();
-            handleAnswerSelected(map[e.code]);
-          }
+          const map = { KeyA:0, Digit1:0, KeyB:1, Digit2:1, KeyC:2, Digit3:2, KeyD:3, Digit4:3 };
+          if (e.code in map) { e.preventDefault(); handleAnswerSelected(map[e.code]); }
         }
       });
 
-      // Inicializa pronto para uso imediato
       renderPickers();
       updateHeaderTags();
-      updateSoundUI();
-      state.questions = generateLocalPool(state.subject, state.grade, state.topic, "", 5);
       renderQuestionsTab();
     })();
   </script>
